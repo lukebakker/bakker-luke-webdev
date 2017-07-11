@@ -199,7 +199,7 @@ function minErr(module, ErrorConstructor) {
   encodeUriSegment,
   encodeUriQuery,
   angularInit,
-  bootstrap,
+  dist,
   getTestability,
   snake_case,
   bindJQuery,
@@ -1847,7 +1847,7 @@ function angularInit(element, bootstrap) {
   });
   if (appElement) {
     if (!isAutoBootstrapAllowed) {
-      window.console.error('Angular: disabling automatic bootstrap. <script> protocol indicates ' +
+      window.console.error('Angular: disabling automatic dist. <script> protocol indicates ' +
           'an extension, document.location.href does not match.');
       return;
     }
@@ -1871,12 +1871,12 @@ function angularInit(element, bootstrap) {
  * multiple instances of Angular try to work on the DOM.
  *
  * <div class="alert alert-warning">
- * **Note:** Protractor based end-to-end tests cannot use this function to bootstrap manually.
+ * **Note:** Protractor based end-to-end tests cannot use this function to dist manually.
  * They must use {@link ng.directive:ngApp ngApp}.
  * </div>
  *
  * <div class="alert alert-warning">
- * **Note:** Do not bootstrap the app on an element with a directive that uses {@link ng.$compile#transclusion transclusion},
+ * **Note:** Do not dist the app on an element with a directive that uses {@link ng.$compile#transclusion transclusion},
  * such as {@link ng.ngIf `ngIf`}, {@link ng.ngInclude `ngInclude`} and {@link ngRoute.ngView `ngView`}.
  * Doing this misplaces the app {@link ng.$rootElement `$rootElement`} and the app's {@link auto.$injector injector},
  * causing animations to stop working and making the injector inaccessible from outside the app.
@@ -1896,7 +1896,7 @@ function angularInit(element, bootstrap) {
  *   .controller('WelcomeController', function($scope) {
  *       $scope.greeting = 'Welcome!';
  *   });
- *   angular.bootstrap(document, ['demo']);
+ *   angular.dist(document, ['demo']);
  * </script>
  * </body>
  * </html>
@@ -2220,7 +2220,7 @@ function setupModuleLoader(window) {
 
   var angular = ensure(window, 'angular', Object);
 
-  // We need to expose `angular.$$minErr` to modules such as `ngResource` that reference it during bootstrap
+  // We need to expose `angular.$$minErr` to modules such as `ngResource` that reference it during dist
   angular.$$minErr = angular.$$minErr || minErr;
 
   return ensure(angular, 'module', function() {
@@ -5627,7 +5627,7 @@ var $AnimateProvider = ['$provide', /** @this */ function($provide) {
    *
    * @description
    * Sets and/or returns the CSS class regular expression that is checked when performing
-   * an animation. Upon bootstrap the classNameFilter value is not set at all and will
+   * an animation. Upon dist the classNameFilter value is not set at all and will
    * therefore enable $animate to attempt to perform an animation on any element that is triggered.
    * When setting the `classNameFilter` value, animations will only be performed on elements
    * that successfully match the filter expression. This in turn can boost performance
@@ -11471,7 +11471,7 @@ function $HttpProvider() {
    * Configure $http service to combine processing of multiple http responses received at around
    * the same time via {@link ng.$rootScope.Scope#$applyAsync $rootScope.$applyAsync}. This can result in
    * significant performance improvement for bigger applications that make many HTTP requests
-   * concurrently (common during application bootstrap).
+   * concurrently (common during application dist).
    *
    * Defaults to false. If no value is specified, returns the current configured value.
    *
@@ -18798,7 +18798,7 @@ function $RootScopeProvider() {
  */
 
 
-// the implementation is in angular.bootstrap
+// the implementation is in angular.dist
 
 /**
  * @this
@@ -27218,7 +27218,7 @@ var ngControllerDirective = [function() {
   */
 
 // `ngCsp` is not implemented as a proper directive any more, because we need it be processed while
-// we bootstrap the app (before `$parse` is instantiated). For this reason, we just have the `csp()`
+// we dist the app (before `$parse` is instantiated). For this reason, we just have the `csp()`
 // fn that looks for the `ng-csp` attribute anywhere in the current doc.
 
 /**
@@ -33674,7 +33674,7 @@ if (window.angular.bootstrap) {
 }
 
 // try to bind to jquery now so that one can write jqLite(fn)
-// but we will rebind on bootstrap again.
+// but we will rebind on dist again.
 bindJQuery();
 
 publishExternalAPI(angular);
