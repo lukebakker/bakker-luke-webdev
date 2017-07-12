@@ -9,7 +9,7 @@ This repository is for the Summer II webdev class. More specifically for the cum
  Link to project: https://bakker-luke-webdev.herokuapp.com/project/index.html
  Link to assignment: https://bakker-luke-webdev.herokuapp.com/assignment/
  Link to Git repo: https://github.com/lukebakker/bakker-luke-webdev
- Link to Heroku: https://dashboard.heroku.com/apps/bakker-luke-webdev/deploy/github
+ Link to Heroku:https://bakker-luke-webdev.herokuapp.com
 
 
 1. git clone https://github.com/jannunzi/web-dev-template.git
