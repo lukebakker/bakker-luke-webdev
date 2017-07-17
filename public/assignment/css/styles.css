@@ -1,7 +1,69 @@
-input {
+input, textarea {
     margin-bottom: 5px;
 }
 
-body {
-    padding-top : 60px;
+.navbar-default {
+    background-image: linear-gradient(to bottom, #be1f38 0%, #b3b3b3 100%);
 }
+
+.navbar-default .navbar-brand {
+    color: black
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.glyphicon-plus, .glyphicon-user {
+    color: white
+}
+
+.glyphicon-user, .header-plus.glyphicon-plus {
+    padding-top: 15px;
+}
+
+@media (min-width: 1200px) {
+    .col-lg-9.lpb-split-view-right {
+        width: 75%;
+        position: absolute;
+        right: 0px;
+        overflow-y: scroll;
+        top: 60px;
+        bottom: 0px;
+    }
+}
+
+.lpb-split-view-left {
+    position: absolute;
+    top: 60px;
+    bottom: 0px;
+    overflow-y: scroll;
+}
+
+h1, p {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.img-responsive {
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.shrinker {
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.button-list {
+    padding-top: 20px;
+    padding-bottom:20px;
+}
+
+body { padding-bottom: 70px;
+    padding-top: 60px;}
