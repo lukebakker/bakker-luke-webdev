@@ -1,71 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WamApp">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-  <!--  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-  --> <!-- use lpb for classes that I create -->
-   <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../vendor/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <!--  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    --> <!-- use lpb for classes that I create -->
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../vendor/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
     <link href="../assignment/css/styles.css" rel="stylesheet">
 
-    <nav class="navbar navbar-fixed-top navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed navbar-fixed-top" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Sign In</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-
-
-    </nav>
+    <h1>Log In</h1>
 
 </head>
 <body>
 
-<div class="container-fluid">
-    <label for="username">Username</label>
-    <input name="username"
-           class="form-control"
-           id="username"/>
+<div ng-controller="loginController">
 
-    <label for="password">Password</label>
-    <input name="password"
-           type="password"
-           class="form-control"
-           id="password"/>
+<div ng-show="welcomeUser" class="alert alert-info">Hello {{username}}</div>
 
-    <a class="btn btn-default btn-primary btn-block"
-            href="profile.html"
-            role="button">Login
-    </a>
+    <div class="container-fluid">
+        <label for="username">Username</label>
+        <input name="username"
+               ng-model="username"
+               class="form-control"
+               id="username"/>
 
-    <a class="btn btn-default btn-success btn-block"
-            href="register.html"
-            role="button">Register
-    </a>
+        <label for="password">Password</label>
+        <input name="password"
+               ng-model="password"
+               type="password"
+               class="form-control"
+               id="password"/>
+
+        <a class="btn btn-default btn-primary btn-block"
+           href="profile.html"
+           role="button">Login
+        </a>
+
+        <a class="btn btn-default btn-success btn-block"
+           href="register.html"
+           role="button">Register
+        </a>
+
+    </div>
 
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-
-    <div class="container-fluid">
-
-    </div>
-</nav>
 
 </body>
 </html>

@@ -2,24 +2,29 @@ input, textarea {
     margin-bottom: 5px;
 }
 
-.navbar-default {
-    background-image: linear-gradient(to bottom, #be1f38 0%, #b3b3b3 100%);
+.list-group {
+    margin-bottom: 60px;
 }
 
-.navbar-default .navbar-brand {
-    color: black
+.navbar-default {
+    background-image: linear-gradient(to bottom, #ceb8d1 0%, black 100%);
+    color: black;
+}
+
+.navbar-default .navbar-brand{
+    color: White;
 }
 
 .navbar-default .navbar-nav>li>a {
     color: white;
 }
 
-.glyphicon-plus, .glyphicon-user {
-    color: white
+.glyphicon-user, .header-plus.glyphicon-plus, .glyphicon-ok, .glyphicon-chevron-left {
+    padding-top: 15px;
 }
 
-.glyphicon-user, .header-plus.glyphicon-plus {
-    padding-top: 15px;
+.glyphicon-plus, .glyphicon-user, .glyphicon-ok, .glyphicon-chevron-left {
+    color: white;
 }
 
 @media (min-width: 1200px) {
@@ -63,6 +68,10 @@ h1, p {
 .button-list {
     padding-top: 20px;
     padding-bottom:20px;
+}
+
+h2 {
+    color: white;
 }
 
 body { padding-bottom: 70px;
