@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div ng-controller="loginController">
+
+
+        <div ng-show="errorMessage" class="alert alert-danger">
+            {{errorMessage}}
+        </div>
+
+        <h1>Log In</h1>
+
+        <label for="username">Username</label>
+        <input name="username"
+               ng-model="user.username"
+               class="form-control"
+               id="username"/>
+
+        <label for="password">Password</label>
+        <input name="password"
+               ng-model="user.password"
+               type="password"
+               class="form-control"
+               id="password"/>
+
+        <a class="btn btn-default btn-primary btn-block"
+           ng-click="login(user)">Login</a>
+
+
+        <a class="btn btn-default btn-success btn-block"
+           href="#!/register.view.client.html"
+           role="button">Register
+        </a>
+
+    </div>
+</div>
