@@ -1,0 +1,62 @@
+<div>
+
+    <div ng-controller="websiteListController">
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <a href="#!/profile/{{model.userId}}">
+                <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
+                </span>
+                </a>
+                <div class="navbar-header">
+
+                    <a class="navbar-brand">My Websites</a>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container-fluid">
+
+            <ul class="list-group">
+                <li class="list-group-item active">
+                    <div class="row">
+                        <div class="col-xs-5">Name</div>
+                        <div class="col-sm-3 col-xs-5">Updated</div>
+                        <div class="col-sm-2 hidden-xs">Visits</div>
+                        <div class="col-xs-2">
+                            <a href="#!/user/{{model.userId}}/website/new">
+                    <span class="pull-right glyphicon glyphicon-plus">
+                </span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <li ng-repeat="website in model.websites" class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">{{website.name}}</a>
+                        </div>
+                        <div class="col-sm-3 col-xs-5">2017-07-05</div>
+                        <div class="col-sm-2 hidden-xs">1,212</div>
+                        <div class="col-xs-2">
+                            <a href="#!/user/{{model.userId}}/website/{{website._id}}">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+
+            <div class="container-fluid">
+                <a href="#!/profile/{{model.userId}}">
+        <span class="pull-right glyphicon glyphicon-user">
+                </span>
+                </a>
+            </div>
+        </nav>
+
+    </div>
+</div>

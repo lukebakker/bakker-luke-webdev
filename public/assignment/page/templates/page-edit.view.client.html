@@ -1,0 +1,52 @@
+<div ng-controller="pageEditController">
+    <nav class="navbar navbar-fixed-top navbar-default">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
+                <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
+                </span>
+            </a>
+            <div class="navbar-header">
+                <a class="navbar-brand">Page Edit</a>
+            </div>
+
+        </div><!-- /.container-fluid -->
+
+
+    </nav>
+
+
+    <div class="container-fluid">
+        <label for="pageName">Edit Page Name</label>
+        <input name="firstName"
+               ng-model="model.page.name"
+               class="form-control"
+               id="pageName"/>
+
+        <label for="pageName">Edit Page Description</label>
+        <input name="title"
+               data-ng-click="resetModel()"
+               ng-model="model.page.description"
+               class="form-control"
+               id="title"/>
+
+
+        <a class="btn btn-default btn-success btn-block"
+           ng-click="model.editPage()" ;
+           role="button">Confirm Changes
+        </a>
+        <a class="btn btn-default btn-danger btn-block"
+           ng-click="model.cancelClicked()"
+           role="button">Cancel
+        </a>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+
+        <div class="container-fluid">
+            <a href="#!/profile/{{model.user._id}}">
+        <span class="pull-right glyphicon glyphicon-user">
+                </span>
+            </a>
+        </div>
+    </nav>
+</div>

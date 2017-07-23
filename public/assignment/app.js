@@ -4,7 +4,8 @@
 
 (function () {
 
-    angular.module("WamApp", ["ngRoute"]);
+    angular
+        .module("WamApp", ["ngRoute"]);
 
 })();
 

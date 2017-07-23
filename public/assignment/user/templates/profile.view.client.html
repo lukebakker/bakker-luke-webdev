@@ -17,21 +17,21 @@
     <div class="container-fluid">
         <label for="firstName">First Name</label>
         <input name="firstName"
-               ng-model="user.firstName"
+               ng-model="model.user.firstName"
                value="demo"
                class="form-control"
                id="firstName"/>
 
         <label for="lastName">Last Name</label>
         <input name="lastname"
-               ng-model="user.lastName"
+               ng-model="model.user.lastName"
                value="user"
                class="form-control"
                id="lastName"/>
 
         <label for="displayUsername">Username</label>
         <input name="displayUsername"
-               ng-model="user.username"
+               ng-model="model.user.username"
                value="demouser"
                disabled="disabled"
                class="form-control"
@@ -39,6 +39,7 @@
 
         <label for="email">email</label>
         <input name="email"
+               ng-model="model.user.email"
                placeholder="demouser@demo.com"
                class="form-control"
                id="email"/>
@@ -50,22 +51,30 @@
                class="form-control"
                id="dob"/>
 
+
         <a class="btn btn-default btn-primary btn-block"
-           href="../../website/templates/website-list.html"
-           role="button">Websites
-        </a>
+           href="#!/user/{{model.user._id}}/website"
+           role="button">Websites</a>
 
         <a class="btn btn-default btn-danger btn-block"
-           href="login.view.client.html"
-           role="button">Logout
-        </a>
+           href="#!/login"
+           role="button">Logout</a>
+
+        <a class="btn btn-default btn-danger btn-block"
+           ng-click="model.unRegister()"
+           role="button">Unregister</a>
+
+        <a class="btn btn-default btn-primary btn-block"
+           ng-click="model.updateUser()"
+           role="button">Update</a>
+
 
     </div>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
 
         <div class="container-fluid">
-            <a href="profile.view.client.html">
+            <a href="#!/profile/{{model.user._id}}">
         <span class="pull-right glyphicon glyphicon-user">
                 </span>
             </a>
