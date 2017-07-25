@@ -74,7 +74,7 @@ h1, p {
 }
 
 h2 {
-    color: white;
+    color: black;
 }
 
 .lpb-container {
@@ -84,11 +84,15 @@ h2 {
 .widget .glyphicon-cog {
     position: absolute;
     right: 0px;
+    background-color: white;
+    padding: 2px;
 }
 
 .widget .glyphicon-th-list {
     position: absolute;
     right: 15px;
+    background-color: white;
+    padding: 2px;
 }
 
 body {

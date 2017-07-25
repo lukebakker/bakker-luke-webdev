@@ -1,29 +1,40 @@
-<div ng-controller="widgetNewController">
-
+<div ng-controller="widgetEditController">
     <nav class="navbar navbar-fixed-top navbar-default">
         <div class="container-fluid">
             <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
                 </span>
             </a>
+            <a ng-click="model.createNewWidget()">
+                <span class="header-plus pull-right glyphicon glyphicon-ok">
+                </span>
+            </a>
             <div class="navbar-header">
-                <a class="navbar-brand">Choose a Widget</a>
+
+                <a class="navbar-brand" href="#">Widget Edit</a>
             </div>
+
         </div><!-- /.container-fluid -->
     </nav>
 
-
     <div class="container-fluid">
-        <a class="btn btn-default btn-primary btn-block"
-           ng-click="model.createNewHeader()">Header</a>
-        <a class="btn btn-default btn-primary btn-block"
-           ng-click="model.createNewImage()">Image</a>
-        <a class="btn btn-default btn-primary btn-block"
-           ng-click="model.createNewYoutube()">YouTube</a>
+        <label for="text">Text</label>
+        <input name="title"
+               ng-model="model.widget.text"
+               class="form-control"
+               id="text"/>
+
+        <label for="title">Size</label>
+        <input name="title"
+               ng-model="model.widget.size"
+               class="form-control"
+               id="title"/>
+
         <a class="btn btn-default btn-danger btn-block"
-           href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
-           role="button">Cancel
+           ng-click="model.deleteWidget()"
+           role="button">Delete
         </a>
+
     </div>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -35,5 +46,4 @@
             </a>
         </div>
     </nav>
-
 </div>

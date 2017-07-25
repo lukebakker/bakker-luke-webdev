@@ -27,12 +27,5 @@
             $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page");
         }
 
-        function cancelClicked() {
-            model.page.name = name;
-            model.page.description = description;
-            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page");
-
-        }
-
     }
 })();
