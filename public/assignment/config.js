@@ -92,6 +92,11 @@
                 controller: "widgetNewController",
                 controllerAs:"model"
             })
+            .when("/", {
+                templateUrl: "views/home/home.view.client.html",
+                controller: "homeController",
+                controllerAs: "model"
+            })
 
     }
 })();
