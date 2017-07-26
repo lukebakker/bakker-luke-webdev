@@ -9,7 +9,6 @@
         model.websiteId = $routeParams.websiteId;
         model.pageId = $routeParams.pageId;
         model.editPage = editPage;
-        model.cancelClicked = cancelClicked;
         var name;
         var description;
 
