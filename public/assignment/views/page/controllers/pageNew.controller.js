@@ -23,7 +23,7 @@
                 "websiteId": model.userId + "",
                 "description": model.description + ""
             };
-            pageService.createPage(model.userId, page);
+            pageService.createPage(model.websiteId, model.userId, page);
             $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page");
         }
 
