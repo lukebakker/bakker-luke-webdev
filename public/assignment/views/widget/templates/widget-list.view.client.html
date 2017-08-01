@@ -17,10 +17,9 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-
     <div ng-repeat="widget in model.widgets">
         <div class="lpb-container">
-            <div ng-controller="widgetEditController" ng-switch="widget.widgetType">
+            <div ng-switch="widget.widgetType">
                 <div class="container-fluid" ng-switch-when="HEADING">
                     <ng-include src="'views/widget/templates/widget-heading.view.client.html'">
                 </div>

@@ -10,7 +10,11 @@
 
 
         function init() {
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
+            pageService
+                .findPageByWebsiteId(model.userId, model.websiteId)
+                .then(function (pages) {
+                    model.pages = pages;
+                });
         }
 
         init();

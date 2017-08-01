@@ -30,7 +30,6 @@
         }
 
         function findWebsitesForUser(userId) {
-            console.log("here");
             var url = "/api/user/" + userId + "/website";
             return $http.get(url)
                 .then(function (response) {
@@ -40,25 +39,21 @@
 
         function findWebsiteById(userId, websiteId) {
             var url = "/api/user/" + userId + "/website/" + websiteId;
-            return $http.get(url);
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
         }
 
-        function updateWebsite(websiteId, website) {
-            for (var u in websites) {
-                if (websites[u]._id === websiteId) {
-                    websites[u] = website;
-                }
-            }
+        function updateWebsite(userId, websiteId, website) {
+            console.log(websiteId);
+            var url = "/api/user/" + userId + "/website/" + websiteId;
+            return $http.put(url, website);
         }
 
-        function deleteWebsite(websiteId) {
-            var newList = [];
-            for (var u in websites) {
-                if (websites[u]._id !== websiteId) {
-                    newList.push(websites[u]);
-                }
-            }
-            websites = newList;
+        function deleteWebsite(userId, websiteId) {
+            var url = "/api/user/" + userId + "/website/" + websiteId;
+            return $http.delete(url);
         }
 
     }

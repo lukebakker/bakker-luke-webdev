@@ -9,7 +9,6 @@
         model.pageId = $routeParams.pageId;
         model.websiteId = $routeParams.websiteId;
         model.widgetId = $routeParams.widgetId;
-        model.widget = widgetService.findWidgetById(model.widgetId);
 
 
         model.createNewHeader = createNewHeader;
@@ -17,7 +16,14 @@
         model.createNewYoutube = createNewYoutube;
 
         function init() {
-            model.widgets = widgetService.findWidgetByPageId(model.pageId);
+            widgetService
+                .findWidgetByPageId(model.userId, model.websiteId, model.pageId)
+                .then(function (widgets) {
+                    model.widgets = widgets;
+                });
+
+
+
         }
 
         init();
@@ -30,7 +36,7 @@
                 "size": "",
                 "text": ""
             };
-            widgetService.createWidget(newWidget);
+            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget);
             $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
                 "/widget/" + newWidget._id + "/edit");
         }
@@ -43,7 +49,7 @@
                 "width": "",
                 "url": ""
             };
-            widgetService.createWidget(newWidget);
+            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget);
             $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
                 "/widget/" + newWidget._id + "/edit");
         }
@@ -56,7 +62,7 @@
                 "width": "",
                 "url": ""
             };
-            widgetService.createWidget(newWidget);
+            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget);
             $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
                 "/widget/" + newWidget._id + "/edit");
         }

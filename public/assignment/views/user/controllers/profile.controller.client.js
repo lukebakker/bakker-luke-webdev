@@ -20,9 +20,9 @@
 
         init();
 
-        function updateUser(user) {
+        function updateUser() {
             var userId = $routeParams["userId"];
-            userService.updateUser(user, userId);
+            userService.updateUser(model.user, userId);
         }
 
         function unRegister() {

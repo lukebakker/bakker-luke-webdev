@@ -15,37 +15,29 @@
         return api;
 
         function createPage(websiteId, userId, page) {
-            var url = "/api/user/" + userId + "/website/" + websiteId;
+            var url = "/api/user/" + userId + "/website/" + websiteId + "/page";
             return $http.post(url, page);
         }
 
-        function findPageByWebsiteId(websiteId) {
-            var newPages = [];
-
-            for (var w in pages) {
-                if (pages[w].websiteId === websiteId) {
-                    newPages.push(pages[w]);
-                }
-            }
-
-            return newPages;
+        function findPageByWebsiteId(userId, websiteId) {
+            var url = "/api/user/" + userId + "/website/" + websiteId + "/page";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
         }
 
-        function findPageById(pageId) {
-            for (var u in pages) {
-                if (pages[u]._id === pageId) {
-                    return pages[u];
-                }
-            }
-            return null;
+        function findPageById(userId, websiteId, pageId) {
+            var url = "/api/user/" + userId + "/website/" + websiteId + "/page/" + pageId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
         }
 
-        function updatePage(pageId, page) {
-            for (var u in pages) {
-                if (pages[u]._id === pageId) {
-                    pages[u] = page;
-                }
-            }
+        function updatePage(userId, websiteId, pageId, page) {
+            var url = "/api/user/" + userId + "/website/" + websiteId + "/page/" + pageId;
+            return $http.put(url, page);
         }
 
         function deletePage(pageId) {

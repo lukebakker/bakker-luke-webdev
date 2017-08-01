@@ -10,11 +10,17 @@
             "findUserByUsernameAndPassword": findUserByUsernameAndPassword,
             "findUserById": findUserById,
             "registerUser": registerUser,
-            "updateUser": updateUser
+            "updateUser": updateUser,
+            "unRegister": unRegister
         };
         return api;
 
-        function updateUser(userId, user) {
+        function unRegister(userId) {
+            var url = "/api/user/" + userId;
+            return $http.delete(url, userId);
+        }
+
+        function updateUser(user, userId) {
 
             var url = "/api/user/" + userId;
 
@@ -38,10 +44,8 @@
         function findUserByUsernameAndPassword(username, password) {
 
             var url = "/api/user?username="+username+"&password="+password;
-            // /user?username=alice&password=alice
 
             return $http.get(url);
-
         }
 
     }

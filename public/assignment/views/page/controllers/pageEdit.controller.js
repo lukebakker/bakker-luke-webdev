@@ -9,21 +9,32 @@
         model.websiteId = $routeParams.websiteId;
         model.pageId = $routeParams.pageId;
         model.editPage = editPage;
-        var name;
-        var description;
+        model.cancelClicked = cancelClicked;
 
         function init() {
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
-            model.page = pageService.findPageById(model.pageId);
-            name = model.page.name;
-            description = model.page.description;
+            pageService
+                .findPageByWebsiteId(model.userId, model.websiteId)
+                .then(function (pages) {
+                    model.pages = pages;
+                });
+            pageService
+                .findPageById(model.userId, model.websiteId, model.pageId)
+                .then(function (page) {
+                    model.page = page;
+                });
         }
 
         init();
 
         function editPage() {
-            pageService.updatePage(model.pageId, model.page);
-            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page");
+            console.log("here");
+            pageService.updatePage(model.userId, model.websiteId, model.pageId, model.page);
+            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/");
+        }
+
+        function cancelClicked() {
+            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/");
+
         }
 
     }

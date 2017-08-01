@@ -13,7 +13,11 @@
         model.trustAsHtmlSource = trustAsHtmlSource;
 
         function init() {
-            model.widgets = widgetService.findWidgetByPageId(model.pageId);
+            widgetService
+                .findWidgetByPageId(model.userId, model.websiteId, model.pageId)
+                .then(function (widgets) {
+                    model.widgets = widgets;
+                });
         }
 
         init();
@@ -29,7 +33,6 @@
         function trustAsHtmlSource(htmlContent) {
             return $sce.trustAsHtml(htmlContent);
         }
-
 
 
     }
