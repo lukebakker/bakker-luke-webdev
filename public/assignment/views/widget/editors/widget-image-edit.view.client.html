@@ -47,16 +47,18 @@
                class="form-control"
                id="width"/>
 
-        <label for="file">File</label>
-        <input name="file"
-               ng-model="model.widget.file"
-               type="file"
-               class="form-control"
-               id="file"/>
-        <a class="btn btn-primary btn-block"
-           ng-click="model.createNewImage()"
-           role="button">Upload Image
-        </a>
+        <form style="margin-top: 5px; margin-bottom: 5px" action="/api/upload" method="post" enctype="multipart/form-data">
+            <input name="myFile" type="file" class="form-control"/>
+            <input name="width" value="{{model.widget.width}}" style="display: none"/>
+            <input name="userId" value="{{model.userId}}" style="display: none"/>
+            <input name="websiteId" value="{{model.websiteId}}" style="display: none"/>
+            <input name="pageId" value="{{model.pageId}}" style="display: none"/>
+            <input name="widgetId" value="{{model.widget._id}}" style="display: none"/>
+            <button type="submit" class="btn btn-block btn-primary"
+            >Upload Image
+            </button>
+        </form>
+
         <a class="btn btn-default btn-danger btn-block"
            ng-click="model.deleteWidget()"
            role="button">Delete
