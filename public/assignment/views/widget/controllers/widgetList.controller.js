@@ -36,7 +36,7 @@
         }
 
         function setIndex(start, end) {
-            return widgetService.setIndex(model.pageId, start, end);
+            widgetService.setIndex(model.pageId, start, end);
         }
 
 

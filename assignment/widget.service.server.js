@@ -6,7 +6,7 @@ app.post("/api/user/:userId/website/:websiteId/page/:pageId/widget/new", createW
 app.get("/api/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/edit", findWidgetById);
 app.put("/api/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/edit", updateWidget);
 app.delete("/api/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/edit", deleteWidget);
-app.put("/api/user/:pageId", setIndex);
+app.put("/api/page/:pageId", setIndex);
 
 
 var widgets = [
@@ -55,15 +55,14 @@ function uploadImage(req, res) {
 }
 
 function setIndex(req, res) {
-    console.log("here");
-    var startIndex = req.params.startIndex;
-    var endIndex = req.params.endIndex;
+    var start = req.query.start;
+    var end = req.query.end;
     var pageId = req.params.pageId;
-    if (widgets[startIndex]._id === widgets[endIndex]._id) {
+    if (widgets[start].pageId === widgets[end].pageId) {
 
-        var temp = widgets[startIndex];
-        widgets[startIndex] = widget[endIndex];
-        widgets[endIndex] = temp;
+        var temp = widgets[start];
+        widgets[start] = widgets[end];
+        widgets[end] = temp;
     }
     res.json(widgets);
 
@@ -108,7 +107,7 @@ function getWidgetByIdLocally(widgetId) {
             return (widgets[w]);
         }
     }
-    return;
+
 }
 
 
@@ -134,7 +133,7 @@ function deleteWidget(req, res) {
             newWidgetList.push(widgets[u]);
         }
     }
-    widgets = newWidgetList
+    widgets = newWidgetList;
     res.send(newWidgetList);
 }
 

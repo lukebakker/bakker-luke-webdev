@@ -4,24 +4,21 @@
         .directive("sortDirective", sortDirective);
 
     function sortDirective($http) {
-        function linkFunction(scope, element, $routeParams) {
-            var userId = $routeParams.userId;
-            var pageId = $routeParams.pageId;
-            var websiteId = $routeParams.websiteId;
-            var startIndex = -1;
-            var endIndex = -1;
+        function linkFunction(scope, element) {
+            var start = -1;
+            var end = -1;
 
             $(element).sortable({
                 start: function (event, ui) {
-                    startIndex = $(ui.item).index();
+                    start = $(ui.item).index();
                 },
                 stop: function (event, ui) {
-                    endIndex = $(ui.item).index();
-                    console.log([startIndex, endIndex]);
+                    end = $(ui.item).index();
+                    console.log([start, end]);
 
                     scope.setIndex({
-                        startIndex: startIndex,
-                        endIndex: endIndex
+                        start: start,
+                        end: end
                     });
 
                 }
@@ -29,8 +26,7 @@
         }
 
         return {
-            scope:
-                {setIndex: '&'},
+            scope: {setIndex: '&'},
             link: linkFunction
         }
     }

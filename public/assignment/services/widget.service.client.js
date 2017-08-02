@@ -46,9 +46,9 @@
             return $http.delete(url, widgetId);
         }
 
-        function setIndex(pageId, startIndex, endIndex) {
-            var url = "/api/user/" + pageId;
-            return $http.put(url, startIndex, endIndex)
+        function setIndex(pageId, start, end) {
+            var url = "/api/page/"+pageId+"/?start="+start+"&end="+end;
+            return $http.put(url)
                 .then(function (response) {
                     return response.data;
                 })
