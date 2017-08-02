@@ -11,14 +11,14 @@
 
         model.trustAsYoutubeSource = trustAsYoutubeSource;
         model.trustAsHtmlSource = trustAsHtmlSource;
-
+        model.widgets12 = [
+            {"type": "HEADINGS"},
+            {"type": "IMAGES"},
+            {"type": "YOUTUBE"},
+            {"type": "HTML"}
+        ];
         function init() {
-            model.widgets12 = [
-                {"type": "HEADINGS"},
-                {"type": "IMAGES"},
-                {"type": "YOUTUBE"},
-                {"type": "HTML"}
-            ];
+
             widgetService
                 .findWidgetByPageId(model.userId, model.websiteId, model.pageId)
                 .then(function (widgets) {

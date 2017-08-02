@@ -18,44 +18,35 @@
     </nav>
 
 
-    <div>
-        <div >
-            <div item-list  ng-repeat="widget12 in model.widgets12">
-                {{widget12}}
-            </div>
-        </div>
+    <div sort-directive ng-repeat="widget12 in model.widgets12">
+        {{widget12}}
     </div>
 
 
-
-
-
-    <div sort-directive>
-        <div class="lpb-container" ng-repeat="widget in model.widgets">
-                <div ng-switch="widget.widgetType">
-                    <div class="container-fluid" ng-switch-when="HEADING">
-                        <ng-include src="'views/widget/templates/widget-heading.view.client.html'">
-                    </div>
-                    <div ng-switch-when="IMAGE">
-                        <ng-include src="'views/widget/templates/widget-image.view.client.html'">
-                    </div>
-                    <div ng-switch-when="YOUTUBE">
-                        <ng-include src="'views/widget/templates/widget-youtube.view.client.html'">
-                    </div>
-                    <div ng-switch-when="HTML">
-                        <ng-include src="'views/widget/templates/widget-html.view.client.html'">
-                    </div>
-                </div>
-                <div class="widget">
-                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}/edit">
+    <div sort-directive class="lpb-container" ng-repeat="widget in model.widgets">
+        <div ng-switch="widget.widgetType">
+            <div class="container-fluid" ng-switch-when="HEADING">
+                <ng-include src="'views/widget/templates/widget-heading.view.client.html'">
+            </div>
+            <div ng-switch-when="IMAGE">
+                <ng-include src="'views/widget/templates/widget-image.view.client.html'">
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <ng-include src="'views/widget/templates/widget-youtube.view.client.html'">
+            </div>
+            <div ng-switch-when="HTML">
+                <ng-include src="'views/widget/templates/widget-html.view.client.html'">
+            </div>
+        </div>
+        <div class="widget">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}/edit">
             <span class="pull-right glyphicon glyphicon-cog">
             </span>
-                    </a>
-                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}/edit">
+            </a>
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}/edit">
             <span class="pull-right glyphicon glyphicon-th-list">
             </span>
-                    </a>
-                </div>
+            </a>
         </div>
     </div>
 

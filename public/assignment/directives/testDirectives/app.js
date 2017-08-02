@@ -1,7 +1,7 @@
 (function () {
     angular
         .module("directivesApp", ["myDirectives"])
-        .controller("directiveController", directiveController)
+        .controller("directiveController", directiveController);
 
     function directiveController($scope) {
         $scope.message = "Hello From Controller";
@@ -12,5 +12,9 @@
             {"type": "HTML"}
         ];
 
+        function init() {
+
+        }
+        init();
     }
 })();
