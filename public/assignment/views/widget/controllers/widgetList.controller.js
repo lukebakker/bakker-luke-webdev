@@ -11,12 +11,7 @@
 
         model.trustAsYoutubeSource = trustAsYoutubeSource;
         model.trustAsHtmlSource = trustAsHtmlSource;
-        model.widgets12 = [
-            {"type": "HEADINGS"},
-            {"type": "IMAGES"},
-            {"type": "YOUTUBE"},
-            {"type": "HTML"}
-        ];
+        model.setIndex = setIndex;
         function init() {
 
             widgetService
@@ -38,6 +33,10 @@
 
         function trustAsHtmlSource(htmlContent) {
             return $sce.trustAsHtml(htmlContent);
+        }
+
+        function setIndex(start, end) {
+            return widgetService.setIndex(model.pageId, start, end);
         }
 
 

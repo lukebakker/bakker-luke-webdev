@@ -6,6 +6,7 @@ app.post("/api/user/:userId/website/:websiteId/page/:pageId/widget/new", createW
 app.get("/api/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/edit", findWidgetById);
 app.put("/api/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/edit", updateWidget);
 app.delete("/api/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/edit", deleteWidget);
+app.put("/api/user/:pageId", setIndex);
 
 
 var widgets = [
@@ -29,6 +30,7 @@ var multer = require('multer'); // npm install multer --save
 var upload = multer({dest: __dirname + '/../public/uploads'});
 app.post("/api/upload", upload.single('myFile'), uploadImage);
 
+
 function uploadImage(req, res) {
     var widgetId = req.body.widgetId;
     console.log(widgetId);
@@ -50,7 +52,22 @@ function uploadImage(req, res) {
     widget.url = '/uploads/' + filename;
     var callbackUrl = "/assignment/#/user/" + userId + "/website/" + websiteId;
     res.redirect(callbackUrl);
-};
+}
+
+function setIndex(req, res) {
+    console.log("here");
+    var startIndex = req.params.startIndex;
+    var endIndex = req.params.endIndex;
+    var pageId = req.params.pageId;
+    if (widgets[startIndex]._id === widgets[endIndex]._id) {
+
+        var temp = widgets[startIndex];
+        widgets[startIndex] = widget[endIndex];
+        widgets[endIndex] = temp;
+    }
+    res.json(widgets);
+
+}
 
 
 function createWidget(req, res) {

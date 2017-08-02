@@ -10,7 +10,8 @@
             "createWidget": createWidget,
             "findWidgetById": findWidgetById,
             "updateWidget": updateWidget,
-            "deleteWidget": deleteWidget
+            "deleteWidget": deleteWidget,
+            "setIndex": setIndex
         };
         return api;
 
@@ -45,6 +46,16 @@
             return $http.delete(url, widgetId);
         }
 
+        function setIndex(pageId, startIndex, endIndex) {
+            var url = "/api/user/" + pageId;
+            return $http.put(url, startIndex, endIndex)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+
     }
 
-})();
+})
+();
