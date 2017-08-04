@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="deviantApp">
+<head>
+    <link href="../../../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="../../../vendor/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <meta charset="UTF-8">
+    <title>Deviant Art</title>
+</head>
+<body>
+<div class="container-fluid">
+    <h1>Deviant art</h1>
+
+    <div class="container-fluid" ng-controller="searchController as model">
+        <h2>Search something</h2>
+
+        <input class="form-control"
+               placeholder="search deviant art"
+               ng-model="model.searchInput">
+        <button class="btn btn-primary btn-block"
+                ng-click="model.searchByTag(model.searchInput)">
+            Search
+        </button>
+        <button class="btn btn-primary btn-block"
+                ng-click="model.searchHot()">
+            Search Currently Popular
+        </button>
+
+        <table class="table">
+            <tr ng-repeat="art in model.showArt">
+                <td>
+                    <img ng-src="{{art.content.src}}" style="width : 100%"></td>
+                <td>
+                    <a href="{{art.url}}">
+                    {{art.title}}</a>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+</div>
+</body>
+</html>
