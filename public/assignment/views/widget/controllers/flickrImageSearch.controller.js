@@ -17,7 +17,7 @@
                 .then(function (widget) {
                     model.widget = widget;
                 });
-                console.log("here");
+            console.log("here");
         }
 
         init();
@@ -25,14 +25,14 @@
 
         model.searchPhotos = function (searchTerm) {
             console.log(searchTerm);
-              flickrService
-             .searchPhotos(searchTerm)
-             .then(function (response) {
-             data = response.data.replace("jsonFlickrApi(", "");
-             data = data.substring(0, data.length - 1);
-             data = JSON.parse(data);
-             model.photos = data.photos;
-             });
+            flickrService
+                .searchPhotos(searchTerm)
+                .then(function (response) {
+                    data = response.data.replace("jsonFlickrApi(", "");
+                    data = data.substring(0, data.length - 1);
+                    data = JSON.parse(data);
+                    model.photos = data.photos;
+                });
         }
     }
 
