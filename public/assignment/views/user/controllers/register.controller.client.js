@@ -15,19 +15,23 @@
         init();
 
         function registerUser(user) {
-            var _verifyPassword = userService.verifyPassword(user.password, user.password1);
-            var _user = userService.findUserByUsername(user.username);
+            var _verifyPassword = user.password === user.password1;
+            var _user = user.username === userService.findUserByUsername(user.username);
+            user = {username: user.username, password: user.password};
             if (!_verifyPassword) {
                 model.errorMessage = "Passwords do not match"
             } else {
                 if (!_user) {
-                    var user = userService.registerUser(user);
-                    $location.url("/profile/" + user._id);
-
+                     userService.registerUser(user)
+                        .then(function (user) {
+                           _user = user.data;
+                            $location.url("/profile/" + _user._id);
+                        });
                 } else {
                     model.errorMessage = "User already exists";
                 }
             }
+            return _user;
         }
     }
 })();

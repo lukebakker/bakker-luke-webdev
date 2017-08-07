@@ -29,24 +29,24 @@
 
         function registerUser(user) {
             var url = "/api/user";
-
             return $http.post(url, user);
         }
 
         function findUserByUsername(username) {
-            var url = "/api/user?username="+username;
+            var url = "/api/user/username?username=" + username;
             return $http.get(url);
         }
+
         function findUserById(userId) {
-            return $http.get("/api/user/"+userId);
+            return $http.get("/api/user/" + userId);
         }
 
         function findUserByUsernameAndPassword(username, password) {
-
-            var url = "/api/user?username="+username+"&password="+password;
-
+            var url = "/api/user?username=" + username + "&password=" + password;
             return $http.get(url);
         }
 
+
     }
-})();
+})
+();
