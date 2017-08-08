@@ -46,7 +46,6 @@
         }
 
         function updateWebsite(userId, websiteId, website) {
-            console.log(websiteId);
             var url = "/api/user/" + userId + "/website/" + websiteId;
             return $http.put(url, website);
         }

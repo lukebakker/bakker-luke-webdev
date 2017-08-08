@@ -26,14 +26,13 @@ function updateWebsite(req, res) {
     var websiteId = req.params.websiteId;
     var website = req.body;
 
-    for (var u in websites) {
-        if (websites[u]._id === websiteId) {
-            websites[u] = website;
-            res.send(website);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    websiteModel.updateWebsite(websiteId, website)
+        .then(function (website) {
+            res.json(website);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        })
+
 }
 
 function deleteWebsite(req, res) {
@@ -48,47 +47,30 @@ function deleteWebsite(req, res) {
     res.json(newWebsiteList);
 }
 
-function addWebsiteToUserArray(userId, website) {
-    var user = userModel.findUserById(userId);
-    var websiteList = userModel.findWebsitesForUser(userId);
-    console.log(websiteList);
-    websiteList.push(website);
-    user.websites = websiteList;
-    console.log("here");
-    return userModel.updateUser(userId, user);
-}
 
 function createWebsite(req, res) {
     var website = req.body;
     var userId = req.params.userId;
-    website.developerId = userId;
-    addWebsiteToUserArray(userId, website);
     websiteModel.createWebsiteForUser(userId, website)
         .then(function (website) {
-
             res.json(website);
-        })
+        });
 }
 
 function findWebsiteById(req, res) {
-    for (var w in websites) {
-        if (websites[w]._id === req.params.websiteId) {
-            res.json(websites[w]);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    var websiteId = req.params.websiteId;
+    websiteModel.findWebsiteById(websiteId)
+        .then(function (website) {
+            res.json(website);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        })
 }
 
 function findWebsitesForUser(req, res) {
     var userId = req.params.userId;
-
-    var sites = [];
-
-    for (var w in websites) {
-        if (websites[w].developerId === userId) {
-            sites.push(websites[w]);
-        }
-    }
-    res.json(sites);
+    websiteModel.findWebsitesForUser(userId)
+        .then(function (user) {
+            res.json(user);
+        })
 }

@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/webdev_summer2_2017");
 
 var widgetSchema = mongoose.Schema({
-    _page: {type: mongoose.Schema.ObjectId, ref: "PageModel"},
+    _page: {type: mongoose.Schema.Types.ObjectId, ref: "PageModel"},
     type: {type: String, enum: ["HEADING", "IMAGE", "YOUTUBE", "HTML", "INPUT"]},
     name: String,
     text: String,
