@@ -1,5 +1,7 @@
 var app = require("../../express");
 
+var widgetModel = require("../model/widget.model.server");
+
 
 app.get("/api/user/:userId/website/:websiteId/page/:pageId/widget", findWidgetsForUser);
 app.post("/api/user/:userId/website/:websiteId/page/:pageId/widget/new", createWidget);
@@ -33,7 +35,6 @@ app.post("/api/upload", upload.single('myFile'), uploadImage);
 
 function uploadImage(req, res) {
     var widgetId = req.body.widgetId;
-    console.log(widgetId);
     var width = req.body.width;
     var myFile = req.file;
 
@@ -48,7 +49,6 @@ function uploadImage(req, res) {
     var mimetype = myFile.mimetype;
 
     var widget = getWidgetByIdLocally(widgetId);
-    console.log(widget);
     widget.url = '/uploads/' + filename;
     var callbackUrl = "/assignment/#/user/" + userId + "/website/" + websiteId;
     res.redirect(callbackUrl);
@@ -72,9 +72,13 @@ function setIndex(req, res) {
 function createWidget(req, res) {
     var widget = req.body;
     var pageId = req.params.pageId;
-    widget.pageId = pageId;
-    widgets.push(widget);
-    res.json(widget);
+    widget._page = pageId;
+    widgetModel.createWidget(pageId, widget)
+        .then(function (widget) {
+            res.json(widget._id);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        });
 }
 
 function updateWidget(req, res) {
@@ -92,49 +96,46 @@ function updateWidget(req, res) {
 }
 
 function findWidgetById(req, res) {
-    for (var w in widgets) {
-        if (widgets[w]._id === req.params.widgetId) {
-            res.json(widgets[w]);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    var widgetId = req.params.widgetId;
+    console.log(widgetId);
+    widgetModel.findWidgetById(widgetId)
+        .then(function (widget) {
+            res.json(widget);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        })
 }
 
 function getWidgetByIdLocally(widgetId) {
-    for (var w in widgets) {
-        if (widgets[w]._id === widgetId) {
-            return (widgets[w]);
-        }
-    }
+    return widgetModel.findWidgetById(widgetId)
+        .then(function (widget) {
+            res.json(widget);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        })
 
 }
 
 
 function findWidgetsForUser(req, res) {
     var pageId = req.params.pageId;
-    var newWidgets = [];
-
-    for (var w in widgets) {
-        if (widgets[w].pageId === pageId) {
-            newWidgets.push(widgets[w]);
-        }
-    }
-    res.json(newWidgets);
+    widgetModel.findWidgetsByPageId(pageId)
+        .then(function (widgets) {
+            res.send(widgets);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        })
 }
 
 function deleteWidget(req, res) {
     var widgetId = req.params.widgetId;
-
-    var newWidgetList = [];
-
-    for (var u in widgets) {
-        if (widgets[u]._id != widgetId) {
-            newWidgetList.push(widgets[u]);
-        }
-    }
-    widgets = newWidgetList;
-    res.send(newWidgetList);
+    var pageId = req.params.pageId;
+    widgetModel.deleteWidget(pageId, widgetId)
+        .then(function (widget) {
+            res.json(widget);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        });
 }
 
 

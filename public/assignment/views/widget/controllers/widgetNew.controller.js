@@ -23,48 +23,56 @@
                 });
 
 
-
         }
 
         init();
 
         function createNewHeader() {
             var newWidget = {
-                "_id": new Date().getTime() + "",
-                "widgetType": "HEADING",
+                "type": "HEADING",
                 "pageId": model.pageId,
                 "size": "",
                 "text": ""
             };
-            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget);
-            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
-                "/widget/" + newWidget._id + "/edit");
+            var widgetId = null;
+            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget)
+                .then(function (widget) {
+                    widgetId = widget.data;
+                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
+                        "/widget/" + widgetId + "/edit");
+                });
         }
 
         function createNewImage() {
             var newWidget = {
-                "_id": new Date().getTime() + "",
-                "widgetType": "IMAGE",
+                "type": "IMAGE",
                 "pageId": model.pageId,
                 "width": "",
                 "url": ""
             };
-            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget);
-            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
-                "/widget/" + newWidget._id + "/edit");
+            var widgetId = null;
+            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget)
+                .then(function (widget) {
+                    widgetId = widget.data;
+                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
+                        "/widget/" + widgetId + "/edit");
+                });
         }
 
         function createNewYoutube() {
             var newWidget = {
-                "_id": new Date().getTime() + "",
-                "widgetType": "YOUTUBE",
+                "type": "YOUTUBE",
                 "pageId": model.pageId,
                 "width": "",
                 "url": ""
             };
-            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget);
-            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
-                "/widget/" + newWidget._id + "/edit");
+            var widgetId = null;
+            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget)
+                .then(function (widget) {
+                    widgetId = widget.data;
+                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
+                        "/widget/" + widgetId + "/edit");
+                });
         }
     }
 })();

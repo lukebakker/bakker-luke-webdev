@@ -11,6 +11,8 @@ pageModel.findPageById = findPageById;
 pageModel.findPagesByWebsiteId = findPagesByWebsiteId;
 pageModel.updatePage = updatePage;
 pageModel.deletePage = deletePage;
+pageModel.addWidget = addWidget;
+pageModel.removeWidget = removeWidget;
 
 function createPage(websiteId, page) {
     var tempPage = null;
@@ -46,6 +48,30 @@ function deletePage(websiteId, pageId) {
         })
         .then(function () {
             return tempPage;
+        })
+}
+
+
+function addWidget(pageId, widgetId) {
+    pageModel.findPageById(pageId)
+        .then(function (page) {
+            page.widgets.push(widgetId);
+            return page.save();
+        });
+}
+
+function removeWidget(pageId, widgetId) {
+    pageModel.findPageById(pageId)
+        .then(function(page) {
+            var newWidgets = [];
+            var widgets = page.widgets;
+            for(var u in widgets) {
+                if (widgets[u]._id === widgetId) {
+                    newWidgets.push(widgets[u]);
+                }
+            }
+            page.widgets = newWidgets;
+            return page.save();
         })
 }
 

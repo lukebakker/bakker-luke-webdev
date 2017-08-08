@@ -17,7 +17,8 @@
 
         function createWidget(userId, websiteId, pageId, widget) {
             var url = "/api/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/new";
-            $http.post(url, widget);
+            return $http.post(url, widget);
+
         }
 
         function findWidgetByPageId(userId, websiteId, pageId) {

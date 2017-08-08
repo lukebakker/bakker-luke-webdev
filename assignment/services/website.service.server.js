@@ -1,7 +1,6 @@
 var app = require("../../express");
 
 var websiteModel = require("../model/website.model.server");
-var userModel = require("../model/user.model.server");
 
 
 app.get("/api/user/:userId/website", findWebsitesForUser);

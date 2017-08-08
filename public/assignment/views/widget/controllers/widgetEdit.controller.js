@@ -25,7 +25,6 @@
         init();
 
         function createNewWidget() {
-            console.log(model.userId);
             widgetService.updateWidget(model.userId, model.websiteId, model.pageId, model.widgetId, model.widget);
             $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
                 "/widget");
