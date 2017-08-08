@@ -1,5 +1,8 @@
 var app = require("../../express");
 
+var websiteModel = require("../model/website.model.server");
+var pageModel = require("../model/page.model.server");
+
 
 app.get("/api/user/:userId/website/:websiteId/page", findPagesForUser);
 app.get("/api/user/:userId/website/:websiteId/page/:pageId", findPageById);
@@ -17,14 +20,13 @@ function updatePage(req, res) {
     var pageId = req.params.pageId;
     var page = req.body;
 
-    for (var u in pages) {
-        if (pages[u]._id === pageId) {
-            pages[u] = page;
-            res.send(page);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    pageModel.updatePage(pageId, page)
+        .then(function (page) {
+            res.json(page);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        })
+
 }
 
 function deletePage(req, res) {
@@ -41,47 +43,32 @@ function deletePage(req, res) {
 function createPage(req, res) {
     var page = req.body;
     var websiteId = req.params.websiteId;
-    page.websiteId = websiteId;
-    page._id = (new Date()).getTime() + "";
-
-    pages.push(page);
-    res.json(page);
+    page._website = websiteId;
+    return pageModel.createPage(websiteId, page)
+        .then(function (page) {
+            res.json(page);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        });
 }
 
 function findPageById(req, res) {
     var pageId = req.params.pageId;
-    for (var w in pages) {
-        if (pages[w]._id === pageId) {
-            res.json(pages[w]);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    return pageModel.findPageById(pageId)
+        .then(function (page) {
+            res.json(page);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        });
 }
 
 function findPagesForUser(req, res) {
     var websiteId = req.params.websiteId;
 
-    var newPages = [];
-
-    for (var w in pages) {
-        if (pages[w].websiteId === websiteId) {
-            newPages.push(pages[w]);
-        }
-    }
-    res.json(newPages);
-}
-
-function findPageByWebsiteId(req, res) {
-    var websiteId = req.params.websiteId;
-
-    var newPages = [];
-
-    for (var w in pages) {
-        if (pages[w].websiteId === websiteId) {
-            newPages.push(pages[w]);
-        }
-    }
-
-    res.json(newPages);
+    return pageModel.findPagesByWebsiteId(websiteId)
+        .then(function (pages) {
+            res.json(pages);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        })
 }

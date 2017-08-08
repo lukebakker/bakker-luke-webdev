@@ -9,14 +9,29 @@ websiteModel.createWebsiteForUser = createWebsiteForUser;
 websiteModel.findWebsitesForUser = findWebsitesForUser;
 websiteModel.findWebsiteById = findWebsiteById;
 websiteModel.updateWebsite = updateWebsite;
+websiteModel.deleteWebsite = deleteWebsite;
+websiteModel.addPage = addPage;
 
-function findWebsiteById (websiteId) {
+function deleteWebsite(userId, websiteId) {
+    var tempWeb = null;
+    return websiteModel.findByIdAndRemove(websiteId)
+        .then(function (website) {
+            tempWeb = website;
+            return userModel.removeWebsite(userId, website._id);
+        })
+        .then(function () {
+            return tempWeb;
+        })
+}
+
+
+function findWebsiteById(websiteId) {
     return websiteModel.findById(websiteId);
 }
 
 function createWebsiteForUser(userId, website) {
     website._user = userId;
-    var tempWeb = null
+    var tempWeb = null;
     return websiteModel.create(website)
         .then(function (websiteDoc) {
             tempWeb = websiteDoc;
@@ -28,9 +43,17 @@ function createWebsiteForUser(userId, website) {
 }
 
 function findWebsitesForUser(userId) {
-    return websiteModel.find({_user : userId});
+    return websiteModel.find({_user: userId});
 }
 
 function updateWebsite(websiteId, website) {
-    return websiteModel.update({name : website.name, description : website.description});
+    return websiteModel.update({_id: websiteId}, {$set: {name: website.name, description: website.description}});
+}
+
+function addPage(websiteId, pageId) {
+    websiteModel.findWebsiteById(websiteId)
+        .then(function (website) {
+            website.pages.push(pageId);
+            return website.save();
+        });
 }

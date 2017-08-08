@@ -18,9 +18,8 @@
 
         function createNewPage() {
             var page = {
-                "_id": new Date().getTime() + "",
                 "name": model.name + "",
-                "websiteId": model.userId + "",
+                "_website": model.websiteId + "",
                 "description": model.description + ""
             };
             pageService.createPage(model.websiteId, model.userId, page);

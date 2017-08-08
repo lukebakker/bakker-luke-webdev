@@ -37,14 +37,14 @@ function updateWebsite(req, res) {
 
 function deleteWebsite(req, res) {
     var websiteId = req.params.websiteId;
-    var newWebsiteList = [];
-    for (var w in websites) {
-        if (websites[w]._id != websiteId) {
-            newWebsiteList.push(websites[w]);
-        }
-    }
-    websites = newWebsiteList;
-    res.json(newWebsiteList);
+    var userId = req.params.userId;
+    websiteModel.deleteWebsite(userId, websiteId)
+        .then(function (website) {
+            res.json(website);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        })
+
 }
 
 
