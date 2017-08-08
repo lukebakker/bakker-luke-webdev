@@ -9,7 +9,9 @@ module.exports = widgetModel;
 widgetModel.createWidget = createWidget;
 widgetModel.findWidgetById = findWidgetById;
 widgetModel.findWidgetsByPageId = findWidgetsByPageId;
-widgetModel.updateWidget = updateWidget;
+widgetModel.updateHeading = updateHeading;
+widgetModel.updateImage = updateImage;
+widgetModel.updateYouTube = updateYouTube;
 widgetModel.deleteWidget = deleteWidget;
 widgetModel.setIndex = setIndex;
 
@@ -32,8 +34,20 @@ function findWidgetsByPageId(pageId) {
     return widgetModel.find({_page: pageId});
 }
 
-function updateWidget(widgetId, widget) {
-    return widgetModel.update({_id: widgetId}, {widget: widget});
+function updateHeading(widgetId, widget) {
+    return widgetModel.update({_id: widgetId}, {text: widget.text, size: widget.size});
+}
+function updateImage(widgetId, widget) {
+    return widgetModel.update({_id: widgetId}, {
+        name: widget.name, text: widget.text,
+        url: widget.url, width: widget.width
+    });
+}
+function updateYouTube(widgetId, widget) {
+    return widgetModel.update({_id: widgetId}, {
+        name: widget.name, text: widget.text,
+        url: widget.url, width: widget.width
+    });
 }
 
 function deleteWidget(pageId, widgetId) {

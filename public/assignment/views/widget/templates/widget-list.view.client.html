@@ -21,7 +21,7 @@
     <div sort-directive set-index="model.setIndex(start, end)">
         <div class="lpb-container" ng-repeat="widget in model.widgets">
 
-            <div ng-switch="widget.widgetType">
+            <div ng-switch="widget.type">
                 <div class="container-fluid" ng-switch-when="HEADING">
                     <ng-include src="'views/widget/templates/widget-heading.view.client.html'">
                 </div>

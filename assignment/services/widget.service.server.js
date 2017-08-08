@@ -84,20 +84,32 @@ function createWidget(req, res) {
 function updateWidget(req, res) {
     var widgetId = req.params.widgetId;
     var widget = req.body;
-
-    for (var u in widgets) {
-        if (widgets[u]._id === widgetId) {
-            widgets[u] = widget;
-            res.send(widget);
-            return;
-        }
+    if (widget.type === "HEADING") {
+        return widgetModel.updateHeading(widgetId, widget)
+            .then(function (widgets) {
+                res.json(widgets);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
+    } else if (widget.type === "IMAGE") {
+        return widgetModel.updateImage(widgetId, widget)
+            .then(function (widgets) {
+                res.json(widgets);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
+    } else if (widget.type === "YOUTUBE") {
+        return widgetModel.updateYouTube(widgetId, widget)
+            .then(function (widgets) {
+                res.json(widgets);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
     }
-    res.sendStatus(404);
 }
 
 function findWidgetById(req, res) {
     var widgetId = req.params.widgetId;
-    console.log(widgetId);
     widgetModel.findWidgetById(widgetId)
         .then(function (widget) {
             res.json(widget);
@@ -121,7 +133,7 @@ function findWidgetsForUser(req, res) {
     var pageId = req.params.pageId;
     widgetModel.findWidgetsByPageId(pageId)
         .then(function (widgets) {
-            res.send(widgets);
+            res.json(widgets);
         }, function (err) {
             res.sendStatus(404).send(err);
         })
