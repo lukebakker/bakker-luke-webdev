@@ -40,14 +40,9 @@
             return $http.put(url, page);
         }
 
-        function deletePage(pageId) {
-            var newList = [];
-            for (var u in pages) {
-                if (pages[u]._id !== pageId) {
-                    newList.push(pages[u]);
-                }
-            }
-            pages = newList;
+        function deletePage(userId, websiteId, pageId) {
+            var url = "/api/user/" + userId + "/website/" + websiteId + "/page/" + pageId;
+            return $http.delete(url, pageId);
         }
     }
 

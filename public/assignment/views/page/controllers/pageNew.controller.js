@@ -11,7 +11,7 @@
         model.createNewPage = createNewPage;
 
         function init() {
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
+
         }
 
         init();

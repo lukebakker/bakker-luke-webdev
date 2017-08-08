@@ -10,6 +10,7 @@
         model.pageId = $routeParams.pageId;
         model.editPage = editPage;
         model.cancelClicked = cancelClicked;
+        model.deletePage = deletePage;
 
         function init() {
             pageService
@@ -35,6 +36,11 @@
         function cancelClicked() {
             $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/");
 
+        }
+
+        function deletePage() {
+            pageService.deletePage(model.userId, model.websiteId, model.pageId, model.page);
+            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/");
         }
 
     }

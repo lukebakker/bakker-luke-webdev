@@ -10,6 +10,7 @@ pageModel.createPage = createPage;
 pageModel.findPageById = findPageById;
 pageModel.findPagesByWebsiteId = findPagesByWebsiteId;
 pageModel.updatePage = updatePage;
+pageModel.deletePage = deletePage;
 
 function createPage(websiteId, page) {
     var tempPage = null;
@@ -31,7 +32,21 @@ function findPagesByWebsiteId(websiteId) {
 }
 
 function updatePage(pageId, page) {
-    return pageModel.update()
+    return pageModel.update({_id: pageId}, {
+        $set: {description: page.description, name: page.name}
+    });
+}
+
+function deletePage(websiteId, pageId) {
+    var tempPage = null;
+    return pageModel.findByIdAndRemove(pageId)
+        .then(function (page) {
+            tempWeb = page;
+            return websiteModel.removePage(websiteId, page._id);
+        })
+        .then(function () {
+            return tempPage;
+        })
 }
 
 

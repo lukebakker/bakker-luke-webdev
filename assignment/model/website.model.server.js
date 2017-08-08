@@ -11,6 +11,7 @@ websiteModel.findWebsiteById = findWebsiteById;
 websiteModel.updateWebsite = updateWebsite;
 websiteModel.deleteWebsite = deleteWebsite;
 websiteModel.addPage = addPage;
+websiteModel.removePage = removePage;
 
 function deleteWebsite(userId, websiteId) {
     var tempWeb = null;
@@ -56,4 +57,19 @@ function addPage(websiteId, pageId) {
             website.pages.push(pageId);
             return website.save();
         });
+}
+
+function removePage(websiteId, pageId) {
+    websiteModel.findWebsiteById(websiteId)
+        .then(function(website) {
+            var newPages = [];
+            var pages = website.pages;
+            for(var u in pages) {
+                if (pages[u]._id === pageId) {
+                    newPages.push(pages[u]);
+                }
+            }
+            website.pages = newPages;
+            return website.save();
+        })
 }
