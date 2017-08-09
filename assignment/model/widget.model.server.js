@@ -15,6 +15,7 @@ widgetModel.updateYouTube = updateYouTube;
 widgetModel.deleteWidget = deleteWidget;
 widgetModel.setIndex = setIndex;
 widgetModel.updateHtml = updateHtml;
+widgetModel.updateText = updateText;
 
 function createWidget(pageId, widget) {
     var tempWidget = null;
@@ -36,23 +37,32 @@ function findWidgetsByPageId(pageId) {
 }
 
 function updateHeading(widgetId, widget) {
-    return widgetModel.update({_id: widgetId}, {text: widget.text, size: widget.size});
+    return widgetModel.update({_id: widgetId}, {$set: {text: widget.text, size: widget.size}});
 }
 function updateImage(widgetId, widget) {
     return widgetModel.update({_id: widgetId}, {
-        name: widget.name, text: widget.text,
-        url: widget.url, width: widget.width
+        $set: {
+            name: widget.name, text: widget.text,
+            url: widget.url, width: widget.width
+        }
     });
 }
 function updateYouTube(widgetId, widget) {
     return widgetModel.update({_id: widgetId}, {
-        name: widget.name, text: widget.text,
-        url: widget.url, width: widget.width
+        $set: {
+            name: widget.name, text: widget.text,
+            url: widget.url, width: widget.width
+        }
     });
 }
 
 function updateHtml(widgetId, widget) {
-    return widgetModel.update({_id: widgetId}, {text: widget.text});
+    return widgetModel.update({_id: widgetId}, {$set: {text: widget.text}});
+}
+
+function updateText(widgetId, widget) {
+    return widgetModel.update({_id: widgetId}, {$set: {text: widget.text, rows: widget.rows,
+    formatted: widget.formatted, class: widget.class, name: widget.name, placeholder: widget.placeholder}});
 }
 
 function deleteWidget(pageId, widgetId) {

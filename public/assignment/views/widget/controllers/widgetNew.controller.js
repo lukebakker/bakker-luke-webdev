@@ -15,6 +15,7 @@
         model.createNewImage = createNewImage;
         model.createNewYoutube = createNewYoutube;
         model.createNewHtml = createNewHtml;
+        model.createNewText = createNewText;
         function init() {
             widgetService
                 .findWidgetByPageId(model.userId, model.websiteId, model.pageId)
@@ -78,6 +79,20 @@
         function createNewHtml() {
             var newWidget = {
                 "type": "HTML",
+                "pageId": model.pageId
+            };
+            var widgetId = null;
+            widgetService.createWidget(model.userId, model.websiteId, model.pageId, newWidget)
+                .then(function (widget) {
+                    widgetId = widget.data;
+                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
+                        "/widget/" + widgetId + "/edit");
+                });
+        }
+
+        function createNewText() {
+            var newWidget = {
+                "type": "TEXT",
                 "pageId": model.pageId
             };
             var widgetId = null;

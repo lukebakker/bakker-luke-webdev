@@ -110,6 +110,14 @@ function updateWidget(req, res) {
                 res.sendStatus(404).send(err);
             });
     }
+    else if (widget.type === "TEXT") {
+        return widgetModel.updateText(widgetId, widget)
+            .then(function (widgets) {
+                res.json(widgets);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
+    }
 }
 
 function findWidgetById(req, res) {

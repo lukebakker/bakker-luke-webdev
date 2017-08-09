@@ -4,7 +4,7 @@ mongoose.connect("mongodb://localhost/webdev_summer2_2017");
 
 var widgetSchema = mongoose.Schema({
     _page: {type: mongoose.Schema.Types.ObjectId, ref: "PageModel"},
-    type: {type: String, enum: ["HEADING", "IMAGE", "YOUTUBE", "HTML", "INPUT"]},
+    type: {type: String, enum: ["HEADING", "IMAGE", "YOUTUBE", "HTML", "TEXT"]},
     name: String,
     text: String,
     placeholder: String,

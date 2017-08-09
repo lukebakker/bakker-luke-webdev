@@ -1,0 +1,76 @@
+<div ng-controller="widgetEditController">
+    <nav class="navbar navbar-fixed-top navbar-default">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
+                </span>
+            </a>
+            <a ng-click="model.createNewWidget()">
+                <span class="header-plus pull-right glyphicon glyphicon-ok">
+                </span>
+            </a>
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="#">Widget Edit</a>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container-fluid">
+        <label for="name">Name</label>
+        <input name="name"
+               ng-model="model.widget.name"
+               class="form-control"
+               id="name"/>
+
+        <label for="bootstrap">Bootstrap Class</label>
+        <input name="bootstrap"
+               ng-model="model.widget.bootstrap"
+               class="form-control"
+               value="col-xs-12"
+               id="bootstrap"/>
+
+        <label for="text">text</label>
+        <input name="text"
+               ng-model="model.widget.text"
+               class="form-control"
+               id="text"/>
+
+        <label for="rows">Rows</label>
+        <input name="rows"
+               ng-model="model.widget.rows"
+               class="form-control"
+               id="rows"/>
+        <label for="placeholder">Placeholder</label>
+        <input name="placeholder"
+               ng-model="model.widget.placeholder"
+               class="form-control"
+               id="placeholder"/>
+
+        <label for="formatted">Formatted</label>
+        <div class="input-group" id="formatted">
+            <span class="input-group-addon">
+                <input type="checkbox" aria-label="..."
+                ng-model="model.widget.formatted">
+            </span>
+            <input type="text" class="form-control" aria-label="...">
+        </div>
+
+        <a class="btn btn-default btn-danger btn-block"
+           ng-click="model.deleteWidget()"
+           role="button">Delete
+        </a>
+
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+
+        <div class="container-fluid">
+            <a href="#!/profile/{{model.userId}}">
+        <span class="pull-right glyphicon glyphicon-user">
+                </span>
+            </a>
+        </div>
+    </nav>
+</div>

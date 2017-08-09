@@ -34,6 +34,9 @@
                 <div ng-switch-when="HTML">
                     <ng-include src="'views/widget/templates/widget-html.view.client.html'">
                 </div>
+                <div ng-switch-when="TEXT">
+                    <ng-include src="'views/widget/templates/widget-text.view.client.html'">
+                </div>
             </div>
             <div class="widget">
                 <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}/edit">
