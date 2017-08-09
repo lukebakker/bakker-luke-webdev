@@ -2,7 +2,7 @@
 
     <nav class="navbar navbar-fixed-top navbar-default">
         <div class="container-fluid">
-            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/edit">
                 <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
                 </span>
             </a>
@@ -26,10 +26,9 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-4" ng-repeat="photo in model.photos.photo">
+            <div class="col-xs-4 container-fluid" ng-repeat="photo in model.photos.photo">
                 <img ng-click="model.selectPhoto(photo)"
-                     ng-src="https://farm{{photo.farm}}.staticflickr.com/
-            {{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
+                     ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
             </div>
         </div>
     </div>
