@@ -5,7 +5,7 @@
 (function () {
 
     angular
-        .module("WamApp", ["ngRoute", "sortable"]);
+        .module("WamApp", ["ngRoute", "sortable", "textAngular"]);
 
 })();
 

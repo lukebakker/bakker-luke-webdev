@@ -14,6 +14,7 @@ widgetModel.updateImage = updateImage;
 widgetModel.updateYouTube = updateYouTube;
 widgetModel.deleteWidget = deleteWidget;
 widgetModel.setIndex = setIndex;
+widgetModel.updateHtml = updateHtml;
 
 function createWidget(pageId, widget) {
     var tempWidget = null;
@@ -48,6 +49,10 @@ function updateYouTube(widgetId, widget) {
         name: widget.name, text: widget.text,
         url: widget.url, width: widget.width
     });
+}
+
+function updateHtml(widgetId, widget) {
+    return widgetModel.update({_id: widgetId}, {text: widget.text});
 }
 
 function deleteWidget(pageId, widgetId) {

@@ -102,6 +102,13 @@ function updateWidget(req, res) {
             }, function (err) {
                 res.sendStatus(404).send(err);
             });
+    } else if (widget.type === "HTML") {
+        return widgetModel.updateHtml(widgetId, widget)
+            .then(function (widgets) {
+                res.json(widgets);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
     }
 }
 
