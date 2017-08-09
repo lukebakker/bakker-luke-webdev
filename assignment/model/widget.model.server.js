@@ -20,7 +20,7 @@ function createWidget(pageId, widget) {
     return widgetModel.create(widget)
         .then(function (widgetDoc) {
             tempWidget = widgetDoc;
-            return pageModel.addWidget(pageId, tempWidget._id);
+            return pageModel.addWidget(pageId, tempWidget);
         }).then(function () {
             return tempWidget;
         });
@@ -62,13 +62,14 @@ function deleteWidget(pageId, widgetId) {
         })
 }
 
-function setIndex(start, end) {
-    if (widgets[start].pageId === widgets[end].pageId) {
-
-        var temp = widgets[start];
-        widgets[start] = widgets[end];
-        widgets[end] = temp;
-    }
+function setIndex(start, end, pageId) {
+    return findWidgetsByPageId(pageId)
+        .then(function (widgets) {
+            var temp = widgets[start];
+            widgets[start] = widgets[end];
+            widgets[end] = temp;
+            return widgets.save();
+        });
 }
 
 

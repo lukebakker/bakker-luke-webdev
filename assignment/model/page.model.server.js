@@ -35,8 +35,9 @@ function findPagesByWebsiteId(websiteId) {
 
 function updatePage(pageId, page) {
     return pageModel.update({_id: pageId}, {
-        $set: {description: page.description, name: page.name}
+        $set: {description: page.description, name: page.name, widgets: page.widgets}
     });
+
 }
 
 function deletePage(websiteId, pageId) {
@@ -52,20 +53,20 @@ function deletePage(websiteId, pageId) {
 }
 
 
-function addWidget(pageId, widgetId) {
+function addWidget(pageId, widget) {
     pageModel.findPageById(pageId)
         .then(function (page) {
-            page.widgets.push(widgetId);
+            page.widgets.push(widget);
             return page.save();
         });
 }
 
 function removeWidget(pageId, widgetId) {
     pageModel.findPageById(pageId)
-        .then(function(page) {
+        .then(function (page) {
             var newWidgets = [];
             var widgets = page.widgets;
-            for(var u in widgets) {
+            for (var u in widgets) {
                 if (widgets[u]._id === widgetId) {
                     newWidgets.push(widgets[u]);
                 }
@@ -74,5 +75,6 @@ function removeWidget(pageId, widgetId) {
             return page.save();
         })
 }
+
 
 

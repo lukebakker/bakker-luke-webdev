@@ -1,7 +1,7 @@
 var app = require("../../express");
 
 var widgetModel = require("../model/widget.model.server");
-
+var pageModel = require("../model/page.model.server");
 
 app.get("/api/user/:userId/website/:websiteId/page/:pageId/widget", findWidgetsForUser);
 app.post("/api/user/:userId/website/:websiteId/page/:pageId/widget/new", createWidget);
@@ -58,13 +58,10 @@ function setIndex(req, res) {
     var start = req.query.start;
     var end = req.query.end;
     var pageId = req.params.pageId;
-    if (widgets[start].pageId === widgets[end].pageId) {
-
-        var temp = widgets[start];
-        widgets[start] = widgets[end];
-        widgets[end] = temp;
-    }
-    res.json(widgets);
+    widgetModel.setIndex(start, end, pageId)
+        .then(function (page) {
+            res.json(page);
+        })
 
 }
 
@@ -126,6 +123,13 @@ function getWidgetByIdLocally(widgetId) {
             res.sendStatus(404).send(err);
         })
 
+}
+
+function findWidgetsForUserLocally(pageId) {
+    return widgetModel.findWidgetsByPageId(pageId)
+        .then(function (widgets) {
+            res.json(widgets);
+        });
 }
 
 
