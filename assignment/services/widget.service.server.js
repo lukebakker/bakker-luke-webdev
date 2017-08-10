@@ -150,13 +150,16 @@ function findWidgetsForUserLocally(pageId) {
 
 function findWidgetsForUser(req, res) {
     var pageId = req.params.pageId;
-    widgetModel.findWidgetsByPageId(pageId)
-        .then(function (widgets) {
-            res.json(widgets);
-        }, function (err) {
-            res.sendStatus(404).send(err);
+    return pageModel
+        .findById(pageId)
+        .populate('widgets')
+        .exec()
+        .then(function (page) {
+            console.log(page.widgets);
+            res.json(page.widgets);
         })
 }
+
 
 function deleteWidget(req, res) {
     var widgetId = req.params.widgetId;

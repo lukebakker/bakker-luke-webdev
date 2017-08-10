@@ -53,10 +53,10 @@ function deletePage(websiteId, pageId) {
 }
 
 
-function addWidget(pageId, widget) {
+function addWidget(pageId, widgetId) {
     pageModel.findPageById(pageId)
         .then(function (page) {
-            page.widgets.push(widget);
+            page.widgets.push(widgetId);
             return page.save();
         });
 }

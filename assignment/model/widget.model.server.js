@@ -22,7 +22,7 @@ function createWidget(pageId, widget) {
     return widgetModel.create(widget)
         .then(function (widgetDoc) {
             tempWidget = widgetDoc;
-            return pageModel.addWidget(pageId, tempWidget);
+            return pageModel.addWidget(pageId, tempWidget._id);
         }).then(function () {
             return tempWidget;
         });
@@ -33,7 +33,13 @@ function findWidgetById(widgetId) {
 }
 
 function findWidgetsByPageId(pageId) {
-    return widgetModel.find({_page: pageId});
+
+    return pageModel.findPageById(pageId)
+        .then(function (data) {
+            console.log("here");
+            console.log(data);
+            return data;
+        });
 }
 
 function updateHeading(widgetId, widget) {
@@ -61,8 +67,12 @@ function updateHtml(widgetId, widget) {
 }
 
 function updateText(widgetId, widget) {
-    return widgetModel.update({_id: widgetId}, {$set: {text: widget.text, rows: widget.rows,
-    formatted: widget.formatted, class: widget.class, name: widget.name, placeholder: widget.placeholder}});
+    return widgetModel.update({_id: widgetId}, {
+        $set: {
+            text: widget.text, rows: widget.rows,
+            formatted: widget.formatted, class: widget.class, name: widget.name, placeholder: widget.placeholder
+        }
+    });
 }
 
 function deleteWidget(pageId, widgetId) {
