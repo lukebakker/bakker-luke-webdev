@@ -9,6 +9,11 @@
             var end = -1;
 
             $(element).sortable({
+                axis: 'y',
+                handle: "#lpb-handle",
+
+
+
                 start: function (event, ui) {
                     start = $(ui.item).index();
                 },
