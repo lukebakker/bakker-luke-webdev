@@ -33,13 +33,10 @@ function findWidgetById(widgetId) {
 }
 
 function findWidgetsByPageId(pageId) {
-
-    return pageModel.findPageById(pageId)
-        .then(function (data) {
-            console.log("here");
-            console.log(data);
-            return data;
-        });
+    return pageModel
+        .findById(pageId)
+        .populate('widgets')
+        .exec()
 }
 
 function updateHeading(widgetId, widget) {
@@ -88,13 +85,12 @@ function deleteWidget(pageId, widgetId) {
 }
 
 function setIndex(start, end, pageId) {
-    return findWidgetsByPageId(pageId)
-        .then(function (widgets) {
-            var temp = widgets[start];
-            widgets[start] = widgets[end];
-            widgets[end] = temp;
-            return widgets.save();
-        });
+    return pageModel.findOne({_id: pageId})
+        .then(function (page) {
+            page.widgets.splice(end, 0, page.widgets.splice(start, 1)[0]);
+            return page.save();
+        })
+
 }
 
 

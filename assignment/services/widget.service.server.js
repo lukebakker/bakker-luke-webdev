@@ -59,8 +59,9 @@ function setIndex(req, res) {
     var end = req.query.end;
     var pageId = req.params.pageId;
     widgetModel.setIndex(start, end, pageId)
-        .then(function (page) {
-            res.json(page);
+        .then(function(page) {
+            console.log(page);
+            res.send(page);
         })
 
 }
@@ -150,14 +151,10 @@ function findWidgetsForUserLocally(pageId) {
 
 function findWidgetsForUser(req, res) {
     var pageId = req.params.pageId;
-    return pageModel
-        .findById(pageId)
-        .populate('widgets')
-        .exec()
+    return widgetModel.findWidgetsByPageId(pageId)
         .then(function (page) {
-            console.log(page.widgets);
             res.json(page.widgets);
-        })
+        });
 }
 
 

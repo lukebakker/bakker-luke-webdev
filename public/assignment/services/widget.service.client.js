@@ -50,8 +50,9 @@
         function setIndex(pageId, start, end) {
             var url = "/api/page/"+pageId+"/?start="+start+"&end="+end;
             return $http.put(url)
-                .then(function (response) {
-                    return response.data;
+                .then(function(data) {
+                    console.log("here");
+                    return data;
                 })
         }
 
