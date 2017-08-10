@@ -1,0 +1,84 @@
+<div ng-controller="profileController">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <a href="#!/profile/{{model.user._id}}">
+                <span class="header-plus pull-right glyphicon glyphicon-ok">
+                </span>
+            </a>
+
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Profile</a>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="container-fluid">
+        <label for="firstName">First Name</label>
+        <input name="firstName"
+               ng-model="model.user.firstName"
+               value="demo"
+               class="form-control"
+               id="firstName"/>
+
+        <label for="lastName">Last Name</label>
+        <input name="lastname"
+               ng-model="model.user.lastName"
+               value="user"
+               class="form-control"
+               id="lastName"/>
+
+        <label for="displayUsername">Username</label>
+        <input name="displayUsername"
+               ng-model="model.user.username"
+               value="demouser"
+               disabled="disabled"
+               class="form-control"
+               id="displayUsername"/>
+
+        <label for="email">email</label>
+        <input name="email"
+               ng-model="model.user.email"
+               placeholder="demouser@demo.com"
+               class="form-control"
+               id="email"/>
+
+        <label for="dob">Date of birth</label>
+        <input name="dob"
+               type="date"
+               placeholder="mm/dd/yyyy"
+               class="form-control"
+               id="dob"/>
+
+
+        <a class="btn btn-default btn-primary btn-block"
+           href="#!/user/{{model.user._id}}/home"
+           role="button">Go To Feed</a>
+
+        <a class="btn btn-default btn-danger btn-block"
+           href="#!/login"
+           role="button">Logout</a>
+
+        <a class="btn btn-default btn-danger btn-block"
+           ng-click="model.unRegister()"
+           role="button">Unregister</a>
+
+        <a class="btn btn-default btn-primary btn-block"
+           ng-click="model.updateUser()"
+           role="button">Update</a>
+
+
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+
+        <div class="container-fluid">
+            <a href="#!/profile/{{model.user._id}}">
+        <span class="pull-right glyphicon glyphicon-user">
+                </span>
+            </a>
+        </div>
+    </nav>
+
+</div>

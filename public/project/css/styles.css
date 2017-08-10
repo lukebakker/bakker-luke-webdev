@@ -1,0 +1,117 @@
+input, textarea {
+    margin-bottom: 5px;
+}
+
+.list-group {
+    margin-bottom: 60px;
+}
+
+.navbar-default {
+    background-image: linear-gradient(to bottom, #00494d 0%, black 100%);
+}
+
+.navbar-default .navbar-brand {
+    color: White;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+.glyphicon-user, .header-plus.glyphicon-plus, .glyphicon-ok, .glyphicon-chevron-left {
+    padding-top: 15px;
+}
+
+.glyphicon-plus, .glyphicon-user, .glyphicon-ok, .glyphicon-chevron-left {
+    color: white;
+}
+
+@media (min-width: 1200px) {
+    .col-lg-9.lpb-split-view-right {
+        width: 75%;
+        position: absolute;
+        right: 0px;
+        overflow-y: scroll;
+        top: 60px;
+        bottom: 0px;
+    }
+}
+
+span, .glyphicon-ok {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.lpb-split-view-left {
+    position: absolute;
+    top: 60px;
+    bottom: 0px;
+    overflow-y: scroll;
+}
+
+h1, p {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.img-responsive {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shrinker {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.button-list {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+h2 {
+    color: black;
+}
+
+.lpb-container {
+    position: relative;
+}
+
+.widget .glyphicon-cog {
+    position: absolute;
+    right: 0px;
+    background-color: white;
+    padding: 2px;
+}
+
+.widget .glyphicon-th-list {
+    position: absolute;
+    right: 15px;
+    background-color: white;
+    padding: 2px;
+}
+
+body {
+    padding-bottom: 70px;
+    padding-top: 60px;
+    background-color: rgba(0, 140, 145, 0.22);
+}
+.youtube-widget {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+.youtube-widget iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.lpb.color {
+    background-color: rgba(0, 29, 115, 0.18)
+}

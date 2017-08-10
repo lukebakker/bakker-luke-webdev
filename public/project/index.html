@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="DevApp">
 <head>
-    <meta charset="UTF-8">
-    <title>Project Home Page</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <script src="../vendor/angular/angular.js"></script>
+    <script src="../vendor/angular/angular-route.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../project/css/styles.css" rel="stylesheet">
+    <link href="../vendor/jQuery/jquery-ui.css" rel="stylesheet">
+    <link href="../project/css/textAngular.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="../vendor/angular/textAngular-rangy.min.js"></script>
+    <script src="../vendor/angular/textAngular.min.js"></script>
+    <script src="../vendor/angular/textAngular-sanitize.min.js"></script>
+
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <script src="../vendor/jQuery/jquery.js"></script>
+    <script src="../vendor/jQuery/jquery-ui.js"></script>
+    <script src="../vendor/angular/angular.js"></script>
+
+    <script src="views/user/controllers/login.controller.client.js"></script>
+    <script src="views/user/controllers/profile.controller.client.js"></script>
+    <script src="views/user/controllers/register.controller.client.js"></script>
+    <script src="views/user/controllers/search.controller.client.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="services/search.service.client.js"></script>
+
+
+    <!--<script src="directives/testDirectives/directives.js"></script>
+    <script src="directives/wbdv-sortable.js"></script>
+
+
+    <script src="views/website/controllers/websiteList.controller.js"></script>
+
+    <script src="services/website.service.client.js"></script>
+    <script src="services/widget.service.client.js"></script>
+    <script src="services/page.service.client.js"></script>
+    <script src="services/flickr.service.client.js"></script>
+
+    <script src="views/website/controllers/websiteNew.controller.js"></script>
+    <script src="views/website/controllers/websiteEdit.controller.js"></script>
+    <script src="views/page/controllers/pageList.controller.js"></script>
+    <script src="views/page/controllers/pageEdit.controller.js"></script>
+    <script src="views/page/controllers/pageNew.controller.js"></script>
+    <script src="views/widget/controllers/widgetList.controller.js"></script>
+    <script src="views/widget/controllers/widgetNew.controller.js"></script>
+    <script src="views/widget/controllers/widgetEdit.controller.js"></script>
+    <script src="views/home/homeController.js"></script>
+    <script src="views/widget/controllers/flickrImageSearch.controller.js"></script>-->
+
+
 </head>
+
 <body>
-    <h1>Project Home Page</h1>
+
+<div ng-view></div>
+
+
+
 </body>
 </html>

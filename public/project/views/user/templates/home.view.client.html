@@ -1,0 +1,66 @@
+<div class="container-fluid lpb.color">
+
+    <nav class="navbar navbar-fixed-top navbar-default">
+        <div class="container-fluid">
+            <a href="#!/user/{{model.user._id}}/profile">
+                <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
+                </span>
+            </a>
+            <div class="container-fluid">
+                <a href="#!/profile/{{model.user._id}}">
+        <span class="pull-right glyphicon glyphicon-user">
+                </span>
+                </a>
+            </div>
+
+
+        </div><!-- /.container-fluid -->
+
+
+    </nav>
+
+    <div class="jumbotron">
+        <h1>Hello, {{model.user.username}}</h1>
+        <p>Welcome to your art-feed!</p>
+        <p>The feed below will populate based on your previously liked works.</p>
+        <h2>Search something</h2>
+
+        <input class="form-control"
+               placeholder="search deviant art"
+               ng-model="model.searchInput">
+        <button class="btn btn-primary btn-block"
+                ng-click="model.searchByTag(model.searchInput)">
+            Search
+        </button>
+        <button class="btn btn-primary btn-block"
+                ng-click="model.searchHot()">
+            Search Currently Popular
+        </button>
+
+    </div>
+
+
+    <table class="table">
+        <tr ng-repeat="art in model.showArt">
+            <td><h4><a href="{{art.url}}">
+                {{art.title}}</a><span class="glyphicon glyphicon-heart-empty pull-right"></span></h4>
+                <img ng-src="{{art.content.src}}" style="width : 100%">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Enter a comment...">
+                    <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Submit</button>
+      </span>
+                </div><!-- /input-group --></td>
+
+            <td>
+
+            </td>
+        </tr>
+
+    </table>
+
+
+</div>
+
+
+

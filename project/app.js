@@ -11,14 +11,15 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     connectionString += '@ds137220.mlab.com:37220/heroku_xkpv7xx0'; // user yours
 }
 
-
 require("./model/model.server");
 
 require("./services/user.service.server");
+/*
 require("./services/website.service.server");
 require("./services/page.service.server");
 require("./services/widget.service.server");
 require("./model/user.model.server");
 require("./model/user.schema.server");
+*/
 
 
