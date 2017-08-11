@@ -12,7 +12,7 @@ var userSchema = mongoose.Schema({
     following: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
     followers:[{type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
     messages: [{type: String}],
-    favImages: [{type: mongoose.Schema.Types.ObjectId, ref: "ImageModelProject"}],
+    favImages: [{type: String}],
     tags: [String],
     dateCreated: {type: Date, default: Date.now()}
 }, {collection: "userProject"});

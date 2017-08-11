@@ -41,14 +41,22 @@
             Search for single image by Id
         </button>
 
+        <button class="btn btn-primary btn-block"
+                ng-click="model.showFavoritesForUser()">
+            show favorites
+        </button>
     </div>
 
 
     <table class="table">
-        <tr ng-repeat="art in model.showArt">
+        <tr ng-repeat="art in model.showArt track by $index">
             <td><h4><a href="{{art.url}}">
-                {{art.title}}</a><span ng-click="model.addFavorite" class="glyphicon glyphicon-heart-empty pull-right"></span></h4>
-                <img ng-src="{{art.content.src}}" style="width : 100%">
+                {{art.title}}</a></h4>
+                <a ng-click="model.addFavorite(art.deviationid)">
+                    <span  class="glyphicon glyphicon-heart-empty pull-right">
+
+                    </span>
+                </a>  <img ng-src="{{art.content.src}}" style="width : 100%">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Enter a comment...">
                     <span class="input-group-btn">

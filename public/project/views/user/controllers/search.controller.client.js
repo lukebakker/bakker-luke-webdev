@@ -6,17 +6,20 @@
 
     function searchController(searchService, $routeParams, userService) {
         var model = this;
-        var userId = $routeParams["userId"];
+        model.userId = $routeParams["userId"];
 
         model.artworks = [];
+        model.showArtList = [];
 
         model.searchHot = searchHot;
         model.searchByTag = searchByTag;
         model.findOneDeviation = findOneDeviation;
+        model.addFavorite = addFavorite;
+        model.showFavoritesForUser = showFavoritesForUser;
 
         function init() {
-            model.key = "0b94aa0d583de7116fe537cc5c343afe77c095291c85864b28";
-            var promise = userService.findUserById(userId);
+            model.key = "a1850727c697f6bc457b4deb512f7ff906f2c7949cdeab0763";
+            var promise = userService.findUserById(model.userId);
             promise.then(function (response) {
                 model.user = response.data;
             });
@@ -46,25 +49,41 @@
                 .then(function (message) {
                     var newList = [];
                     var objects = (message.results);
-                    console.log(objects);
                     for (var u in objects) {
                         newList.push(objects[u]);
                     }
-                    console.log(newList);
                     return model.showArt = newList;
                 });
         }
 
         function findOneDeviation(deviationId) {
-            searchService.findOneDeviation(model.key, deviationId)
+            return searchService.findOneDeviation(model.key, deviationId)
                 .then(function (message) {
                     var newList = [];
                     var object = (message);
-                    console.log(object);
                     newList.push(object);
-                    console.log(newList);
-                    return model.showArt = newList;
+                    model.showArt = newList;
+                    return newList;
                 })
+        }
+
+        function addFavorite(deviationId) {
+            var theUser = null;
+            model.user.favImages.push(deviationId);
+            userService.updateUser(model.user, model.userId);
+        }
+
+        function showFavoritesForUser() {
+            var newList = [];
+            model.showArt = newList;
+            for (var u in model.user.favImages) {
+                findOneDeviation(model.user.favImages[u])
+                    .then(function (dev) {
+                        console.log(model.showArt);
+                        model.showArtList.push(dev[0]);
+                    })
+            }
+            model.showArt = model.showArtList;
         }
 
 
