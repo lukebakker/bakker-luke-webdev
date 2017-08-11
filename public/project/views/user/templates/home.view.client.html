@@ -36,6 +36,10 @@
                 ng-click="model.searchHot()">
             Search Currently Popular
         </button>
+        <button class="btn btn-primary btn-block"
+                ng-click="model.findOneDeviation(model.searchInput)">
+            Search for single image by Id
+        </button>
 
     </div>
 
@@ -43,7 +47,7 @@
     <table class="table">
         <tr ng-repeat="art in model.showArt">
             <td><h4><a href="{{art.url}}">
-                {{art.title}}</a><span class="glyphicon glyphicon-heart-empty pull-right"></span></h4>
+                {{art.title}}</a><span ng-click="model.addFavorite" class="glyphicon glyphicon-heart-empty pull-right"></span></h4>
                 <img ng-src="{{art.content.src}}" style="width : 100%">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Enter a comment...">

@@ -12,9 +12,10 @@
 
         model.searchHot = searchHot;
         model.searchByTag = searchByTag;
+        model.findOneDeviation = findOneDeviation;
 
         function init() {
-            model.key = "215045c2ad1723fea010f02537b65fc83688968c034de75c40";
+            model.key = "0b94aa0d583de7116fe537cc5c343afe77c095291c85864b28";
             var promise = userService.findUserById(userId);
             promise.then(function (response) {
                 model.user = response.data;
@@ -49,8 +50,23 @@
                     for (var u in objects) {
                         newList.push(objects[u]);
                     }
+                    console.log(newList);
                     return model.showArt = newList;
                 });
         }
+
+        function findOneDeviation(deviationId) {
+            searchService.findOneDeviation(model.key, deviationId)
+                .then(function (message) {
+                    var newList = [];
+                    var object = (message);
+                    console.log(object);
+                    newList.push(object);
+                    console.log(newList);
+                    return model.showArt = newList;
+                })
+        }
+
+
     }
 })();

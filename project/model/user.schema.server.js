@@ -9,8 +9,10 @@ var userSchema = mongoose.Schema({
     lastName: String,
     email: String,
     phone: String,
-    favUsers: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModel"}],
+    following: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
+    followers:[{type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
     messages: [{type: String}],
+    favImages: [{type: mongoose.Schema.Types.ObjectId, ref: "ImageModelProject"}],
     tags: [String],
     dateCreated: {type: Date, default: Date.now()}
 }, {collection: "userProject"});
