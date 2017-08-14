@@ -10,7 +10,7 @@
 
             $(element).sortable({
                 axis: 'y',
-                handle: "#lpb-handle",
+                handle: "lpb-handle",
 
 
 

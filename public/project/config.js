@@ -31,6 +31,11 @@
                 controller: "searchController",
                 controllerAs: "model"
             })
+            .when("/profile/:userId/search/users", {
+                templateUrl: "views/user/templates/user.search.view.client.html",
+                controller: "searchController",
+                controllerAs: "model"
+            })
 
 
     }

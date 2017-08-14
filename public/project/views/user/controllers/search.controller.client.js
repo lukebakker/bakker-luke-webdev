@@ -4,7 +4,7 @@
         .controller("searchController", searchController);
 
 
-    function searchController(searchService, $routeParams, userService) {
+    function searchController(searchService, $routeParams, userService, $location) {
         var model = this;
         model.userId = $routeParams["userId"];
 
@@ -16,12 +16,17 @@
         model.findOneDeviation = findOneDeviation;
         model.addFavorite = addFavorite;
         model.showFavoritesForUser = showFavoritesForUser;
+        model.searchUser = searchUser;
+        model.showFavoritesForUserByUsername = showFavoritesForUserByUsername;
+        model.follow = follow;
 
         function init() {
-            model.key = "a1850727c697f6bc457b4deb512f7ff906f2c7949cdeab0763";
+            model.key = "618c60372f57ffdb5592ac79e09c0782a1483e7d59c5599575";
             var promise = userService.findUserById(model.userId);
             promise.then(function (response) {
                 model.user = response.data;
+                model.followers = model.user.followers;
+                model.following = model.user.following;
             });
         }
 
@@ -57,6 +62,7 @@
         }
 
         function findOneDeviation(deviationId) {
+            model.showArt = [];
             return searchService.findOneDeviation(model.key, deviationId)
                 .then(function (message) {
                     var newList = [];
@@ -74,17 +80,69 @@
         }
 
         function showFavoritesForUser() {
+            model.showArt = [];
+
             var newList = [];
             model.showArt = newList;
             for (var u in model.user.favImages) {
                 findOneDeviation(model.user.favImages[u])
                     .then(function (dev) {
-                        console.log(model.showArt);
                         model.showArtList.push(dev[0]);
-                    })
+                        model.showArt = model.showArtList;
+                    });
+
             }
-            model.showArt = model.showArtList;
+            model.showArtList = [];
+
         }
+
+        function showFavoritesForUserByUsername(username) {
+            model.showArt = [];
+
+            var newList = [];
+            model.showArt = newList;
+            return userService.findUserByUsername(username)
+                .then(function (user) {
+                    console.log(user.data[0].favImages);
+                    for (var u in user.data[0].favImages) {
+                        findOneDeviation(user.data[0].favImages[u])
+                            .then(function (dev) {
+                                model.showArtList.push(dev[0]);
+                                model.showArt = model.showArtList;
+                            });
+                    }
+                    model.showArtList = [];
+                });
+
+
+        }
+
+        function searchUser(username) {
+            var userList = [];
+            return userService.findUserByUsername(username)
+                .then(function (user) {
+                    model.showArt = [];
+                    $location.url("/profile/" + model.userId + "/search/users");
+                });
+
+        }
+
+        function follow(username) {
+            return userService.findUserByUsername(username)
+                .then(function (user) {
+                    user.data[0].followers.push(model.userId);
+                    console.log("this is the user", user.data[0]._id);
+                    userService.updateUser(user.data[0], user.data[0]._id)
+                        .then(function (data) {
+                            model.user.following.push(user.data[0]._id);
+                            userService.updateUser(model.user, model.userId);
+                            model.followers = model.user.followers;
+                            model.following = model.user.following;
+                        });
+                });
+        }
+
+
 
 
     }

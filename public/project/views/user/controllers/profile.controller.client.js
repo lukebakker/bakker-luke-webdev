@@ -15,7 +15,12 @@
             var promise = userService.findUserById(userId);
             promise.then(function (response) {
                 model.user = response.data;
+                for (var u in model.user.followers) {
+                    console.log(model.user.followers[u].username);
+                }
             });
+
+
         }
 
         init();
@@ -30,6 +35,7 @@
             userService.unRegister(userId);
             $location.url("/login");
         }
+
 
     }
 

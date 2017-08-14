@@ -1,25 +1,19 @@
 var app = require("../../express");
 var userModel = require("../model/user.model.server");
 
-var users = [
-    {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder", isAdmin: true},
-    {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley"},
-    {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia"},
-    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
-];
 
 // http handlers
 app.get("/api/users", getAllUsers);
 app.get("/api/user/:userId", getUserById);
 app.get("/api/user", findUser);
-app.get("/api/user/username", getUserByUsername);
+app.get("/api/project/user/username", getUserByUsername);
 app.post("/api/user", registerUser);
 app.put("/api/user/:userId", updateUser);
 app.delete("/api/user/:userId", deleteUser);
 
 function getUserByUsername(req, res) {
     var username = req.query.username;
-    userModel.findUserByUsername(username)
+    userModel.getUserByUsername(username)
         .then(function (user) {
             res.json(user);
         }, function (err) {
@@ -82,4 +76,5 @@ function getUserById(req, response) {
             response.json(user);
         });
 }
+
 

@@ -7,7 +7,7 @@ input, textarea {
 }
 
 .navbar-default {
-    background-image: linear-gradient(to bottom, #00494d 0%, black 100%);
+    background-image: linear-gradient(to bottom, #00494d 0%, #00494d 100%);
 }
 
 .navbar-default .navbar-brand {
@@ -97,7 +97,8 @@ h2 {
 body {
     padding-bottom: 70px;
     padding-top: 60px;
-    background-color: rgba(0, 140, 145, 0.22);
+    background-image: url("../../uploads/maxresdefault.jpg");
+
 }
 .youtube-widget {
     position: relative;

@@ -1,10 +1,9 @@
-
 var db = require('./model/model.server');
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 mongoose.connect('mongodb://127.0.0.1:27017/webdev_summer2_2017');
-if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
+if (process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
     var password = process.env.MLAB_PASSWORD_WEBDEV;
     connectionString = 'mongodb://' + username + ':' + password;
@@ -12,14 +11,13 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
 }
 
 require("./model/model.server");
-
 require("./services/user.service.server");
 /*
-require("./services/website.service.server");
-require("./services/page.service.server");
-require("./services/widget.service.server");
-require("./model/user.model.server");
-require("./model/user.schema.server");
-*/
+ require("./services/website.service.server");
+ require("./services/page.service.server");
+ require("./services/widget.service.server");
+ require("./model/user.model.server");
+ require("./model/user.schema.server");
+ */
 
 

@@ -68,8 +68,12 @@
            ng-click="model.updateUser()"
            role="button">Update</a>
 
-
+        <div ng-repeat="followed in model.following">
+            <li>{{model.followed}}</li>
+        </div>
     </div>
+
+
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
 

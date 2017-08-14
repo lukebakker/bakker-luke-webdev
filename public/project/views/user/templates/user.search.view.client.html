@@ -21,34 +21,28 @@
 
     <div class="jumbotron">
         <h1>Hello, {{model.user.username}}</h1>
-        <p>Welcome to your art-feed!</p>
-        <p>The feed below will populate based on your previously liked works.</p>
-        <h2>Search something</h2>
+        <h2>Search for a user to see their favorites / posts</h2>
 
         <input class="form-control"
                placeholder="search deviant art"
                ng-model="model.searchInput">
         <button class="btn btn-primary btn-block"
-                ng-click="model.searchByTag(model.searchInput)">
-            Search
-        </button>
-        <button class="btn btn-primary btn-block"
-                ng-click="model.searchHot()">
-            Search Currently Popular
-        </button>
-        <button class="btn btn-primary btn-block"
-                ng-click="model.findOneDeviation(model.searchInput)">
-            Search for single image by Id
-        </button>
-
-        <button class="btn btn-primary btn-block"
-                ng-click="model.showFavoritesForUser()">
-            show favorites
-        </button>
-        <button class="btn btn-primary btn-block"
-                ng-click="model.searchUser(model.searchInput)">
+                ng-click="model.showFavoritesForUserByUsername(model.searchInput)">
             search User
         </button>
+        <button class="btn btn-success btn-block"
+                ng-click="model.follow(model.searchInput)">
+            follow currently searched user
+        </button>
+        <table class="table">
+            <tr ng-repeat="follower in model.user.followers">
+                <td><h4>
+                    {{follower.username}}</h4>
+                <td>
+                </td>
+            </tr>
+
+        </table>
     </div>
 
 

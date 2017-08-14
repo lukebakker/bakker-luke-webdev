@@ -21,7 +21,7 @@
         }
 
         function updateUser(user, userId) {
-
+            console.log(user, userId);
             var url = "/api/user/" + userId;
 
             return $http.put(url, user);
@@ -33,7 +33,7 @@
         }
 
         function findUserByUsername(username) {
-            var url = "/api/user/username?username=" + username;
+            var url = "/api/project/user/username?username=" + username;
             return $http.get(url);
         }
 
@@ -45,6 +45,7 @@
             var url = "/api/user?username=" + username + "&password=" + password;
             return $http.get(url);
         }
+
 
 
     }

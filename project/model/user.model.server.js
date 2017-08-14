@@ -10,10 +10,10 @@ userModel.findUserByCredentials = findUserByCredentials;
 userModel.getAllUsers = getAllUsers;
 userModel.deleteUser = deleteUser;
 userModel.getUserByUsername = getUserByUsername;
-userModel.addWebsite = addWebsite;
-userModel.removeWebsite = removeWebsite;
+
 
 module.exports = userModel;
+
 
 function getUserByUsername(username) {
     return userModel.find({username: username});
@@ -45,26 +45,5 @@ function findUserByCredentials(username, password) {
     return userModel.findOne({username: username}, {password: password})
 }
 
-function addWebsite(userId, websiteId) {
-    userModel.findUserById(userId)
-        .then(function (user) {
-            user.websites.push(websiteId);
-            return user.save();
-        });
-}
 
-function removeWebsite(userId, websiteId) {
-    userModel.findUserById(userId)
-        .then(function(user) {
-            var newWebsites = [];
-            var websites = user.websites;
-            for(var u in websites) {
-                if (websites[u]._id === websiteId) {
-                    newWebsites.push(websites[u]);
-                }
-            }
-            user.websites = newWebsites;
-            return user.save();
-        })
-}
 
