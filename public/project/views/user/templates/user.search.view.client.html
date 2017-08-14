@@ -28,24 +28,24 @@
                ng-model="model.searchInput">
         <button class="btn btn-primary btn-block"
                 ng-click="model.showFavoritesForUserByUsername(model.searchInput)">
-            search User
+            search favorites for user by username
         </button>
         <button class="btn btn-success btn-block"
                 ng-click="model.follow(model.searchInput)">
             follow currently searched user
         </button>
-        <table class="table">
-            <tr ng-repeat="follower in model.user.followers">
-                <td><h4>
-                    {{follower.username}}</h4>
-                <td>
-                </td>
-            </tr>
+        <div ng-repeat="follow in model.following track by $index">
+            <label>Following : {{follow}}</label>
 
-        </table>
+        </div>
+        <div ng-repeat="follow in model.followers track by $index">
+            <label>Followers : {{follow}}</label>
+
+        </div>
     </div>
 
 
+    </table>
     <table class="table">
         <tr ng-repeat="art in model.showArt track by $index">
             <td><h4><a href="{{art.url}}">

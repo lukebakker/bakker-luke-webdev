@@ -27,6 +27,7 @@
                 model.user = response.data;
                 model.followers = model.user.followers;
                 model.following = model.user.following;
+                model.text = "A";
             });
         }
 
@@ -128,6 +129,7 @@
         }
 
         function follow(username) {
+
             return userService.findUserByUsername(username)
                 .then(function (user) {
                     user.data[0].followers.push(model.userId);
@@ -136,10 +138,13 @@
                         .then(function (data) {
                             model.user.following.push(user.data[0]._id);
                             userService.updateUser(model.user, model.userId);
-                            model.followers = model.user.followers;
                             model.following = model.user.following;
+                            model.followers = model.user.followers;
+
+                            console.log(model.user.following);
                         });
                 });
+
         }
 
 
