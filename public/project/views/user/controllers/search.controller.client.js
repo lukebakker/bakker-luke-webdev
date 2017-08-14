@@ -21,7 +21,7 @@
         model.follow = follow;
 
         function init() {
-            model.key = "618c60372f57ffdb5592ac79e09c0782a1483e7d59c5599575";
+            model.key = "f6f09b5f77c083203dca0f3fc994f5a1e286215dd8dfd22a65";
             var promise = userService.findUserById(model.userId);
             promise.then(function (response) {
                 model.user = response.data;
