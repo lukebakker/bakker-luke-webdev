@@ -7,7 +7,7 @@ input, textarea {
 }
 
 .navbar-default {
-    background-image: linear-gradient(to bottom, #00494d 0%, #00494d 100%);
+    background-image: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
 }
 
 .navbar-default .navbar-brand {
@@ -18,12 +18,27 @@ input, textarea {
     color: white;
 }
 
-.glyphicon-user, .header-plus.glyphicon-plus, .glyphicon-ok, .glyphicon-chevron-left {
+.glyphicon-user, .header-plus.glyphicon-plus, .glyphicon-ok, .glyphicon-chevron-left,
+.glyphicon-search, .glyphicon-fire, .glyphicon-heart {
     padding-top: 15px;
 }
 
-.glyphicon-plus, .glyphicon-user, .glyphicon-ok, .glyphicon-chevron-left {
+.glyphicon-fire {
+    padding-left: 10px;
+    color: #ff6f44;
+}
+
+.glyphicon-heart, .glyphicon-heart-empty {
+    padding-left: 10px;
+    color: red;
+}
+
+
+
+
+.glyphicon-plus, .glyphicon-user, .glyphicon-ok, .glyphicon-chevron-left, .glyphicon-search {
     color: white;
+    padding-left: 5px;
 }
 
 @media (min-width: 1200px) {
@@ -95,16 +110,19 @@ h2 {
 }
 
 body {
+    background-attachment: fixed;
     padding-bottom: 70px;
     padding-top: 60px;
     background-image: url("../../uploads/maxresdefault.jpg");
 
 }
+
 .youtube-widget {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
     height: 0;
 }
+
 .youtube-widget iframe {
     position: absolute;
     top: 0;
@@ -116,3 +134,71 @@ body {
 .lpb.color {
     background-color: rgba(0, 29, 115, 0.18)
 }
+
+.login-container {
+    margin: auto;
+    min-width: 350px;
+    max-width: 400px;
+    padding-bottom: 10px;
+    background-color: rgba(0, 122, 255, 0.24);
+    border-radius: 10px;
+
+}
+
+.login-header, label {
+    color: white;
+}
+
+.profile-container {
+    min-width: 350px;
+    width: 50%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: rgba(0, 122, 255, 0.24);
+    border-radius: 10px;
+}
+
+.lpb-navbar-search {
+    color: white;
+    width: 30%;
+    margin-top: 8px;
+    margin-left: 10px;
+    background-color: rgba(0, 122, 255, 0.27);
+}
+
+.lpb-pic-viewer {
+    margin: auto;
+    width: 92%;
+    color: white;
+    background-color: rgba(0, 122, 255, 0.14);
+    text-align: center;
+
+}
+
+.lpb-home-container {
+    color: white;
+    min-width: 350px;
+    width: 92%;
+    margin: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: rgba(0, 122, 255, 0.24);
+    border-radius: 10px;
+}
+
+a:link {
+    color: #ffffff;
+
+}
+
+/*input[type=text] {
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 50%;
+}*/
+
+
+

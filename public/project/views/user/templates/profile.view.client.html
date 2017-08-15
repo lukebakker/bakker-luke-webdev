@@ -14,7 +14,7 @@
     </nav>
 
 
-    <div class="container-fluid">
+    <div class="container-fluid profile-container">
         <label for="firstName">First Name</label>
         <input name="firstName"
                ng-model="model.user.firstName"
@@ -60,17 +60,13 @@
            href="#!/login"
            role="button">Logout</a>
 
+        <a class="btn btn-default btn-primary btn-block"
+           ng-click="model.updateUser()"
+           role="button">Update</a>
         <a class="btn btn-default btn-danger btn-block"
            ng-click="model.unRegister()"
            role="button">Unregister</a>
 
-        <a class="btn btn-default btn-primary btn-block"
-           ng-click="model.updateUser()"
-           role="button">Update</a>
-
-        <div ng-repeat="followed in model.following">
-            <li>{{model.followed}}</li>
-        </div>
     </div>
 
 

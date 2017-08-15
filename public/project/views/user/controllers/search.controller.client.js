@@ -19,15 +19,18 @@
         model.searchUser = searchUser;
         model.showFavoritesForUserByUsername = showFavoritesForUserByUsername;
         model.follow = follow;
+        model.findMoreLikeThis = findMoreLikeThis;
 
         function init() {
-            model.key = "f6f09b5f77c083203dca0f3fc994f5a1e286215dd8dfd22a65";
+            model.key = "1d3718b9e42b44a3db597a54806f70bee7f021cd963bf1b0b1";
             var promise = userService.findUserById(model.userId);
             promise.then(function (response) {
                 model.user = response.data;
                 model.followers = model.user.followers;
                 model.following = model.user.following;
-                model.text = "A";
+                var randomId = model.user.favImages[Math.floor(Math.random() * model.user.favImages.length)];
+                findMoreLikeThis(randomId);
+
             });
         }
 
@@ -57,10 +60,12 @@
                     var objects = (message.results);
                     for (var u in objects) {
                         newList.push(objects[u]);
+                        console.log(objects[u]);
                     }
                     return model.showArt = newList;
                 });
         }
+
 
         function findOneDeviation(deviationId) {
             model.showArt = [];
@@ -72,6 +77,20 @@
                     model.showArt = newList;
                     return newList;
                 })
+        }
+
+        function findMoreLikeThis(deviationId) {
+            model.showArt = [];
+            return searchService.findMoreLikeThis(model.key, deviationId)
+                .then(function (message) {
+                    var newList = [];
+                    var objects = (message.results);
+                    for (var u in objects) {
+                        newList.push(objects[u]);
+                        console.log(objects[u]);
+                    }
+                    return model.showArt = newList;
+                });
         }
 
         function addFavorite(deviationId) {
@@ -94,7 +113,6 @@
 
             }
             model.showArtList = [];
-
         }
 
         function showFavoritesForUserByUsername(username) {
@@ -114,8 +132,6 @@
                     }
                     model.showArtList = [];
                 });
-
-
         }
 
         function searchUser(username) {
@@ -144,10 +160,7 @@
                             console.log(model.user.following);
                         });
                 });
-
         }
-
-
 
 
     }
