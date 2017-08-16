@@ -3,7 +3,7 @@
         .module("DevApp")
         .controller("registerController", registerController);
 
-    function registerController(userService, $location) {
+    function registerController(userService, $location, albumService) {
         var model = this;
 
         model.registerUser = registerUser;
@@ -25,6 +25,7 @@
                      userService.registerUser(user)
                         .then(function (user) {
                            _user = user.data;
+                            albumService.addAlbumForUser(_user._id, "Favorites");
                             $location.url("/profile/" + _user._id);
                         });
                 } else {

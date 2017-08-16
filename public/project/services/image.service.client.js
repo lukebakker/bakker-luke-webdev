@@ -1,9 +1,9 @@
 (function () {
     angular
         .module("DevApp")
-        .factory("searchService", searchService);
+        .factory("imageService", imageService);
 
-    function searchService($http) {
+    function imageService($http) {
 
         var api = {
             "searchDeviations": searchDeviations,
@@ -53,8 +53,8 @@
                 });
         }
 
-        function addImage(userId, deviation) {
-            var url = "/api/project/" + userId;
+        function addImage(userId, deviation, albumName) {
+            var url = "/api/project/" + userId + "/album/" + albumName;
             var deviationSend = deviation;
             return $http.post(url, deviationSend);
         }

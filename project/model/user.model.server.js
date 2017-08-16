@@ -10,6 +10,7 @@ userModel.findUserByCredentials = findUserByCredentials;
 userModel.getAllUsers = getAllUsers;
 userModel.deleteUser = deleteUser;
 userModel.getUserByUsername = getUserByUsername;
+userModel.addAlbum = addAlbum;
 
 
 module.exports = userModel;
@@ -44,6 +45,16 @@ function findUserByCredentials(username, password) {
 
     return userModel.findOne({username: username}, {password: password})
 }
+
+function addAlbum(userId, albumId) {
+    userModel.findUserById(userId)
+        .then(function (user) {
+            user.albums.push(albumId);
+            return user.save();
+        });
+}
+
+
 
 
 

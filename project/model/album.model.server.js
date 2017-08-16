@@ -5,13 +5,30 @@ var albumModel = mongoose.model("AlbumModelProject", albumSchema);
 
 module.exports = albumModel;
 
-albumModel.addImage = addImage;
-albumModel.getAlbumsForUser = getAlbumsForUser;
 
-function addImage(userId, image) {
-   return  albumModel.create({_user: userId, image: image});
+albumModel.getAlbumsForUser = getAlbumsForUser;
+albumModel.createAlbumForUser = createAlbumForUser;
+albumModel.addImage = addImage;
+albumModel.findAlbumByAlbumName = findAlbumByAlbumName;
+
+function createAlbumForUser(userId, albumName) {
+    return albumModel.create({_user: userId, name: albumName});
 }
 
 function getAlbumsForUser(userId) {
+    console.log("here" ,albumModel.find({_user: userId}));
     return albumModel.find({_user: userId});
 }
+
+function addImage(imageId, albumName) {
+    albumModel.findAlbumByAlbumName(albumName)
+        .then(function (album) {
+            album.images.push(imageId);
+            return album.save();
+        });
+}
+
+function findAlbumByAlbumName(albumName) {
+    return albumModel.findOne({name: albumName});
+}
+

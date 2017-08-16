@@ -4,7 +4,7 @@
         .controller("searchController", searchController);
 
 
-    function searchController(searchService, $routeParams, userService, $location, albumService) {
+    function searchController(imageService, $routeParams, userService, $location, albumService) {
         var model = this;
         model.userId = $routeParams["userId"];
 
@@ -23,7 +23,7 @@
         model.addFavorite = addFavorite;
 
         function init() {
-            model.key = "d20f38cfe8e47c83ad55796845e225fc6473ed9d38c19b0512";
+            model.key = "7b2ff3ba184d5c48d8a52a519e65df8c1bb4b28b98da90cac5";
             var promise = userService.findUserById(model.userId);
             promise.then(function (response) {
                 model.user = response.data;
@@ -39,7 +39,7 @@
         init();
 
         function searchHot() {
-            searchService
+            imageService
                 .searchDeviations(model.key)
                 .then(function (message) {
                     return model.artworks = message;
@@ -55,7 +55,7 @@
         }
 
         function searchByTag(tag) {
-            searchService
+            imageService
                 .browseByTag(model.key, tag)
                 .then(function (message) {
                     var newList = [];
@@ -71,7 +71,7 @@
 
         function findOneDeviation(deviationId) {
             model.showArt = [];
-            return searchService.findOneDeviation(model.key, deviationId)
+            return imageService.findOneDeviation(model.key, deviationId)
                 .then(function (message) {
                     var newList = [];
                     var object = (message);
@@ -83,7 +83,7 @@
 
         function findMoreLikeThis(deviationId) {
             model.showArt = [];
-            return searchService.findMoreLikeThis(model.key, deviationId)
+            return imageService.findMoreLikeThis(model.key, deviationId)
                 .then(function (message) {
                     var newList = [];
                     var objects = (message.results);
@@ -95,24 +95,22 @@
                 });
         }
 
+
         function addFavorite(deviationId) {
+            var albumName = "Favorites";
             model.user.favImages.push(deviationId);
             userService.updateUser(model.user, model.userId)
                 .then(function (data) {
-                    searchService.findOneDeviation(model.key, deviationId)
+                    imageService.findOneDeviation(model.key, deviationId)
                         .then(function (deviation) {
-                            console.log(deviation);
-                            searchService.addImage(model.userId, deviation);
+                            imageService.addImage(model.userId, deviation, albumName);
                         })
-
                 });
         }
 
+
         function showFavoritesForUser() {
             model.showArt = [];
-
-            var newList = [];
-            model.showArt = newList;
             for (var u in model.user.favImages) {
                 findOneDeviation(model.user.favImages[u])
                     .then(function (dev) {
@@ -126,9 +124,6 @@
 
         function showFavoritesForUserByUsername(username) {
             model.showArt = [];
-
-            var newList = [];
-            model.showArt = newList;
             return userService.findUserByUsername(username)
                 .then(function (user) {
                     console.log(user.data[0].favImages);
