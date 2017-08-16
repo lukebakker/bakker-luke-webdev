@@ -9,8 +9,10 @@
             "searchDeviations": searchDeviations,
             "browseByTag": browseByTag,
             "findOneDeviation": findOneDeviation,
-            "findMoreLikeThis": findMoreLikeThis
+            "findMoreLikeThis": findMoreLikeThis,
+            "addImage": addImage
         };
+
         return api;
 
         function searchDeviations(key) {
@@ -49,9 +51,14 @@
                             return response.data;
                         });
                 });
-
         }
-    }
 
+        function addImage(userId, deviation) {
+            var url = "/api/project/" + userId;
+            var deviationSend = deviation;
+            return $http.post(url, deviationSend);
+        }
+
+    }
 
 })();

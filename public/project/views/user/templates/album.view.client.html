@@ -38,6 +38,11 @@
     <h1>{{model.user.firstName}} view your albums below</h1>
 </div>
 
+
+<div ng-repeat="album in model.albums" class="container-fluid">
+    <button class="btn btn-primary btn-block">{{model.album.name}}</button>
+</div>
+
 <table class="table lpb-pic-viewer container-fluid">
     <tr ng-repeat="art in model.showArt track by $index">
         <td><h2><a href="{{art.url}}">

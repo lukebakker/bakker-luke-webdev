@@ -11,7 +11,15 @@ if (process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
 }
 
 require("./model/model.server");
+
 require("./services/user.service.server");
+require("./services/album.service.server");
+require("./model/album.schema.server");
+require("./model/user.model.server");
+require("./model/image.model.server");
+require("./model/image.schema.server");
+
+
 /*
  require("./services/website.service.server");
  require("./services/page.service.server");

@@ -31,6 +31,11 @@
                 controller: "searchController",
                 controllerAs: "model"
             })
+            .when("/profile/:userId/home/albums", {
+                templateUrl: "views/user/templates/home.view.client.html",
+                controller: "albumController",
+                controllerAs: "model"
+            })
 
 
     }

@@ -1,10 +1,10 @@
 (function () {
     angular
         .module("DevApp")
-        .controller("searchController", searchController);
+        .controller("albumController", albumController);
 
 
-    function searchController(searchService, $routeParams, userService, $location, albumService) {
+    function albumController(searchService, $routeParams, userService, $location, albumService) {
         var model = this;
         model.userId = $routeParams["userId"];
 
@@ -20,7 +20,6 @@
         model.showFavoritesForUserByUsername = showFavoritesForUserByUsername;
         model.follow = follow;
         model.findMoreLikeThis = findMoreLikeThis;
-        model.addFavorite = addFavorite;
 
         function init() {
             model.key = "d20f38cfe8e47c83ad55796845e225fc6473ed9d38c19b0512";
@@ -29,10 +28,8 @@
                 model.user = response.data;
                 model.followers = model.user.followers;
                 model.following = model.user.following;
-                var randomId = model.user.favImages[Math.floor(Math.random() * model.user.favImages.length)];
-                findMoreLikeThis(randomId);
                 model.albums = albumService.findAlbumsForUser(model.user._id);
-
+                console.log(model.albums);
             });
         }
 
@@ -96,16 +93,9 @@
         }
 
         function addFavorite(deviationId) {
+            var theUser = null;
             model.user.favImages.push(deviationId);
-            userService.updateUser(model.user, model.userId)
-                .then(function (data) {
-                    searchService.findOneDeviation(model.key, deviationId)
-                        .then(function (deviation) {
-                            console.log(deviation);
-                            searchService.addImage(model.userId, deviation);
-                        })
-
-                });
+            userService.updateUser(model.user, model.userId);
         }
 
         function showFavoritesForUser() {
