@@ -7,11 +7,20 @@
 
         var api = {
             "findAlbumsForUser": findAlbumsForUser,
-            "addAlbumForUser" : addAlbumForUser
+            "addAlbumForUser" : addAlbumForUser,
+            "findAlbumById" : findAlbumById
         };
 
 
         return api;
+
+        function findAlbumById(albumId) {
+            var url = "/api/project/user/" + userId +"/album/" + albumId;
+            return $http.get(url)
+                .then(function (album) {
+                    return album;
+                })
+        }
 
         function addAlbumForUser(userId, albumName) {
             var url = "/api/project/user/" + userId +"/album/create/" +albumName;
@@ -19,7 +28,10 @@
         }
 
         function findAlbumsForUser(userId) {
-            $http.get("/api/project/user/" + userId + "/albums");
+            return $http.get("/api/project/user/" + userId + "/albums")
+                .then(function(albums){
+                    return albums.data;
+                });
         }
 
     }

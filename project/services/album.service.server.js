@@ -8,6 +8,16 @@ var userModel = require("../model/user.model.server");
 app.post("/api/project/:userId", addImage);
 app.get("/api/project/user/:userId/albums", getAlbumsForUser);
 app.post("/api/project/user/:userId/album/create/:albumName", createAlbumForUser);
+app.get("/api/project/user/:userId/album/:albumId", findAlbumById);
+
+function findAlbumById(req, res) {
+    var albumId = req.params.albumId;
+    return albumModel.findAlbumById(albumId)
+        .then(function (album) {
+            res.json(album);
+        })
+
+}
 
 function createAlbumForUser(req, res) {
     var userId = req.params.userId;

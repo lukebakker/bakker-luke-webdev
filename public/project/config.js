@@ -32,8 +32,13 @@
                 controllerAs: "model"
             })
             .when("/profile/:userId/home/albums", {
-                templateUrl: "views/user/templates/home.view.client.html",
+                templateUrl: "views/user/templates/album.view.client.html",
                 controller: "albumController",
+                controllerAs: "model"
+            })
+            .when("/profile/:userId/home/albums/:albumId", {
+                templateUrl: "views/user/templates/single.album.view.client.html",
+                controller: "singleAlbumController",
                 controllerAs: "model"
             })
 

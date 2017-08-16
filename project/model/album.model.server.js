@@ -11,24 +11,27 @@ albumModel.createAlbumForUser = createAlbumForUser;
 albumModel.addImage = addImage;
 albumModel.findAlbumByAlbumName = findAlbumByAlbumName;
 
+function findAlbumById(albumId) {
+    return albumModel.findById(albumId);
+}
+
 function createAlbumForUser(userId, albumName) {
     return albumModel.create({_user: userId, name: albumName});
 }
 
 function getAlbumsForUser(userId) {
-    console.log("here" ,albumModel.find({_user: userId}));
     return albumModel.find({_user: userId});
 }
 
-function addImage(imageId, albumName) {
-    albumModel.findAlbumByAlbumName(albumName)
-        .then(function (album) {
-            album.images.push(imageId);
-            return album.save();
-        });
-}
+    function addImage(imageId, albumName) {
+        albumModel.findAlbumByAlbumName(albumName)
+            .then(function (album) {
+                album.images.push(imageId);
+                return album.save();
+            });
+    }
 
-function findAlbumByAlbumName(albumName) {
-    return albumModel.findOne({name: albumName});
-}
+    function findAlbumByAlbumName(albumName) {
+        return albumModel.findOne({name: albumName});
+    }
 

@@ -1,20 +1,22 @@
 (function () {
     angular
         .module("DevApp")
-        .controller("albumController", albumController);
+        .controller("singleAlbumController", singleAlbumController);
 
 
-    function albumController(imageService, $routeParams, userService, $location, albumService) {
+    function singleAlbumController(imageService, $routeParams, userService, $location, albumService) {
         var model = this;
         model.userId = $routeParams["userId"];
 
         model.artworks = [];
         model.showArtList = [];
         model.albums = [];
+        model.albumId = $routeParams["albumId"];
 
         model.findOneDeviation = findOneDeviation;
         model.searchUser = searchUser;
         model.findMoreLikeThis = findMoreLikeThis;
+        model.loadAlbum = loadAlbum;
 
         function init() {
             model.key = "7b2ff3ba184d5c48d8a52a519e65df8c1bb4b28b98da90cac5";
@@ -23,11 +25,10 @@
                 model.user = response.data;
                 model.followers = model.user.followers;
                 model.following = model.user.following;
-                var promise2 = albumService.findAlbumsForUser(model.user._id);
-                promise2.then(function (albums) {
-                    console.log(albums[0].name);
-                    model.albums = albums;
-                })
+                albumService.findAlbumById(model.albumId)
+                    .then(function (album) {
+                        model.album = album;
+                    })
 
             });
 
@@ -35,6 +36,19 @@
         }
 
         init();
+
+        function loadAlbum() {
+            model.showArt = [];
+
+            for (var u in model.album) {
+                findOneDeviation(model.album[u])
+                    .then(function (dev) {
+                        model.showArtList.push(dev[0]);
+                        model.showArt = model.showArtList;
+                    });
+            }
+            model.showArtList = [];
+        }
 
 
         function findOneDeviation(deviationId) {

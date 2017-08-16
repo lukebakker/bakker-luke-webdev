@@ -40,15 +40,28 @@
 </div>
 
 
-<div ng-repeat="album in model.albums" class="container-fluid">
-
-    <a href="#!/profile/{{model.userId}}/home/albums/{{album._id}}">
-        <button class="btn btn-primary btn-block">{{album.name}}</button>
-    </a>
-
-</div>
 
 
+<table class="table lpb-pic-viewer container-fluid">
+    <tr ng-repeat="art in model.showArt track by $index">
+        <td><h2><a href="{{art.url}}">
+            {{art.title}}</a></h2>
+            <a ng-click="model.addFavorite(art.deviationid)">
+                    <span class="glyphicon glyphicon-heart-empty pull-right">
+                    </span>
+            </a> <img ng-src="{{art.content.src}}" style="width : 100%">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter a comment...">
+                <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Submit</button>
+      </span>
+            </div><!-- /input-group --></td>
+
+        <td>
+
+        </td>
+    </tr>
+</table>
 
 
 
