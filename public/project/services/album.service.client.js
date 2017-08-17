@@ -8,13 +8,15 @@
         var api = {
             "findAlbumsForUser": findAlbumsForUser,
             "addAlbumForUser" : addAlbumForUser,
-            "findAlbumById" : findAlbumById
+            "findAlbumById" : findAlbumById,
+            "removeImage" : removeImage
         };
 
 
         return api;
 
-        function findAlbumById(albumId) {
+
+        function findAlbumById(albumId, userId) {
             var url = "/api/project/user/" + userId +"/album/" + albumId;
             return $http.get(url)
                 .then(function (album) {
@@ -32,6 +34,14 @@
                 .then(function(albums){
                     return albums.data;
                 });
+        }
+
+        function removeImage(albumId, imageId) {
+            console.log(albumId, imageId);
+            return $http.delete(("/api/project/albums/" + albumId + "/image/" + imageId))
+                .then(function (data) {
+                    return data;
+                })
         }
 
     }

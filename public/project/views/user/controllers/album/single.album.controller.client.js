@@ -12,6 +12,7 @@
         model.showArtList = [];
         model.albums = [];
         model.albumId = $routeParams["albumId"];
+        model.albumImages = [];
 
         model.findOneDeviation = findOneDeviation;
         model.searchUser = searchUser;
@@ -19,29 +20,43 @@
         model.loadAlbum = loadAlbum;
 
         function init() {
-            model.key = "7b2ff3ba184d5c48d8a52a519e65df8c1bb4b28b98da90cac5";
-            var promise = userService.findUserById(model.userId);
-            promise.then(function (response) {
-                model.user = response.data;
-                model.followers = model.user.followers;
-                model.following = model.user.following;
-                albumService.findAlbumById(model.albumId)
-                    .then(function (album) {
-                        model.album = album;
-                    })
-
-            });
+            imageService.getNewKey()
+                .then(function (key) {
+                    model.key = key;
+                    var promise = userService.findUserById(model.userId);
+                    promise.then(function (response) {
+                        model.user = response.data;
+                        model.followers = model.user.followers;
+                        model.following = model.user.following;
+                        albumService.findAlbumById(model.albumId, model.user._id)
+                            .then(function (album) {
+                                model.album = album.data;
+                                model.albumName = model.album.name;
+                                loadImagesForAlbum();
+                            })
+                    });
+                });
 
 
         }
 
         init();
 
+        function loadImagesForAlbum() {
+            for (var u in model.album.images) {
+                imageService.getImageById(model.user._id, model.album.images[u])
+                    .then(function (image) {
+                        model.albumImages.push(image.data.deviantId);
+                        loadAlbum();
+                    });
+            }
+        }
+
         function loadAlbum() {
             model.showArt = [];
-
-            for (var u in model.album) {
-                findOneDeviation(model.album[u])
+            for (var u in model.albumImages) {
+                console.log(model.albumImages);
+                findOneDeviation(model.albumImages[u])
                     .then(function (dev) {
                         model.showArtList.push(dev[0]);
                         model.showArt = model.showArtList;
@@ -71,7 +86,6 @@
                     var objects = (message.results);
                     for (var u in objects) {
                         newList.push(objects[u]);
-                        console.log(objects[u]);
                     }
                     return model.showArt = newList;
                 });

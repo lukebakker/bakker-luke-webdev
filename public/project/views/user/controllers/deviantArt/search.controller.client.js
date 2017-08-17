@@ -23,17 +23,21 @@
         model.addFavorite = addFavorite;
 
         function init() {
-            model.key = "7b2ff3ba184d5c48d8a52a519e65df8c1bb4b28b98da90cac5";
-            var promise = userService.findUserById(model.userId);
-            promise.then(function (response) {
-                model.user = response.data;
-                model.followers = model.user.followers;
-                model.following = model.user.following;
-                var randomId = model.user.favImages[Math.floor(Math.random() * model.user.favImages.length)];
-                findMoreLikeThis(randomId);
-                model.albums = albumService.findAlbumsForUser(model.user._id);
+            imageService.getNewKey()
+                .then(function (key) {
+                    model.key = key;
+                    var promise = userService.findUserById(model.userId);
+                    promise.then(function (response) {
+                        model.user = response.data;
+                        model.followers = model.user.followers;
+                        model.following = model.user.following;
+                        var randomId = model.user.favImages[Math.floor(Math.random() * model.user.favImages.length)];
+                        findMoreLikeThis(randomId);
+                        model.albums = albumService.findAlbumsForUser(model.user._id);
 
-            });
+                    });
+                });
+
         }
 
         init();

@@ -41,11 +41,11 @@
 <table class="table lpb-pic-viewer container-fluid">
     <tr ng-repeat="art in model.showArt track by $index">
         <td><h2><a href="{{art.url}}">
-            {{art.title}}</a></h2>
-            <a ng-click="model.addFavorite(art.deviationid)">
+            {{art.title}}</a><a ng-click="model.addFavorite(art.deviationid)">
                     <span class="glyphicon glyphicon-heart-empty pull-right">
                     </span>
-            </a> <img ng-src="{{art.content.src}}" style="width : 100%">
+        </a></h2>
+             <img ng-src="{{art.content.src}}" style="width : 100%">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Enter a comment...">
                 <span class="input-group-btn">

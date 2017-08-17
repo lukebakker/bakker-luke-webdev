@@ -9,6 +9,8 @@ app.post("/api/project/:userId", addImage);
 app.get("/api/project/user/:userId/albums", getAlbumsForUser);
 app.post("/api/project/user/:userId/album/create/:albumName", createAlbumForUser);
 app.get("/api/project/user/:userId/album/:albumId", findAlbumById);
+app.delete("/api/project/albums/:albumId/image/:imageId", removeImage);
+
 
 function findAlbumById(req, res) {
     var albumId = req.params.albumId;
@@ -47,6 +49,20 @@ function addImage(req, res) {
         .then(function (image) {
             return albumModel.addImage(userId, image);
         });
+}
+
+
+function removeImage(req, res) {
+    var albumId = req.params.albumId;
+    var imageId = req.params.imageId;
+    return imageModel.removeImage(imageId)
+        .then(function (image) {
+            findAlbumById(imageId)
+                .then(function (album) {
+                    albumModel.removeImage(albumId, imageId);
+                    res.json(album);
+                })
+        })
 }
 
 

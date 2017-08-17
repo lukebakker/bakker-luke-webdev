@@ -6,6 +6,8 @@ var imageModel = mongoose.model("ImageModelProject", imageSchema);
 module.exports = imageModel;
 
 imageModel.addImage = addImage;
+imageModel.getImageById = getImageById;
+imageModel.removeImage = removeImage;
 
 function addImage(userId, deviation) {
     var image = [{
@@ -13,4 +15,12 @@ function addImage(userId, deviation) {
         name: deviation.name, creator: deviation.author.username, deviantId: deviation.deviationid
     }];
     return imageModel.create(image);
+}
+
+function getImageById(imageId) {
+    return imageModel.findById(imageId);
+}
+
+function removeImage(imageId) {
+    return imageModel.remove({deviantId: imageId});
 }

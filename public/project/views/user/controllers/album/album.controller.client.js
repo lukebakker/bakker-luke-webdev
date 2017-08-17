@@ -17,21 +17,22 @@
         model.findMoreLikeThis = findMoreLikeThis;
 
         function init() {
-            model.key = "7b2ff3ba184d5c48d8a52a519e65df8c1bb4b28b98da90cac5";
-            var promise = userService.findUserById(model.userId);
-            promise.then(function (response) {
-                model.user = response.data;
-                model.followers = model.user.followers;
-                model.following = model.user.following;
-                var promise2 = albumService.findAlbumsForUser(model.user._id);
-                promise2.then(function (albums) {
-                    console.log(albums[0].name);
-                    model.albums = albums;
-                })
+            imageService.getNewKey()
+                .then(function (key) {
+                    model.key = key;
+                    var promise = userService.findUserById(model.userId);
+                    promise.then(function (response) {
+                        model.user = response.data;
+                        model.followers = model.user.followers;
+                        model.following = model.user.following;
+                        var promise2 = albumService.findAlbumsForUser(model.user._id);
+                        promise2.then(function (albums) {
+                            console.log(albums[0].name);
+                            model.albums = albums;
+                        })
 
-            });
-
-
+                    });
+                });
         }
 
         init();

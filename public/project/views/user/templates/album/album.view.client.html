@@ -40,11 +40,27 @@
 </div>
 
 
-<div ng-repeat="album in model.albums" class="container-fluid">
 
-    <a href="#!/profile/{{model.userId}}/home/albums/{{album._id}}">
-        <button class="btn btn-primary btn-block">{{album.name}}</button>
+
+<div class="container-fluid">
+
+    <a href="#!/profile/{{model.user._id}}/home/albums/new">
+        <div class="btn btn-primary btn-block list-group-item">Add a new album</div>
     </a>
+
+
+    <li ng-repeat="album in model.albums" class="list-group-item">
+        <div class="row">
+            <div class="col-xs-10">
+                <h5><a href="#!">{{album.name}}</a></h5>
+            </div>
+            <div class="col-xs-2">
+                <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">
+                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </li>
 
 </div>
 

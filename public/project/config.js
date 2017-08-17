@@ -7,22 +7,22 @@
     function configuration($routeProvider) {
         $routeProvider
             .when("/", {
-                templateUrl: "views/user/templates/login.view.client.html",
+                templateUrl: "views/user/templates/login/login.view.client.html",
                 controller: "loginController",
                 controllerAs: "model"
             })
             .when("/login", {
-                templateUrl: "views/user/templates/login.view.client.html",
+                templateUrl: "views/user/templates/login/login.view.client.html",
                 controller: "loginController",
                 controllerAs: "model"
             })
             .when("/register", {
-                templateUrl: "views/user/templates/register.view.client.html",
+                templateUrl: "views/user/templates/login/register.view.client.html",
                 controller: "registerController",
                 controllerAs: "model"
             })
             .when("/profile/:userId", {
-                templateUrl: "views/user/templates/profile.view.client.html",
+                templateUrl: "views/user/templates/login/profile.view.client.html",
                 controller: "profileController",
                 controllerAs: "model"
             })
@@ -32,16 +32,25 @@
                 controllerAs: "model"
             })
             .when("/profile/:userId/home/albums", {
-                templateUrl: "views/user/templates/album.view.client.html",
+                templateUrl: "views/user/templates/album/album.view.client.html",
                 controller: "albumController",
                 controllerAs: "model"
             })
+            .when("/profile/:userId/home/albums/new", {
+                templateUrl: "views/user/templates/album/album.new.view.client.html",
+                controller: "albumNewController",
+                controllerAs: "model"
+            })
             .when("/profile/:userId/home/albums/:albumId", {
-                templateUrl: "views/user/templates/single.album.view.client.html",
+                templateUrl: "views/user/templates/album/single.album.view.client.html",
                 controller: "singleAlbumController",
                 controllerAs: "model"
             })
-
+            .when("/profile/:userId/home/albums/:albumId/edit", {
+                templateUrl: "views/user/templates/album/album.edit.view.client.html",
+                controller: "albumEditController",
+                controllerAs: "model"
+            })
 
     }
 })();
