@@ -66,7 +66,6 @@
                     var objects = (message.results);
                     for (var u in objects) {
                         newList.push(objects[u]);
-                        console.log(objects[u]);
                     }
                     return model.showArt = newList;
                 });
@@ -93,7 +92,6 @@
                     var objects = (message.results);
                     for (var u in objects) {
                         newList.push(objects[u]);
-                        console.log(objects[u]);
                     }
                     return model.showArt = newList;
                 });
@@ -102,7 +100,6 @@
 
         function addFavorite(deviationId) {
             var albumName = "Favorites";
-            model.user.favImages.push(deviationId);
             userService.updateUser(model.user, model.userId)
                 .then(function (data) {
                     imageService.findOneDeviation(model.key, deviationId)
@@ -114,23 +111,31 @@
 
 
         function showFavoritesForUser() {
-            model.showArt = [];
-            for (var u in model.user.favImages) {
-                findOneDeviation(model.user.favImages[u])
-                    .then(function (dev) {
-                        model.showArtList.push(dev[0]);
-                        model.showArt = model.showArtList;
-                    });
 
-            }
-            model.showArtList = [];
+
+            albumService.findAlbumsForUser(model.userId)
+                .then(function (albums) {
+                    for (var i in albums) {
+                        if (albums[i].name == "Favorites") {
+                            model.favorites = albums[i];
+                            $location.url("/profile/" + model.userId + "/home/albums/" + model.favorites._id+ "/edit");
+                        }
+                    }
+                });
+            /*
+             for (var u in model.favorites.images) {
+             model.showArtList.push(model.favorites.images);
+             model.showArt = model.showArtList;
+
+             }
+             });
+             model.showArtList = [];*/
         }
 
         function showFavoritesForUserByUsername(username) {
             model.showArt = [];
             return userService.findUserByUsername(username)
                 .then(function (user) {
-                    console.log(user.data[0].favImages);
                     for (var u in user.data[0].favImages) {
                         findOneDeviation(user.data[0].favImages[u])
                             .then(function (dev) {
@@ -157,7 +162,6 @@
             return userService.findUserByUsername(username)
                 .then(function (user) {
                     user.data[0].followers.push(model.userId);
-                    console.log("this is the user", user.data[0]._id);
                     userService.updateUser(user.data[0], user.data[0]._id)
                         .then(function (data) {
                             model.user.following.push(user.data[0]._id);
@@ -165,7 +169,6 @@
                             model.following = model.user.following;
                             model.followers = model.user.followers;
 
-                            console.log(model.user.following);
                         });
                 });
         }

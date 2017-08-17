@@ -1,0 +1,43 @@
+<nav class="navbar navbar-fixed-top navbar-default">
+    <div class="container-fluid">
+        <a href="#!/profile/{{model.user._id}}">
+                <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
+                </span>
+        </a>
+
+
+        <div class="container-fluid">
+            <a href="#!/profile/{{model.user._id}}">
+        <span class="pull-right glyphicon glyphicon-user">
+                </span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="lpb-home-container">
+    <h1>{{model.album.name}}</h1>
+
+    <div class=" lpb-pic-viewer container-fluid">
+        <div>
+            <label class="lpb-name-label pull-left">Name</label>
+        </div>
+        <div>
+            <input type="text" class="form-control lpb-navbar-search"
+                   placeholder="Album Name"
+                   ng-model="model.album.name">
+        </div>
+
+        <div ng-repeat="album in model.albums">
+            <div>
+                <button class="btn button primary btn-block"
+                        ng-click="model.addImageToAlbum(album._id)"> Add to {{album.name}}
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

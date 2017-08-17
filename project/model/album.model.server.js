@@ -13,6 +13,7 @@ albumModel.findAlbumByAlbumName = findAlbumByAlbumName;
 albumModel.findAlbumById = findAlbumById;
 albumModel.removeImage = removeImage;
 albumModel.updateAlbum = updateAlbum;
+albumModel.addImageToAlbum= addImageToAlbum;
 
 
 function updateAlbum(albumId, album) {
@@ -34,7 +35,17 @@ function getAlbumsForUser(userId) {
 function addImage(imageId, albumName) {
     albumModel.findAlbumByAlbumName(albumName)
         .then(function (album) {
+    album.images.push(imageId);
+    return album.save();
+});
+}
+
+function addImageToAlbum(imageId, albumId) {
+    console.log(imageId, albumId);
+    albumModel.findById(albumId)
+        .then(function (album) {
             album.images.push(imageId);
+            console.log(album);
             return album.save();
         });
 }

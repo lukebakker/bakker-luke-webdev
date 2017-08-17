@@ -12,7 +12,7 @@ imageModel.removeImage = removeImage;
 function addImage(userId, deviation) {
     var image = [{
         _userId: userId, src: deviation.content.src,
-        name: deviation.name, creator: deviation.author.username, deviantId: deviation.deviationid
+        name: deviation.title, creator: deviation.author.username, deviantId: deviation.deviationid
     }];
     return imageModel.create(image);
 }

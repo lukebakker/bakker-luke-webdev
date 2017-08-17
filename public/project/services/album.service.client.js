@@ -10,7 +10,8 @@
             "addAlbumForUser": addAlbumForUser,
             "findAlbumById": findAlbumById,
             "updateAlbum": updateAlbum,
-            "removeImage": removeImage
+            "removeImage": removeImage,
+            "addImage" : addImage
         };
 
 
@@ -45,10 +46,16 @@
         }
 
         function updateAlbum(albumId, album) {
-            console.log(album);
             var url = "/api/project/albums/" + albumId + "/update";
             return $http.put(url, album);
         }
+
+
+        function addImage(albumId, imageId) {
+            var url = "/api/project/album/" + albumId + "/" +imageId;
+            return $http.put(url);
+        }
+
 
     }
 

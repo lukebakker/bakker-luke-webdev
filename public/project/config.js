@@ -51,6 +51,16 @@
                 controller: "albumEditController",
                 controllerAs: "model"
             })
+            .when("/profile/:userId/home/albums/:albumId/edit/:imageId", {
+                templateUrl: "views/user/templates/album/album.selector.view.client.html",
+                controller: "imageAddController",
+                controllerAs: "model"
+            })
+            .when("/profile/:userId/home/follow", {
+                templateUrl: "views/user/templates/social/find.followers.view.client.html",
+                controller: "socialController",
+                controllerAs: "model"
+            })
 
     }
 })();

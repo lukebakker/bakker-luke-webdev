@@ -71,7 +71,6 @@
 
         function getImageById(userId, imageId) {
             var url = "/api/project/" + userId + "/image/" + imageId;
-
             return $http.get(url)
                 .then(function (image){
                     return image;

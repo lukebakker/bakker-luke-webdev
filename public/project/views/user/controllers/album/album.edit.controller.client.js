@@ -54,6 +54,7 @@
             $location.url("/profile/" + model.userId + "/home/albums");
         }
 
+
         function loadImagesForAlbum() {
             var newList = [];
             for (var u in model.album.images) {
@@ -65,18 +66,6 @@
             }
             model.showArt = model.albumImages;
         }
-
-        /* function loadAlbum() {
-         model.showArt = [];
-         for (var u in model.albumImages) {
-         findOneDeviation(model.albumImages[u])
-         .then(function (dev) {
-         model.showArtList.push(dev[0]);
-         model.showArt = model.showArtList;
-         });
-         }
-         model.showArtList = [];
-         }*/
 
 
         function findOneDeviation(deviationId) {
