@@ -1,4 +1,4 @@
-<div ng-controller="profileController">
+
 
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -6,16 +6,9 @@
                 <span class="header-plus pull-right glyphicon glyphicon-home">
                 </span>
             </a>
-            <span ng-if="model.user.isAdmin">
-            <a href="#!/profile/{{model.user._id}}/admin">
-                <span class="header-plus pull-right glyphicon glyphicon-wrench">
-                </span>
-            </a>
-            </span>
-
 
             <div class="navbar-header">
-                <a class="navbar-brand pull-left">Profile</a>
+                <a class="navbar-brand pull-left">Edit {{model.nonAdminUser.username}}'s Profile</a>
 
 
             </div>
@@ -28,21 +21,21 @@
     <div class="container-fluid profile-container">
         <label for="firstName">First Name</label>
         <input name="firstName"
-               ng-model="model.user.firstName"
+               ng-model="model.nonAdminUser.firstName"
                value="demo"
                class="form-control"
                id="firstName"/>
 
         <label for="lastName">Last Name</label>
         <input name="lastname"
-               ng-model="model.user.lastName"
+               ng-model="model.nonAdminUser.lastName"
                value="user"
                class="form-control"
                id="lastName"/>
 
         <label for="displayUsername">Username</label>
         <input name="displayUsername"
-               ng-model="model.user.username"
+               ng-model="model.nonAdminUser.username"
                value="demouser"
                disabled="disabled"
                class="form-control"
@@ -50,7 +43,7 @@
 
         <label for="email">email</label>
         <input name="email"
-               ng-model="model.user.email"
+               ng-model="model.nonAdminUser.email"
                placeholder="demouser@demo.com"
                class="form-control"
                id="email"/>
@@ -58,6 +51,7 @@
         <label for="dob">Date of birth</label>
         <input name="dob"
                type="date"
+               ng-model="model.nonAdminUser.dateOfBirth"
                placeholder="mm/dd/yyyy"
                class="form-control"
                id="dob"/>
@@ -67,16 +61,10 @@
            href="#!/profile/{{model.user._id}}/home"
            role="button">Go To Feed</a>
 
-        <a class="btn  btn-danger btn-block"
-           href="#!/login"
-           role="button">Logout</a>
-
         <a class="btn btn-primary btn-block"
            ng-click="model.updateUser()"
            role="button">Update</a>
-        <a class="btn btn-danger btn-block"
-           ng-click="model.unRegister()"
-           role="button">Unregister</a>
+
 
     </div>
 
@@ -93,5 +81,3 @@
             </a>
         </div>
     </nav>
-
-</div>

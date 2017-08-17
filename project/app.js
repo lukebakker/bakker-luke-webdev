@@ -21,6 +21,9 @@ require("./model/album.model.server");
 require("./model/image.model.server");
 require("./services/image.service.server");
 
+require("./model/comment.model.server");
+require("./model/comment.schema.server");
+
 
 /*
  require("./services/website.service.server");

@@ -13,9 +13,21 @@
             "updateUser": updateUser,
             "unRegister": unRegister,
             "findFollowing": findFollowing,
-            "findFollowers": findFollowers
+            "findFollowers": findFollowers,
+            "findAllUsers" : findAllUsers,
+            "removeUser" : removeUser
         };
         return api;
+
+        function removeUser(userId) {
+           var url =  "/api/user/" + userId;
+           return $http.delete(url);
+        }
+
+        function findAllUsers() {
+            var url = "/api/users";
+            return $http.get(url);
+        }
 
         function unRegister(userId) {
             var url = "/api/user/" + userId;

@@ -9,7 +9,7 @@ app.get("/api/project/:userId/image/:imageId", getImageById);
 
 
 function getImageById(req, res) {
-    var imageId = req.params.imageId;
+    var imageId = req.params.imageId
     return imageModel.getImageById(imageId)
         .then(function (image) {
             res.json(image);

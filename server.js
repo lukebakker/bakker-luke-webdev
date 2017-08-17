@@ -4,6 +4,17 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var passport      = require('passport');
+var cookieParser  = require('cookie-parser');
+var session       = require('express-session');
+
+/*app.use(cookieParser());
+app.use(session({
+    secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true
+}));*/
+
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));

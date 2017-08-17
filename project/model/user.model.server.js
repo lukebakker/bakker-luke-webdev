@@ -15,6 +15,7 @@ userModel.findFollowing = findFollowing;
 userModel.findFollwers = findFollowers;
 
 
+
 module.exports = userModel;
 
 function findFollowing(userId) {

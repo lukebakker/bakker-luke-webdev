@@ -1,0 +1,54 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a href="#!/profile/{{model.user._id}}/home">
+                <span class="header-plus pull-right glyphicon glyphicon-home">
+                </span>
+        </a>
+
+        <div class="navbar-header">
+            <a class="navbar-brand pull-left">Profile</a>
+
+
+        </div>
+
+
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<ul class="list-group lpb-follwers-container">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-10">
+                <h4>Users</h4>
+            </div>
+        </div>
+    </li>
+
+    <li ng-repeat="user in model.users" class="list-group-item">
+        <div class="row container-fluid">
+                <a href="#!/profile/{{model.user._id}}/admin/{{user._id}}/edit">
+                    <h5 class="pull-left"> {{user.username}}
+                    </h5>
+                </a>
+
+                <a ng-click="model.removeUser(user._id)">
+                    <span class=" glyphicon glyphicon-remove-sign pull-right"></span>
+                </a>
+        </div>
+
+    </li>
+</ul>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <a href="#!/profile/{{model.user._id}}/home/albums"
+       type="button" class="btn btn-primary navbar-btn pull-left">View My Albums</a>
+    <a href="#!/profile/{{model.user._id}}/home/follow"
+       type="button" class="btn btn-primary navbar-btn pull-left">Search For Followers</a>
+    <div class="container-fluid">
+        <a href="#!/profile/{{model.user._id}}">
+        <span class="pull-right glyphicon glyphicon-user">
+                </span>
+        </a>
+    </div>
+</nav>

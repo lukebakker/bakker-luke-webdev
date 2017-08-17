@@ -2,7 +2,6 @@ var app = require("../../express");
 var userModel = require("../model/user.model.server");
 
 
-
 // http handlers
 app.get("/api/users", getAllUsers);
 app.get("/api/user/:userId", getUserById);
@@ -43,7 +42,6 @@ function getUserByUsername(req, res) {
 
 function deleteUser(req, res) {
     var userId = req.params.userId;
-
     userModel.deleteUser(userId)
         .then(function (user) {
             res.send(user);
@@ -82,11 +80,13 @@ function findUser(req, res) {
         });
 }
 
-function getAllUsers(req, response) {
-    userModel.getAllUsers
-        .then(function (users) {
-            res.json(users);
-        });
+function getAllUsers(req, res) {
+   userModel.getAllUsers()
+       .then(function (users){
+           console.log(users);
+           res.json(users);
+       })
+
 }
 
 

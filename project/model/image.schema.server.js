@@ -6,7 +6,7 @@ var imageSchema = mongoose.Schema({
     _user: [{type : mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
     deviantId: String,
     creator: String,
-    comments: [{type: String}],
+    comments: [{type: mongoose.Schema.Types.ObjectId, ref: "AlbumModelProject"}],
     tags: [String],
     src: String,
     name: String,

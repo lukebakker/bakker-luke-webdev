@@ -27,55 +27,53 @@
             model.userId = $routeParams["userId"];
             imageService.getNewKey()
                 .then(function (key) {
-                    model.key = key;
-                    var promise = userService.findUserById(model.userId);
-                    promise.then(function (response) {
-                        model.user = response.data;
-                        console.log(model.user);
-                        model.followers = model.user.followers;
-                        model.following = model.user.following;
-                        model.albums = albumService.findAlbumsForUser(model.user._id);
-                        getRandomImageId()
-                            .then(function(randomId) {
-                                findMoreLikeThis(randomId);
-                            });
-                    });
-                });
+                        model.key = key;
+                        var promise = userService.findUserById(model.userId);
+                        promise.then(function (response) {
+                            model.user = response.data;
+                            model.followers = model.user.followers;
+                            model.following = model.user.following;
+                            albumService.findAlbumsForUser(model.user._id)
+                                .then(function (albums) {
+                                    model.albums = albums;
+                                    model.getRandomImageId()
+                                        .then(function (imageId) {
+                                            findMoreLikeThis(imageId)
+                                        });
+                                });
+                        });
+                    }
+                );
 
         }
 
         init();
 
         function getRandomImageId() {
-            if (model.user.albums.length == 0) {
-                return null;
-            }
-            var randomAlbum = model.user.albums[Math.floor(Math.random() * model.user.albums.length)];
-            console.log(randomAlbum);
-            return albumService.findAlbumById(randomAlbum)
-                .then(function (album) {
-                    var randomImage = album.data.images[Math.floor(Math.random() * album.data.images.length)];
-                    return imageService.getImageById(model.user._id, randomImage)
-                        .then(function (image) {
-                            return image.data.deviantId;
-                        })
+            var album = model.albums[Math.floor(Math.random() * model.albums.length)];
+            var randomId = album.images[Math.floor(Math.random() * album.images.length)];
+            return imageService.getImageById(model.user._id, randomId)
+                .then(function (image) {
+                    return image.data.deviantId;
                 })
+
         }
 
         function searchHot() {
             imageService
                 .searchDeviations(model.key)
                 .then(function (message) {
-                    return model.artworks = message;
+                    model.artworks = message;
+                    var art = model.artworks;
+                    var newList = [];
+                    for (var u in art) {
+                        for (var v in art[u]) {
+                            newList.push(art[u][v]);
+                        }
+                    }
+                    model.showArt = newList;
                 });
-            var art = model.artworks;
-            var newList = [];
-            for (var u in art) {
-                for (var v in art[u]) {
-                    newList.push(art[u][v]);
-                }
-            }
-            model.showArt = newList;
+
         }
 
         function searchByTag(tag) {
@@ -189,4 +187,5 @@
 
 
     }
-})();
+})
+();

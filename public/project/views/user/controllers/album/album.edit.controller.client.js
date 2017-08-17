@@ -51,6 +51,10 @@
         function editAlbum(albumName) {
             model.album.name = albumName;
             albumService.updateAlbum(model.albumId, model.album);
+            albumService.findAlbumById(model.albumId)
+                .then(function (album) {
+                    model.album = album.data;
+                });
             $location.url("/profile/" + model.userId + "/home/albums");
         }
 

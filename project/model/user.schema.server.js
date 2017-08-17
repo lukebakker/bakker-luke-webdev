@@ -12,8 +12,10 @@ var userSchema = mongoose.Schema({
     following: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
     followers:[{type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
     albums: [{type: mongoose.Schema.Types.ObjectId, ref: "AlbumModelProject"}],
-    messages: [{type: String}],
+    comments: [{type: mongoose.Schema.Types.ObjectId, ref: "CommentModelProject"}],
     tags: [String],
+    dateOfBirth: {type: Date},
+    isAdmin:{type: Boolean, default: false},
     dateCreated: {type: Date, default: Date.now()}
 }, {collection: "userProject"});
 

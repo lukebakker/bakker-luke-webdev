@@ -71,6 +71,16 @@
                 controller: "albumController",
                 controllerAs: "model"
             })
+            .when("/profile/:userId/admin", {
+                templateUrl: "views/user/templates/login/admin.management.view.client.html",
+                controller: "adminController",
+                controllerAs: "model"
+            })
+            .when("/profile/:userId/admin/:nonAdminUserId/edit", {
+                templateUrl: "views/user/templates/login/admin.edit.profile.view.client.html",
+                controller: "adminController",
+                controllerAs: "model"
+            })
 
 
     }
