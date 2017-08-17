@@ -14,7 +14,7 @@ albumModel.findAlbumById = findAlbumById;
 albumModel.removeImage = removeImage;
 
 function findAlbumById(albumId) {
-    return albumModel.findById(albumId);
+    return albumModel.findById(albumId).populate('albums').exec();
 }
 
 function createAlbumForUser(userId, albumName) {
@@ -38,16 +38,26 @@ function findAlbumByAlbumName(albumName) {
 }
 
 function removeImage(albumId, imageId) {
-    albumModel.findAlbumById(albumId)
+    return albumModel.findAlbumById(albumId)
         .then(function (album) {
-            var newAlbum = [];
-            var images = album.images;
-            for (var u in images) {
-                if (images[u].deviantId === imageId) {
-                    newAlbum.push(images[u]);
+            console.log(album);
+            // var newAlbum = [];
+            // var images = album.images;
+            //
+            for (var i = 0; i < album.images.length; ++i) {
+                if (album.images[i] == imageId) {
+                    album.images.splice(i, 1);
+                    break;
                 }
             }
-            album.images = newAlbum;
+
+            // for (var u in images) {
+            //     if (!images[u].deviationid === imageId) {
+            //         newAlbum.push(images[u]);
+            //     }
+            // }
+            // console.log(newAlbum);
+            // album.images = newAlbum;
             return album.save();
         })
 }

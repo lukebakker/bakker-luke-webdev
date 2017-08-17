@@ -24,10 +24,10 @@
             <label class="lpb-name-label pull-left">Name</label>
         </div>
         <div>
-        <input type="text" class="form-control lpb-navbar-search"
-               placeholder="Album Name"
-               ng-model="model.album.name">
-    </div>
+            <input type="text" class="form-control lpb-navbar-search"
+                   placeholder="Album Name"
+                   ng-model="model.album.name">
+        </div>
 
         <button class="btn button primary btn-block"
                 ng-click="model.editAlbum()">Confirm
@@ -37,11 +37,11 @@
         <table class="table container-fluid">
             <tr ng-repeat="art in model.showArt track by $index">
                 <td><h2><a href="{{art.url}}">
-                    {{art.title}}</a><a ng-click="model.removeImage(art.deviationid)">
+                    {{art.name}}</a><a ng-click="model.removeImage(art._id)">
                     <span class="glyphicon glyphicon-remove pull-right">
                     </span>
                 </a></h2>
-                    <img ng-src="{{art.content.src}}" style="width : 100%">
+                    <img ng-src="{{art.src}}" style="width : 100%">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Enter a comment...">
                         <span class="input-group-btn">

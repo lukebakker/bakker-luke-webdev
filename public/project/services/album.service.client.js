@@ -37,7 +37,6 @@
         }
 
         function removeImage(albumId, imageId) {
-            console.log(albumId, imageId);
             return $http.delete(("/api/project/albums/" + albumId + "/image/" + imageId))
                 .then(function (data) {
                     return data;

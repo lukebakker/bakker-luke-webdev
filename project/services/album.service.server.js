@@ -21,6 +21,14 @@ function findAlbumById(req, res) {
 
 }
 
+function findAlbumByIdLocal(albumId) {
+    return albumModel.findAlbumById(albumId)
+        .then(function (album) {
+            return album;
+        })
+
+}
+
 function createAlbumForUser(req, res) {
     var userId = req.params.userId;
     var albumName = req.params.albumName;
@@ -55,9 +63,10 @@ function addImage(req, res) {
 function removeImage(req, res) {
     var albumId = req.params.albumId;
     var imageId = req.params.imageId;
+    console.log(albumId, imageId);
     return imageModel.removeImage(imageId)
         .then(function (image) {
-            findAlbumById(imageId)
+            findAlbumByIdLocal(albumId)
                 .then(function (album) {
                     albumModel.removeImage(albumId, imageId);
                     res.json(album);

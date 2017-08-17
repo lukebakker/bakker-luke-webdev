@@ -9,6 +9,7 @@ var imageSchema = mongoose.Schema({
     comments: [{type: String}],
     tags: [String],
     src: String,
+    name: String,
     dateCreated: {type: Date, default: Date.now()}
 }, {collection: "imageProject"});
 

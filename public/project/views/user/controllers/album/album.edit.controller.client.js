@@ -16,7 +16,7 @@
 
         model.editAlbum = editAlbum;
         model.findOneDeviation = findOneDeviation;
-        model.loadAlbum = loadAlbum;
+        //model.loadAlbum = loadAlbum;
         model.removeImage = removeImage;
 
         function init() {
@@ -38,12 +38,13 @@
 
 
         }
+
         init();
 
         function removeImage(imageId) {
-            imageService.findImage
-            console.log("HERE");
+            console.log(imageId);
             albumService.removeImage(model.albumId, imageId);
+            $location.url("/profile/" + model.userId + "/home/albums/" + model.albumId + "/edit");
         }
 
 
@@ -53,26 +54,28 @@
         }
 
         function loadImagesForAlbum() {
+            var newList = [];
             for (var u in model.album.images) {
                 imageService.getImageById(model.user._id, model.album.images[u])
                     .then(function (image) {
-                        model.albumImages.push(image.data.deviantId);
-                        loadAlbum();
+                        console.log(image.data);
+                        model.albumImages.push(image.data);
                     });
             }
+            model.showArt = model.albumImages;
         }
 
-        function loadAlbum() {
-            model.showArt = [];
-            for (var u in model.albumImages) {
-                findOneDeviation(model.albumImages[u])
-                    .then(function (dev) {
-                        model.showArtList.push(dev[0]);
-                        model.showArt = model.showArtList;
-                    });
-            }
-            model.showArtList = [];
-        }
+        /* function loadAlbum() {
+         model.showArt = [];
+         for (var u in model.albumImages) {
+         findOneDeviation(model.albumImages[u])
+         .then(function (dev) {
+         model.showArtList.push(dev[0]);
+         model.showArt = model.showArtList;
+         });
+         }
+         model.showArtList = [];
+         }*/
 
 
         function findOneDeviation(deviationId) {
@@ -87,7 +90,6 @@
                     return newList;
                 })
         }
-
 
 
     }

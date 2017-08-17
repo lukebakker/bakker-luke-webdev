@@ -22,5 +22,5 @@ function getImageById(imageId) {
 }
 
 function removeImage(imageId) {
-    return imageModel.remove({deviantId: imageId});
+    return imageModel.findByIdAndRemove(imageId);
 }
