@@ -32,8 +32,8 @@ function getAlbumsForUser(userId) {
     return albumModel.find({_user: userId});
 }
 
-function addImage(imageId, albumName) {
-    albumModel.findAlbumByAlbumName(albumName)
+function addImage(userId, imageId, albumName) {
+    albumModel.findAlbumByAlbumName(userId, albumName)
         .then(function (album) {
     album.images.push(imageId);
     return album.save();
@@ -41,7 +41,7 @@ function addImage(imageId, albumName) {
 }
 
 function addImageToAlbum(imageId, albumId) {
-    console.log(imageId, albumId);
+    console.log(userId, imageId, albumId);
     albumModel.findById(albumId)
         .then(function (album) {
             album.images.push(imageId);
@@ -50,8 +50,9 @@ function addImageToAlbum(imageId, albumId) {
         });
 }
 
-function findAlbumByAlbumName(albumName) {
-    return albumModel.findOne({name: albumName});
+function findAlbumByAlbumName(userId, albumName) {
+    console.log(albumModel.findOne({name: albumName, _user: userId});
+    return albumModel.findOne({name: albumName, _user: userId});
 }
 
 function removeImage(albumId, imageId) {

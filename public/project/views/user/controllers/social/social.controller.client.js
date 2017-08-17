@@ -32,7 +32,6 @@
 
 
         function searchUser(username) {
-            console.log("here");
             return userService.findUserByUsername(username)
                 .then(function (user) {
                     console.log(user.data);

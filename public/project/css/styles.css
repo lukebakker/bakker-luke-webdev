@@ -28,6 +28,11 @@ input, textarea {
     padding-top: 15px;
 }
 
+.list-group-item .glyphicon-plus, .list-group-item .glyphicon-remove-sign{
+    padding-top: 10px;
+    color: white;
+}
+
 .glyphicon-fire {
     padding-left: 10px;
     color: #ff6f44;
@@ -38,7 +43,13 @@ input, textarea {
     color: red;
 }
 
-
+.lpb-follwers-container {
+    margin: auto;
+    padding-top: 50px;
+    width: 50%;
+    min-width: 350px;
+    color : white;
+}
 
 
 

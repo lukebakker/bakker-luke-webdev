@@ -7,7 +7,7 @@
     function singleAlbumController(imageService, $routeParams, userService, $location, albumService) {
         var model = this;
         model.userId = $routeParams["userId"];
-
+        model.userId = $routeParams["followerId"];
         model.artworks = [];
         model.showArtList = [];
         model.albums = [];
@@ -17,7 +17,6 @@
         model.findOneDeviation = findOneDeviation;
         model.searchUser = searchUser;
         model.findMoreLikeThis = findMoreLikeThis;
-        model.loadAlbum = loadAlbum;
 
         function init() {
             imageService.getNewKey()
@@ -32,6 +31,7 @@
                             .then(function (album) {
                                 model.album = album.data;
                                 model.albumName = model.album.name;
+                                console.log(model.album);
                                 loadImagesForAlbum();
                             })
                     });
@@ -43,26 +43,14 @@
         init();
 
         function loadImagesForAlbum() {
+            model.showArt = [];
             for (var u in model.album.images) {
                 imageService.getImageById(model.user._id, model.album.images[u])
                     .then(function (image) {
-                        model.albumImages.push(image.data.deviantId);
-                        loadAlbum();
+                        model.albumImages.push(image.data);
                     });
             }
-        }
-
-        function loadAlbum() {
-            model.showArt = [];
-            for (var u in model.albumImages) {
-                console.log(model.albumImages);
-                findOneDeviation(model.albumImages[u])
-                    .then(function (dev) {
-                        model.showArtList.push(dev[0]);
-                        model.showArt = model.showArtList;
-                    });
-            }
-            model.showArtList = [];
+            model.showArt = model.albumImages;
         }
 
 

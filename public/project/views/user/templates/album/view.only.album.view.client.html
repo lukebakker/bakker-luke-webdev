@@ -36,29 +36,23 @@
 
 
 <div class="lpb-home-container">
-    <h1>{{model.album.name}}</h1>
+    <h1>view {{model.follower.username}}'s Albums below</h1>
 </div>
 
 
 
 
-<table class="table lpb-pic-viewer container-fluid">
-    <tr ng-repeat="art in model.showArt track by $index">
-        <td><h2><a href="{{art.url}}">
-            {{art.title}}</a></h2>
-            </a> <img ng-src="{{art.src}}" style="width : 100%">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Enter a comment...">
-                <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Submit</button>
-      </span>
-            </div><!-- /input-group --></td>
-
-        <td>
-        </td>
-    </tr>
-</table>
+<div class="container-fluid">
 
 
+    <li ng-repeat="album in model.albums" class="list-group-item">
+        <div class="row">
+            <div class="col-xs-10">
+                <h5><a href="#!/profile/{{model.follower._id}}/home/albums/{{album._id}}">{{album.name}}</a></h5>
+            </div>
+        </div>
+    </li>
+
+</div>
 
 

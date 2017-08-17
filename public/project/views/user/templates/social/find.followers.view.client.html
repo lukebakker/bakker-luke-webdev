@@ -26,48 +26,65 @@
         <a ng-click="model.searchUser(model.searchInput)"
            type="button" class="btn btn-primary navbar-btn pull-left">Search For Followers</a>
     </div>
-    <div>
-        <li ng-repeat="follower in model.findFollowers" class="list-group-item">
-            <div class="row">
-                <div class="col-xs-10">
-                    <h5><a href="#!">{{follower.firstName}}</a></h5>
-                </div>
-                <div class="col-xs-2">
-                    <a ng-click="model.follow(follower.username)">
-                        <span class="glyphicon glyphicon-plus pull-right"></span>
-                    </a>
-                </div>
-            </div>
-        </li>
-    </div>
-    <div>
-        <li ng-repeat="follower in model.followers" class="list-group-item">
-            <div class="row">
-                <div class="col-xs-10">
-                    <h5><a href="#!">{{model.follower.firstName}}</a></h5>
-                </div>
-                <div class="col-xs-2">
-                    <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </div>
-            </div>
-        </li>
-    </div>
 
+</div>
 
-    <li ng-repeat="follower in model.followers" class="list-group-item">
+<ul class="list-group lpb-follwers-container">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-10">
+                <h4>Search Results</h4>
+            </div>
+        </div>
+    </li>
+
+    <li ng-repeat="follower in model.findFollowers" class="list-group-item">
         <div class="row">
             <div class="col-xs-10">
                 <h5><a href="#!">{{follower.username}}</a></h5>
             </div>
             <div class="col-xs-2">
-                <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">
-                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                <a ng-click="model.follow(follower.username)">
+                    <span class="glyphicon glyphicon-plus pull-right"></span>
                 </a>
             </div>
         </div>
     </li>
+</ul>
+
+
+<ul class="list-group lpb-follwers-container">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-10">
+                <h4>Followers</h4>
+            </div>
+        </div>
+    </li>
+
+    <div>
+        <li ng-repeat="follower in model.followers" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h5><a href="#!/user/{{model.user._id}}/view/{{follower._id}}/albums">{{follower.username}}</a></h5>
+                </div>
+                <div class="col-xs-2">
+                    <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">
+                        <span class="glyphicon glyphicon-remove-sign pull-right"></span>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </div>
+
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-10">
+                <h4>Following</h4>
+            </div>
+        </div>
+    </li>
+
 
     <li ng-repeat="follow in model.following" class="list-group-item">
         <div class="row">
@@ -76,12 +93,13 @@
             </div>
             <div class="col-xs-2">
                 <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">
-                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                    <span class="glyphicon glyphicon-remove-sign pull-right"></span>
                 </a>
             </div>
         </div>
     </li>
+</ul>
 
 
-</div>
+
 

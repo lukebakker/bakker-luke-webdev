@@ -16,7 +16,6 @@
             promise.then(function (response) {
                 model.user = response.data;
             });
-            console.log("HERE");
         }
 
         init();

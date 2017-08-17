@@ -7,6 +7,8 @@
     function albumController(imageService, $routeParams, userService, $location, albumService) {
         var model = this;
         model.userId = $routeParams["userId"];
+        model.followerId = $routeParams["followerId"];
+
 
         model.artworks = [];
         model.showArtList = [];
@@ -17,6 +19,10 @@
         model.findMoreLikeThis = findMoreLikeThis;
 
         function init() {
+            userService.findUserById(model.followerId)
+                .then(function (follower) {
+                model.follower = follower.data;
+            });
             imageService.getNewKey()
                 .then(function (key) {
                     model.key = key;
@@ -27,10 +33,8 @@
                         model.following = model.user.following;
                         var promise2 = albumService.findAlbumsForUser(model.user._id);
                         promise2.then(function (albums) {
-                            console.log(albums[0].name);
                             model.albums = albums;
                         })
-
                     });
                 });
         }

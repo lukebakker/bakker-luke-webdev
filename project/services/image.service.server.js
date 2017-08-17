@@ -24,7 +24,7 @@ function addImage(req, res) {
     var albumName = req.params.albumName;
     return imageModel.addImage(userId, deviation)
         .then(function (image) {
-            albumModel.addImage(image[0]._id, albumName);
+            albumModel.addImage(userId, image[0]._id, albumName);
             res.json(image);
         });
 }

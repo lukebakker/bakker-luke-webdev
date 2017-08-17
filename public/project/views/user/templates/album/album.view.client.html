@@ -52,7 +52,7 @@
     <li ng-repeat="album in model.albums" class="list-group-item">
         <div class="row">
             <div class="col-xs-10">
-                <h5><a href="#!">{{album.name}}</a></h5>
+                <h5><a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}">{{album.name}}</a></h5>
             </div>
             <div class="col-xs-2">
                 <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">

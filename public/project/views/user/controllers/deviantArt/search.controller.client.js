@@ -6,7 +6,7 @@
 
     function searchController(imageService, $routeParams, userService, $location, albumService) {
         var model = this;
-        model.userId = $routeParams["userId"];
+
 
         model.artworks = [];
         model.showArtList = [];
@@ -21,19 +21,25 @@
         model.follow = follow;
         model.findMoreLikeThis = findMoreLikeThis;
         model.addFavorite = addFavorite;
+        model.getRandomImageId = getRandomImageId;
 
         function init() {
+            model.userId = $routeParams["userId"];
             imageService.getNewKey()
                 .then(function (key) {
                     model.key = key;
                     var promise = userService.findUserById(model.userId);
                     promise.then(function (response) {
                         model.user = response.data;
+                        console.log(model.user);
                         model.followers = model.user.followers;
                         model.following = model.user.following;
-                        var randomId = model.user.favImages[Math.floor(Math.random() * model.user.favImages.length)];
-                        findMoreLikeThis(randomId);
                         model.albums = albumService.findAlbumsForUser(model.user._id);
+                        getRandomImageId()
+                            .then(function(randomId) {
+                                findMoreLikeThis(randomId);
+                            });
+
 
                     });
                 });
@@ -41,6 +47,22 @@
         }
 
         init();
+
+        function getRandomImageId() {
+            if (model.user.albums.length == 0) {
+                return null;
+            }
+            var randomAlbum = model.user.albums[Math.floor(Math.random() * model.user.albums.length)];
+            console.log(randomAlbum);
+            return albumService.findAlbumById(randomAlbum)
+                .then(function (album) {
+                    var randomImage = album.data.images[Math.floor(Math.random() * album.data.images.length)];
+                    return imageService.getImageById(model.user._id, randomImage)
+                        .then(function (image) {
+                            return image.data.deviantId;
+                        })
+                })
+        }
 
         function searchHot() {
             imageService
@@ -67,7 +89,9 @@
                     for (var u in objects) {
                         newList.push(objects[u]);
                     }
-                    return model.showArt = newList;
+                    model.showArt = newList;
+                    $location.url("/profile/" + model.userId + "/home");
+
                 });
         }
 
@@ -118,7 +142,7 @@
                     for (var i in albums) {
                         if (albums[i].name == "Favorites") {
                             model.favorites = albums[i];
-                            $location.url("/profile/" + model.userId + "/home/albums/" + model.favorites._id+ "/edit");
+                            $location.url("/profile/" + model.userId + "/home/albums/" + model.favorites._id + "/edit");
                         }
                     }
                 });
