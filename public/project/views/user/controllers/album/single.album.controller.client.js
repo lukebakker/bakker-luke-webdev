@@ -7,7 +7,7 @@
     function singleAlbumController(imageService, $routeParams, userService, $location, albumService) {
         var model = this;
         model.userId = $routeParams["userId"];
-        model.userId = $routeParams["followerId"];
+        model.followerId = $routeParams["followerId"];
         model.artworks = [];
         model.showArtList = [];
         model.albums = [];
@@ -27,13 +27,21 @@
                         model.user = response.data;
                         model.followers = model.user.followers;
                         model.following = model.user.following;
-                        albumService.findAlbumById(model.albumId, model.user._id)
-                            .then(function (album) {
-                                model.album = album.data;
-                                model.albumName = model.album.name;
-                                console.log(model.album);
-                                loadImagesForAlbum();
-                            })
+                        if(model.followerId === null) {
+                            albumService.findAlbumById(model.albumId, model.user._id)
+                                .then(function (album) {
+                                    model.album = album.data;
+                                    model.albumName = model.album.name;
+                                    loadImagesForAlbum();
+                                })
+                        } else {
+                            albumService.findAlbumById(model.albumId, model.followerId)
+                                .then(function (album) {
+                                    model.album = album.data;
+                                    model.albumName = model.album.name;
+                                    loadImagesForAlbum();
+                                })
+                        }
                     });
                 });
 
@@ -47,6 +55,7 @@
             for (var u in model.album.images) {
                 imageService.getImageById(model.user._id, model.album.images[u])
                     .then(function (image) {
+                        console.log(image);
                         model.albumImages.push(image.data);
                     });
             }

@@ -61,6 +61,11 @@
                 controller: "socialController",
                 controllerAs: "model"
             })
+            .when("/user/:userId/view/:imageId/details", {
+                templateUrl: "views/user/templates/album/image.detail.view.client.html",
+                controller: "imageDetailController",
+                controllerAs: "model"
+            })
             .when("/user/:userId/view/:followerId/albums", {
                 templateUrl: "views/user/templates/album/view.only.album.view.client.html",
                 controller: "albumController",

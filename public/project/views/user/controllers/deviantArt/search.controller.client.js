@@ -39,8 +39,6 @@
                             .then(function(randomId) {
                                 findMoreLikeThis(randomId);
                             });
-
-
                     });
                 });
 
@@ -146,14 +144,6 @@
                         }
                     }
                 });
-            /*
-             for (var u in model.favorites.images) {
-             model.showArtList.push(model.favorites.images);
-             model.showArt = model.showArtList;
-
-             }
-             });
-             model.showArtList = [];*/
         }
 
         function showFavoritesForUserByUsername(username) {

@@ -51,7 +51,6 @@ function addImageToAlbum(imageId, albumId) {
 }
 
 function findAlbumByAlbumName(userId, albumName) {
-    console.log(albumModel.findOne({name: albumName, _user: userId});
     return albumModel.findOne({name: albumName, _user: userId});
 }
 

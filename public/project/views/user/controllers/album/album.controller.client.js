@@ -21,8 +21,8 @@
         function init() {
             userService.findUserById(model.followerId)
                 .then(function (follower) {
-                model.follower = follower.data;
-            });
+                    model.follower = follower.data;
+                });
             imageService.getNewKey()
                 .then(function (key) {
                     model.key = key;
@@ -31,11 +31,14 @@
                         model.user = response.data;
                         model.followers = model.user.followers;
                         model.following = model.user.following;
+
                         var promise2 = albumService.findAlbumsForUser(model.user._id);
                         promise2.then(function (albums) {
                             model.albums = albums;
                         })
+
                     });
+
                 });
         }
 

@@ -89,7 +89,7 @@
     <li ng-repeat="follow in model.following" class="list-group-item">
         <div class="row">
             <div class="col-xs-10">
-                <h5><a href="#!">{{follow.username}}</a></h5>
+                <h5><a href="#!/user/{{model.user._id}}/view/{{follow._id}}/albums">{{follow.username}}</a></h5>
             </div>
             <div class="col-xs-2">
                 <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">

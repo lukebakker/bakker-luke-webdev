@@ -1,0 +1,33 @@
+<nav class="navbar navbar-fixed-top navbar-default">
+    <div class="container-fluid">
+        <a href="#!/profile/{{model.user._id}}">
+                <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
+                </span>
+        </a>
+
+        <div class="container-fluid">
+
+
+            <div class="container-fluid">
+                <a href="#!/profile/{{model.user._id}}">
+        <span class="pull-right glyphicon glyphicon-user">
+                </span>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="lpb-details-viewer container-fluid">
+    <h1>{{model.image.name}}</h1>
+    <p>Link to deviantArt post: {{model.image.src}}</p>
+    <h5>Name : {{model.image.name}}</h5>
+    <h5>Author : {{model.image.creator}}</h5>
+    <h5>Deviant Id: {{model.image.deviantId}}</h5>
+    <img  ng-src="{{model.image.src}}" style="width : 100%;">
+    <h5>Date Added : {{model.image.dateCreated}}</h5>
+    <h5>Comments: {{model.image.comments}}</h5>
+</div>
