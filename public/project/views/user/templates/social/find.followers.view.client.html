@@ -33,8 +33,8 @@
                     <h5><a href="#!">{{follower.firstName}}</a></h5>
                 </div>
                 <div class="col-xs-2">
-                    <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    <a ng-click="model.follow(follower.username)">
+                        <span class="glyphicon glyphicon-plus pull-right"></span>
                     </a>
                 </div>
             </div>
@@ -72,7 +72,7 @@
     <li ng-repeat="follow in model.following" class="list-group-item">
         <div class="row">
             <div class="col-xs-10">
-                <h5><a href="#!">{{follow.name}}</a></h5>
+                <h5><a href="#!">{{follow.username}}</a></h5>
             </div>
             <div class="col-xs-2">
                 <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">

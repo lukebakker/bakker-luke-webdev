@@ -11,9 +11,19 @@ userModel.getAllUsers = getAllUsers;
 userModel.deleteUser = deleteUser;
 userModel.getUserByUsername = getUserByUsername;
 userModel.addAlbum = addAlbum;
+userModel.findFollowing = findFollowing;
+userModel.findFollwers = findFollowers;
 
 
 module.exports = userModel;
+
+function findFollowing(userId) {
+    return userModel.findById(userId).populate('following').exec();
+}
+
+function findFollowers(userId) {
+    return userModel.findById(userId).populate('followers').exec();
+}
 
 
 function getUserByUsername(username) {
@@ -27,6 +37,7 @@ function deleteUser(userId) {
 function getAllUsers() {
     return userModel.find();
 }
+
 
 function createUser(user) {
     return userModel.create(user);

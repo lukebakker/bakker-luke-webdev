@@ -16,8 +16,14 @@
             var promise = userService.findUserById(model.userId);
             promise.then(function (response) {
                 model.user = response.data;
-                model.followers = model.user.followers;
-                model.following = model.user.following;
+                userService.findFollowing(model.user._id)
+                    .then(function (following) {
+                        model.following = following.data.following;
+                        userService.findFollowers(model.user._id)
+                            .then(function (followers) {
+                                model.followers = followers.data.followers;
+                            });
+                    });
             });
 
         }

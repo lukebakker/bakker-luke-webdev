@@ -11,7 +11,9 @@
             "findUserById": findUserById,
             "registerUser": registerUser,
             "updateUser": updateUser,
-            "unRegister": unRegister
+            "unRegister": unRegister,
+            "findFollowing": findFollowing,
+            "findFollowers": findFollowers
         };
         return api;
 
@@ -45,6 +47,15 @@
             return $http.get(url);
         }
 
+        function findFollowing(userId) {
+            var url = "/api/user/" + userId + "/following";
+            return $http.get(url);
+        }
+
+        function findFollowers(userId) {
+            var url = "/api/user/" + userId + "/followers";
+            return $http.get(url);
+        }
 
 
     }
