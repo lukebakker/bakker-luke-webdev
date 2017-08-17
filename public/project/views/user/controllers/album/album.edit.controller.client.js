@@ -49,7 +49,8 @@
 
 
         function editAlbum(albumName) {
-            albumService.editAlbum(model.user._id, albumName);
+            model.album.name = albumName;
+            albumService.updateAlbum(model.albumId, model.album);
             $location.url("/profile/" + model.userId + "/home/albums");
         }
 

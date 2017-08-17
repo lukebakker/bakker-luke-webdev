@@ -21,7 +21,6 @@
         }
 
         function updateUser(user, userId) {
-            console.log(user, userId);
             var url = "/api/user/" + userId;
 
             return $http.put(url, user);

@@ -12,6 +12,12 @@ albumModel.addImage = addImage;
 albumModel.findAlbumByAlbumName = findAlbumByAlbumName;
 albumModel.findAlbumById = findAlbumById;
 albumModel.removeImage = removeImage;
+albumModel.updateAlbum = updateAlbum;
+
+
+function updateAlbum(albumId, album) {
+    return albumModel.update({_id: albumId}, {$set: album});
+}
 
 function findAlbumById(albumId) {
     return albumModel.findById(albumId).populate('albums').exec();
@@ -40,10 +46,6 @@ function findAlbumByAlbumName(albumName) {
 function removeImage(albumId, imageId) {
     return albumModel.findAlbumById(albumId)
         .then(function (album) {
-            console.log(album);
-            // var newAlbum = [];
-            // var images = album.images;
-            //
             for (var i = 0; i < album.images.length; ++i) {
                 if (album.images[i] == imageId) {
                     album.images.splice(i, 1);
@@ -51,13 +53,6 @@ function removeImage(albumId, imageId) {
                 }
             }
 
-            // for (var u in images) {
-            //     if (!images[u].deviationid === imageId) {
-            //         newAlbum.push(images[u]);
-            //     }
-            // }
-            // console.log(newAlbum);
-            // album.images = newAlbum;
             return album.save();
         })
 }
