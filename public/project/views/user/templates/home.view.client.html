@@ -1,9 +1,18 @@
 <nav class="navbar navbar-fixed-top navbar-default">
     <div class="container-fluid">
-        <a href="#!/profile/{{model.user._id}}">
+        <a ng-if="model.user" href="#!/profile/{{model.user._id}}">
+
                 <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
                 </span>
         </a>
+
+        <a ng-if="!model.user" href="#/">
+
+                <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
+                </span>
+        </a>
+
+
         <span> <input type="text" class="form-control lpb-navbar-search pull-left"
                       placeholder="search..."
                       ng-model="model.searchInput">
@@ -17,16 +26,18 @@
                       class="pull-left glyphicon glyphicon-fire">
                 </span>
 
-            <span ng-click="model.showFavoritesForUser()"
+
+            <span ng-if="model.user._id" ng-click="model.showFavoritesForUser()"
                   class="pull-left glyphicon glyphicon-heart">
                 </span>
 
 
-            <div class="container-fluid">
+            <div ng-if="model.user" class="container-fluid">
                 <a href="#!/profile/{{model.user._id}}">
         <span class="pull-right glyphicon glyphicon-user">
                 </span>
                 </a>
+
             </div>
 
 
@@ -42,11 +53,11 @@
     <tr ng-repeat="art in model.showArt track by $index">
         <td><h3><a href="{{art.url}}">
             {{art.title}}</a><a ng-click="model.addFavorite(art.deviationid)">
-                    <span class="glyphicon glyphicon-heart-empty pull-right">
+                    <span ng-if="model.user._id" class="glyphicon glyphicon-heart-empty pull-right">
                     </span>
         </a></h3>
-             <img ng-src="{{art.content.src}}" style="width : 100%">
-          </td>
+            <img ng-src="{{art.content.src}}" style="width : 100%">
+        </td>
 
         <td>
 

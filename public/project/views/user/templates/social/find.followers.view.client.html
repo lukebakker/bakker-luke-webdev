@@ -17,18 +17,17 @@
 
 
 <div class="lpb-home-container">
-<div class="container-fluid">
-    <input type="text" class="form-control lpb-edit-name"
-           placeholder="Search to follow"
-           ng-model="model.searchInput">
-</div>
-    <div class="container-fluid">
-        <a ng-click="model.searchUser(model.searchInput)"
-           type="button" class="btn btn-primary pull-left btn-block">Search For Followers</a>
-    </div>
-
-
     <div class="lpb-pic-viewer">
+
+        <input type="text" class="form-control lpb-edit-name"
+               placeholder="Search to follow"
+               ng-model="model.searchInput">
+
+            <a ng-click="model.searchUser(model.searchInput)"
+               type="button" class="btn btn-primary pull-left btn-block">Search For Followers</a>
+
+
+
         <ul class="list-group lpb-follwers-container">
             <li class="list-group-item">
                 <div class="row container-fluid">

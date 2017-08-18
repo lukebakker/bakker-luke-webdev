@@ -24,24 +24,33 @@
         model.getRandomImageId = getRandomImageId;
 
         function init() {
+            model.artworks = [];
             model.userId = $routeParams["userId"];
             imageService.getNewKey()
                 .then(function (key) {
                         model.key = key;
-                        var promise = userService.findUserById(model.userId);
-                        promise.then(function (response) {
-                            model.user = response.data;
-                            model.followers = model.user.followers;
-                            model.following = model.user.following;
-                            albumService.findAlbumsForUser(model.user._id)
-                                .then(function (albums) {
-                                    model.albums = albums;
-                                    model.getRandomImageId()
-                                        .then(function (imageId) {
-                                            findMoreLikeThis(imageId)
-                                        });
-                                });
-                        });
+                        console.log(model.userId);
+                        if (model.userId == 099) {
+                            model.searchHot()
+                            console.log(model.showArt);
+
+                        } else {
+                            var promise = userService.findUserById(model.userId);
+                            promise.then(function (response) {
+                                model.user = response.data;
+
+                                model.followers = model.user.followers;
+                                model.following = model.user.following;
+                                albumService.findAlbumsForUser(model.user._id)
+                                    .then(function (albums) {
+                                        model.albums = albums;
+                                        model.getRandomImageId()
+                                            .then(function (imageId) {
+                                                findMoreLikeThis(imageId)
+                                            });
+                                    });
+                            });
+                        }
                     }
                 );
 
