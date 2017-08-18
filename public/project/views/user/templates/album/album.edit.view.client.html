@@ -1,6 +1,6 @@
 <nav class="navbar navbar-fixed-top navbar-default">
     <div class="container-fluid">
-        <a href="#!/profile/{{model.user._id}}">
+        <a href="#!/profile/{{model.user._id}}/home">
                 <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
                 </span>
         </a>
@@ -36,7 +36,7 @@
 
     <table class="table container-fluid">
         <tr ng-repeat="art in model.showArt track by $index">
-            <td><h3><a href="{{art.url}}">
+            <td><h3><a href="#!/user/{{model.user._id}}/view/{{art._id}}/details">
                 {{art.name}}</a><a ng-click="model.removeImage(art._id)">
                     <span class="glyphicon glyphicon-remove pull-right">
                     </span>

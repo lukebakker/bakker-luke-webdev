@@ -60,7 +60,7 @@
                                 href="#!/user/{{model.user._id}}/view/{{follower._id}}/albums">{{follower.username}}</a>
                         </h5>
 
-                        <a href="#!/profile/{{model.user._id}}/home/albums/{{album._id}}/edit">
+                        <a ng-click="model.unFollowed(follower._id)">
                                 <span class="glyphicon glyphicon-remove-sign pull-right lpb-glyphicon-move-up">
                     </span>
                         </a>
@@ -81,7 +81,7 @@
                     <h5 class="pull-left container-fluid"><a
                             href="#!/user/{{model.user._id}}/view/{{follow._id}}/albums">{{follow.username}}</a></h5>
 
-                    <a ng-click="model.unfollow(follow._id)">
+                    <a ng-click="model.unFollow(follow._id)">
                         <span class="glyphicon glyphicon-remove-sign pull-right lpb-glyphicon-move-up "></span>
                     </a>
                 </div>

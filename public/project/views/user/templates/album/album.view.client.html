@@ -21,7 +21,8 @@
 
 
 <div class="lpb-home-container">
-    <h1>{{model.user.firstName}} view your albums below</h1>
+    <h1 ng-if="model.followerId"> See What Your Friends Like!</h1>
+    <h1 ng-if="!model.followerId">{{model.user.firstName}} view your albums below</h1>
 </div>
 
 

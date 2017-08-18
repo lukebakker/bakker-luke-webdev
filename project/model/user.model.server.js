@@ -13,10 +13,43 @@ userModel.getUserByUsername = getUserByUsername;
 userModel.addAlbum = addAlbum;
 userModel.findFollowing = findFollowing;
 userModel.findFollwers = findFollowers;
-
-
+userModel.removeFollower = removeFollower;
+userModel.removeFollowed = removeFollowed;
+userModel.findUserByGoogleId = findUserByGoogleId;
 
 module.exports = userModel;
+
+function findUserByGoogleId(googleId) {
+    return userModel.findOne({'google.id' : googleId});
+}
+
+
+function removeFollower(userId, unFollowId) {
+    return userModel.findUserById(userId)
+        .then(function (user) {
+            for (var i = 0; i < user.following.length; ++i) {
+                if (user.following[i] == unFollowId) {
+                    user.following.splice(i, 1);
+                    break;
+                }
+            }
+            return user.save();
+        });
+}
+
+function removeFollowed(userId, unFollowedId) {
+    return userModel.findUserById(userId)
+        .then(function (user) {
+            for (var i = 0; i < user.followers.length; ++i) {
+                if (user.followers[i] == unFollowedId) {
+                    user.followers.splice(i, 1);
+                    break;
+                }
+            }
+            return user.save();
+        });
+}
+
 
 function findFollowing(userId) {
     return userModel.findById(userId).populate('following').exec();

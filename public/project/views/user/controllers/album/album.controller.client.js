@@ -9,7 +9,6 @@
         model.userId = $routeParams["userId"];
         model.followerId = $routeParams["followerId"];
 
-
         model.artworks = [];
         model.showArtList = [];
         model.albums = [];
@@ -22,6 +21,10 @@
             userService.findUserById(model.followerId)
                 .then(function (follower) {
                     model.follower = follower.data;
+                    var promise3 = albumService.findAlbumsForUser(model.follower._id);
+                    promise3.then(function (albums) {
+                        model.followAlbums = albums;
+                    })
                 });
             imageService.getNewKey()
                 .then(function (key) {
@@ -35,7 +38,9 @@
                         var promise2 = albumService.findAlbumsForUser(model.user._id);
                         promise2.then(function (albums) {
                             model.albums = albums;
-                        })
+                        });
+
+
 
                     });
 
@@ -65,7 +70,6 @@
                     var objects = (message.results);
                     for (var u in objects) {
                         newList.push(objects[u]);
-                        console.log(objects[u]);
                     }
                     return model.showArt = newList;
                 });

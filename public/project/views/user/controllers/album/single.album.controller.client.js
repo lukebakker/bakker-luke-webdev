@@ -37,6 +37,7 @@
                         } else {
                             albumService.findAlbumById(model.albumId, model.followerId)
                                 .then(function (album) {
+                                    console.log(album);
                                     model.album = album.data;
                                     model.albumName = model.album.name;
                                     loadImagesForAlbum();

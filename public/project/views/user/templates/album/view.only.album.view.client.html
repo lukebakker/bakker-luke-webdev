@@ -45,10 +45,10 @@
 <div class="container-fluid">
 
 
-    <li ng-repeat="album in model.albums" class="list-group-item">
+    <li ng-repeat="album in model.followAlbums" class="list-group-item">
         <div class="row">
             <div class="col-xs-10">
-                <h5><a href="#!/profile/{{model.follower._id}}/home/albums/{{album._id}}">{{album.name}}</a></h5>
+                <h5><a href="#!/profile/{{model.user._id}}/view/{{model.follower._id}}/albums/{{album._id}}">{{album.name}}</a></h5>
             </div>
         </div>
     </li>

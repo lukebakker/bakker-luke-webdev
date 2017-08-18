@@ -71,7 +71,6 @@ function addImage(req, res) {
 function removeImage(req, res) {
     var albumId = req.params.albumId;
     var imageId = req.params.imageId;
-    console.log(albumId, imageId);
     return imageModel.removeImage(imageId)
         .then(function (image) {
             findAlbumByIdLocal(albumId)
@@ -87,7 +86,6 @@ function updateAlbum(req, res) {
     var album = req.body;
     return albumModel.updateAlbum(albumId, album)
         .then(function (album) {
-            console.log(album);
             res.json(album);
         })
 }

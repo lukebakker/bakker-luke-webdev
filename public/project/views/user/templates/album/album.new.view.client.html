@@ -20,12 +20,13 @@
     <h1>{{model.user.firstName}} Add an album</h1>
 
 
-    <div class="lpb-profile-container container-fluid">
-        <input type="text" class="form-control lpb-navbar-search"
-               placeholder="Album Name"
-               ng-model="model.albumName">
+    <div class="lpb-profile-container">
 
-        <button class="btn button primary btn-block"
+            <input type="text" class="form-control lpb-edit-name"
+                   placeholder="Album Name"
+                   ng-model="model.albumName">
+
+        <button class="btn btn-primary btn-block"
                 ng-click="model.addAlbum(model.albumName)">Add Album
         </button>
 

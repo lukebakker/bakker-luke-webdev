@@ -8,14 +8,18 @@ var userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     email: String,
+    google: {
+        id: String,
+        token: String
+    },
     phone: String,
     following: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
-    followers:[{type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
+    followers: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"}],
     albums: [{type: mongoose.Schema.Types.ObjectId, ref: "AlbumModelProject"}],
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: "CommentModelProject"}],
     tags: [String],
     dateOfBirth: {type: Date},
-    isAdmin:{type: Boolean, default: false},
+    isAdmin: {type: Boolean, default: false},
     dateCreated: {type: Date, default: Date.now()}
 }, {collection: "userProject"});
 

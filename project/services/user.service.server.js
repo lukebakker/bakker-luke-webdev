@@ -2,6 +2,7 @@ var app = require("../../express");
 var userModel = require("../model/user.model.server");
 
 var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
@@ -9,6 +10,7 @@ passport.deserializeUser(deserializeUser);
 var bcrypt = require('bcrypt-nodejs');
 
 app.post("/api/login", login);
+
 
 
 // http handlers
@@ -23,6 +25,82 @@ app.delete("/api/user/:userId", deleteUser);
 app.get("/api/user/:userId/following", findFollowing);
 app.get("/api/user/:userId/followers", findFollowers);
 app.get("/api/checkLogin", checkLogin);
+app.delete("/api/user/:userId/unfollow/:unFollowId", unFollow);
+app.delete("/api/user/:userId/removeFollow/:unFollowId", removeFollow);
+
+var googleConfig = {
+    clientID     : "114422916088-eenkrbihdkkhhn12sn4h55qc1r2to498.apps.googleusercontent.com",
+    clientSecret : "Mtar5QJp1YQQBf5QjLUamOqF",
+    callbackURL  : "process.env.GOOGLE_CALLBACK_URL"
+};
+
+
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+function googleStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByGoogleId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        email:     email,
+
+                    };
+                    return userModel.createUser(newGoogleUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+}
+
+
+
+
+
+app.get("/auth/google", passport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/#/profile/:userId/home',
+        failureRedirect: '/#/login'
+    }));
+
+
+
+function unFollow(req, res) {
+    var userId = req.params.userId;
+    var unFollowId = req.params.unFollowId;
+    userModel.removeFollower(userId, unFollowId)
+        .then(function (response) {
+            res.json(response);
+        })
+}
+
+function removeFollow(req, res) {
+    var userId = req.params.userId;
+    var unFollowedId = req.params.unFollowId;
+    userModel.removeFollowed(userId, unFollowedId)
+        .then(function (response) {
+            res.json(response);
+        })
+}
 
 
 function login(req, resp) {
@@ -128,7 +206,6 @@ function findUser(req, res) {
 function getAllUsers(req, res) {
     userModel.getAllUsers()
         .then(function (users) {
-            console.log(users);
             res.json(users);
         })
 

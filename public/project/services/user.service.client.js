@@ -16,7 +16,10 @@
             "findFollowers": findFollowers,
             "findAllUsers": findAllUsers,
             "removeUser": removeUser,
-            "checkLogin": checkLogin
+            "checkLogin": checkLogin,
+            "unFollow": unFollow,
+            "unFollowed" : unFollowed
+
         };
         return api;
 
@@ -68,6 +71,16 @@
         function findFollowers(userId) {
             var url = "/api/user/" + userId + "/followers";
             return $http.get(url);
+        }
+
+        function unFollow(userId, unFollowId) {
+            var url = "/api/user/" + userId + "/unfollow/" + unFollowId;
+            return $http.delete(url);
+        }
+
+        function unFollowed(userId, unFollowedId) {
+            var url = "/api/user/" + userId + "/removeFollow/" + unFollowedId;
+            return $http.delete(url);
         }
 
         function checkLogin() {

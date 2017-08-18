@@ -71,6 +71,11 @@
                 controller: "albumController",
                 controllerAs: "model"
             })
+            .when("/profile/:userId/view/:followerId/albums/:albumId", {
+                templateUrl: "views/user/templates/album/single.album.view.client.html",
+                controller: "singleAlbumController",
+                controllerAs: "model"
+            })
             .when("/profile/:userId/admin", {
                 templateUrl: "views/user/templates/login/admin.management.view.client.html",
                 controller: "adminController",
@@ -83,15 +88,15 @@
             })
     }
 
- /*   function checkLogin(userService, $rootScope, $location) {
-        return userService
-            .checkLogin()
-            .then(function (user) {
-                if (user === '0') {
-                    $rootScope.display('not logged in');
-                    $location.url("/login");
-                }
-                return user;
-            });
-    }*/
+    /*   function checkLogin(userService, $rootScope, $location) {
+     return userService
+     .checkLogin()
+     .then(function (user) {
+     if (user === '0') {
+     $rootScope.display('not logged in');
+     $location.url("/login");
+     }
+     return user;
+     });
+     }*/
 })();
