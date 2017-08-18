@@ -23,7 +23,7 @@
             promise
                 .then(function (response) {
                     user = response.data;
-                    if (user === null) {
+                    if (!user) {
                         model.errorMessage = "User not found";
                     } else {
                         $rootScope.currentUser = user;
