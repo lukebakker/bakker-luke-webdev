@@ -14,14 +14,15 @@
             "unRegister": unRegister,
             "findFollowing": findFollowing,
             "findFollowers": findFollowers,
-            "findAllUsers" : findAllUsers,
-            "removeUser" : removeUser
+            "findAllUsers": findAllUsers,
+            "removeUser": removeUser,
+            "checkLogin": checkLogin
         };
         return api;
 
         function removeUser(userId) {
-           var url =  "/api/user/" + userId;
-           return $http.delete(url);
+            var url = "/api/user/" + userId;
+            return $http.delete(url);
         }
 
         function findAllUsers() {
@@ -41,7 +42,7 @@
         }
 
         function registerUser(user) {
-            var url = "/api/user";
+            var url = "/api/user/register";
             return $http.post(url, user);
         }
 
@@ -55,8 +56,8 @@
         }
 
         function findUserByUsernameAndPassword(username, password) {
-            var url = "/api/user?username=" + username + "&password=" + password;
-            return $http.get(url);
+            var url = "/api/login";
+            return $http.post(url, {username: username, password: password});
         }
 
         function findFollowing(userId) {
@@ -67,6 +68,13 @@
         function findFollowers(userId) {
             var url = "/api/user/" + userId + "/followers";
             return $http.get(url);
+        }
+
+        function checkLogin() {
+            return $http.get("/api/checkLogin")
+                .then(function (user) {
+                    return user.data;
+                })
         }
 
 

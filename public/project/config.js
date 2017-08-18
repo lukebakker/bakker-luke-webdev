@@ -4,7 +4,7 @@
         .module("DevApp")
         .config(configuration);
 
-    function configuration($routeProvider) {
+    function configuration($routeProvider, $httpProvider) {
         $routeProvider
             .when("/", {
                 templateUrl: "views/user/templates/login/login.view.client.html",
@@ -81,7 +81,17 @@
                 controller: "adminController",
                 controllerAs: "model"
             })
-
-
     }
+
+ /*   function checkLogin(userService, $rootScope, $location) {
+        return userService
+            .checkLogin()
+            .then(function (user) {
+                if (user === '0') {
+                    $rootScope.display('not logged in');
+                    $location.url("/login");
+                }
+                return user;
+            });
+    }*/
 })();

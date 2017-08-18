@@ -28,7 +28,7 @@ function findFollowers(userId) {
 
 
 function getUserByUsername(username) {
-    return userModel.find({username: username});
+    return userModel.findOne({username: username});
 }
 
 function deleteUser(userId) {

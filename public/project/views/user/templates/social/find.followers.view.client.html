@@ -39,6 +39,7 @@
     <li ng-repeat="follower in model.findFollowers" class="list-group-item">
         <div class="row">
             <h5><a href="#!">{{follower.username}}</a></h5>
+
             <a ng-click="model.follow(follower.username)">
                 <span class="glyphicon glyphicon-plus pull-right"></span>
             </a>

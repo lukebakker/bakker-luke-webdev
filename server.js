@@ -8,12 +8,15 @@ var passport      = require('passport');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 
-/*app.use(cookieParser());
+
 app.use(session({
-    secret: 'this is the secret',
+    secret: 'adsfaklj',
     resave: true,
     saveUninitialized: true
-}));*/
+}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.set('view engine', 'ejs');

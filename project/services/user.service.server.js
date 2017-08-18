@@ -1,18 +1,57 @@
 var app = require("../../express");
 var userModel = require("../model/user.model.server");
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
+
+var bcrypt = require('bcrypt-nodejs');
+
+app.post("/api/login", login);
+
 
 // http handlers
 app.get("/api/users", getAllUsers);
 app.get("/api/user/:userId", getUserById);
-app.get("/api/user", findUser);
+app.post("/api/user", findUser);
+
 app.get("/api/project/user/username", getUserByUsername);
-app.post("/api/user", registerUser);
+app.post("/api/user/register", registerUser);
 app.put("/api/user/:userId", updateUser);
 app.delete("/api/user/:userId", deleteUser);
 app.get("/api/user/:userId/following", findFollowing);
 app.get("/api/user/:userId/followers", findFollowers);
+app.get("/api/checkLogin", checkLogin);
 
+
+function login(req, resp) {
+    var username = req.body.username;
+    var password = req.body.password;
+    userModel
+        .getUserByUsername(username)
+        .then(function (user) {
+            if (!user) {
+                resp.send(null);
+                return;
+            }
+            bcrypt.compare(password, user.password, function (err, res) {
+                if (res) {
+                    req.login(user, function (nothing) {
+                        resp.send(user);
+                        return;
+                    })
+                } else {
+                    resp.send(null);
+                    return;
+                }
+            });
+        }, function (err) {
+            if (err) {
+                resp.send(err);
+            }
+        });
+}
 
 function findFollowers(req, res) {
     var userId = req.params.userId;
@@ -61,17 +100,23 @@ function updateUser(req, res) {
 
 function registerUser(req, res) {
     var user = req.body;
-    userModel.createUser(user)
-        .then(function (user) {
-            res.json(user);
-        });
+
+    bcrypt.hash(user.password, null, null, function (err, hash) {
+
+        user.password = hash;
+
+        userModel.createUser(user)
+            .then(function (user) {
+                res.json(user);
+            });
+    });
 }
 
 
 function findUser(req, res) {
-    var username = req.query.username;
-    var password = req.query.password;
-
+    var body = req.body;
+    var username = body.username;
+    var password = body.password;
     userModel.findUserByCredentials(username, password)
         .then(function (user) {
             res.json(user);
@@ -81,11 +126,11 @@ function findUser(req, res) {
 }
 
 function getAllUsers(req, res) {
-   userModel.getAllUsers()
-       .then(function (users){
-           console.log(users);
-           res.json(users);
-       })
+    userModel.getAllUsers()
+        .then(function (users) {
+            console.log(users);
+            res.json(users);
+        })
 
 }
 
@@ -95,6 +140,27 @@ function getUserById(req, response) {
         .then(function (user) {
             response.json(user);
         });
+}
+
+function checkLogin(req, res) {
+    res.send(isAuthenticated() ? req.user : '0');
+}
+
+function serializeUser(user, done) {
+    done(null, user);
+}
+
+function deserializeUser(user, done) {
+    userModel
+        .findUserById(user._id)
+        .then(
+            function (user) {
+                done(null, user);
+            },
+            function (err) {
+                done(err, null);
+            }
+        );
 }
 
 

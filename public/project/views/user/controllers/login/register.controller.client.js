@@ -24,7 +24,7 @@
                 if (!_user) {
                      userService.registerUser(user)
                         .then(function (user) {
-                           _user = user.data;
+                            _user = user.data;
                             albumService.addAlbumForUser(_user._id, "Favorites");
                             $location.url("/profile/" + _user._id);
                         });
