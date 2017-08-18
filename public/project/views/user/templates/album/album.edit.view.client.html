@@ -24,12 +24,12 @@
         <label class="lpb-name-label pull-left">Name</label>
     </div>
     <div>
-        <input type="text" class="form-control lpb-navbar-search"
+        <input type="text" class="form-control lpb-navbar-search lpb-edit-name"
                placeholder="Album Name"
                ng-model="model.album.name">
     </div>
 
-    <button class="btn button primary btn-block"
+    <button class="btn btn-primary btn-block"
             ng-click="model.editAlbum(model.album.name)">Save Name
     </button>
 
@@ -46,12 +46,7 @@
                    class="glyphicon glyphicon-plus-sign pull-right">
                 </a></h3>
                 <img ng-src="{{art.src}}" style="width : 100%">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Enter a comment...">
-                    <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Submit</button>
-      </span>
-                </div><!-- /input-group --></td>
+
 
             <td>
 

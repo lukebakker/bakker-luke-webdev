@@ -15,6 +15,10 @@ input, textarea {
     background-image: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
 }
 
+.navbar-btn {
+    margin-left: 5px;
+}
+
 .navbar-default .navbar-brand {
     color: White;
 }
@@ -65,6 +69,10 @@ input, textarea {
     color: white;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.glyphicon-plus, .glyphicon-cog {
+    padding-top: 10px;
 }
 
 @media (min-width: 1200px) {
@@ -167,6 +175,14 @@ body {
     background-color: rgba(0, 122, 255, 0.27);
 }
 
+.lpb-edit-name {
+    color: white;
+    width: 100%;
+    margin-top: 8px;
+    margin-left: 0px;
+    background-color: rgba(0, 122, 255, 0.27);
+}
+
 .lpb-pic-viewer {
     margin: auto;
     min-width: 350px;
@@ -190,6 +206,10 @@ body {
 
 .img {
     align: auto;
+}
+
+.lpb-glyphicon-move-up {
+    padding-right: 10px;
 }
 
 

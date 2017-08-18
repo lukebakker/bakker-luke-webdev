@@ -41,7 +41,6 @@ function addImage(userId, imageId, albumName) {
 }
 
 function addImageToAlbum(imageId, albumId) {
-    console.log(userId, imageId, albumId);
     albumModel.findById(albumId)
         .then(function (album) {
             album.images.push(imageId);

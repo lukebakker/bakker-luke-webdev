@@ -1,25 +1,9 @@
 <nav class="navbar navbar-fixed-top navbar-default">
     <div class="container-fluid">
-        <a href="#!/profile/{{model.user._id}}">
+        <a href="#!/profile/{{model.user._id}}/home">
                 <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
                 </span>
         </a>
-        <span> <input type="text" class="form-control lpb-navbar-search pull-left"
-                      placeholder="search..."
-                      ng-model="model.searchInput">
-                </span>
-        <span ng-click="model.searchByTag(model.searchInput)"
-              class="pull-left glyphicon glyphicon-search"></span>
-
-
-        <div class="container-fluid">
-                <span ng-click="model.searchHot(model.searchInput)"
-                      class="pull-left glyphicon glyphicon-fire">
-                </span>
-
-            <span ng-click="model.showFavoritesForUser()"
-                  class="pull-left glyphicon glyphicon-heart">
-                </span>
 
 
             <div class="container-fluid">
@@ -47,12 +31,7 @@
         <td><h3><a href="#!/user/{{model.user._id}}/view/{{art._id}}/details">
             {{art.name}}</a></h3>
             </a>  <img  ng-src="{{art.src}}" style="width : 100%">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Enter a comment...">
-                <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Submit</button>
-      </span>
-            </div><!-- /input-group --></td>
+            </td>
 
         <td>
         </td>

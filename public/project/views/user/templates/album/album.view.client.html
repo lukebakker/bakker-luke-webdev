@@ -4,26 +4,11 @@
                 <span class="header-plus pull-left glyphicon glyphicon-chevron-left">
                 </span>
         </a>
-        <span> <input type="text" class="form-control lpb-navbar-search pull-left"
-                      placeholder="search..."
-                      ng-model="model.searchInput">
-                </span>
-        <span ng-click="model.searchByTag(model.searchInput)"
-              class="pull-left glyphicon glyphicon-search"></span>
 
-
-        <div class="container-fluid">
-                <span ng-click="model.searchHot(model.searchInput)"
-                      class="pull-left glyphicon glyphicon-fire">
-                </span>
-
-            <span ng-click="model.showFavoritesForUser()"
-                  class="pull-left glyphicon glyphicon-heart">
-                </span>
 
 
             <div class="container-fluid">
-                <a href="#!/profile/{{model.user._id}}">
+                <a href="#!/profile/{{model.user._id}}/home">
         <span class="pull-right glyphicon glyphicon-user">
                 </span>
                 </a>
@@ -42,7 +27,7 @@
 
 
 
-<div class="container-fluid">
+<div class="container-fluid lpb-follwers-container">
 
     <a href="#!/profile/{{model.user._id}}/home/albums/new">
         <div class="btn btn-primary btn-block list-group-item">Add a new album</div>
