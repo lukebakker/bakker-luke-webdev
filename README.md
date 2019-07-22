@@ -6,3 +6,5 @@
 1. mongod
 1. node server.js
 1. browse to localhost:3000
+
+EDIT: Has now hit a bug with javascript promises. Not currently working.
